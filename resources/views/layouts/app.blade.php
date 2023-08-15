@@ -36,6 +36,7 @@
 
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <!-- Left Side Of Navbar -->
+                    @guest
                     <ul class="navbar-nav ms-auto">
                         <li class="nav-item">
                             <a class="nav-link active" aria-current="page" href="#menu">VIEW OUR MENU</a>
@@ -56,7 +57,7 @@
                             <a class="nav-link active" aria-current="page" href="#">MAKE A RESERVATION</a>
                         </li>
                     </ul>
-
+                    @endguest
                     <!-- Right Side Of Navbar -->
                     <ul class="navbar-nav ms-auto">
                         <!-- Authentication Links -->
@@ -99,6 +100,8 @@
         <main class="py-4">
             @yield('content')
         </main>
+
     </div>
+   @extends('layouts.footer')
 </body>
 </html>

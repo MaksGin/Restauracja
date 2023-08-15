@@ -17,9 +17,17 @@ return new class extends Migration
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
+            $table->Integer('telefon');
+            $table->unsignedBigInteger('id_stanowiska');
             $table->rememberToken();
             $table->timestamps();
+
+            $table->foreign('id_stanowiska')->references('id')->on('lista_stanowisk');
         });
+
+
+
+
     }
 
     /**
