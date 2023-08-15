@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ZamowieniaController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 
@@ -13,6 +14,8 @@ use App\Http\Controllers\HomeController;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
+Route::get("/login",[LoginController::class,'succeslogin']);
+Route::get('/zamowienia',[ZamowieniaController::class,'index']);
 Route::get('/main', function () {
     return view('main.index');
 });

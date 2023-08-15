@@ -15,10 +15,16 @@
 
     <!-- Scripts -->
     @vite(['resources/sass/app.scss', 'resources/js/app.js'])
+
+    <style>
+        .navbar{
+            background-color: #e1be00;
+        }
+    </style>
 </head>
 <body>
     <div id="app">
-        <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
+        <nav class="navbar fixed-top navbar-expand-md navbar-light shadow-sm">
             <div class="container">
                 <img src="logo.png" alt="Logo" width="25" height="24" class="d-inline-block align-text-top">
                 <a class="navbar-brand" href="{{ url('/') }}">

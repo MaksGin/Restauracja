@@ -11,12 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('lista_potraw', function (Blueprint $table) {
+        Schema::create('miejsce_realizacji', function (Blueprint $table) {
             $table->id();
-            $table->string('nazwa');
-            $table->text('skladniki')->nullable();
-            $table->double('cena');
-            $table->timestamps();;
+            $table->string("nazwa");
+            $table->timestamps();
         });
     }
 
@@ -25,6 +23,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('lista_potraw');
+        Schema::dropIfExists('miejsce_realizacji');
     }
 };

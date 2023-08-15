@@ -10,4 +10,9 @@ class Potrawa extends Model
     use HasFactory;
 
     protected $table = 'lista_potraw';
+
+    public function kategoria(): \Illuminate\Database\Eloquent\Relations\BelongsTo
+    {
+        return $this->belongsTo(kategoriePotraw::class,'id_kategorii','id');
+    }
 }
