@@ -26,8 +26,8 @@
                         Potrawy
                     </a>
                     <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDarkDropdownMenuLink">
-                        <li><a class="dropdown-item" href="#">Lista Potraw</a></li>
-                        <li><a class="dropdown-item" href="#">Lista Kategorii Potraw</a></li>
+                        <li><a class="dropdown-item" href="{{ route('ListaPotraw') }}">Lista Potraw</a></li>
+                        <li><a class="dropdown-item" href="{{ route('ListaKategorii')}}">Lista Kategorii Potraw</a></li>
                     </ul>
                 </li>
                 <li class="nav-item dropdown">
@@ -35,7 +35,7 @@
                         Stoliki
                     </a>
                     <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDarkDropdownMenuLink">
-                        <li><a class="dropdown-item" href="#">Lista Stolików</a></li>
+                        <li><a class="dropdown-item" href="{{ route('ListaStolikow')}}">Lista Stolików</a></li>
                     </ul>
                 </li>
                 <li class="nav-item dropdown">

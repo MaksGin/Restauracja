@@ -57,6 +57,17 @@
                             <a class="nav-link active" aria-current="page" href="#">MAKE A RESERVATION</a>
                         </li>
                     </ul>
+                    @else
+                    <ul class="navbar-nav ms-auto">
+                        <li class="nav-item">
+                            <a class="nav-link active" aria-current="page" href="/zamowienia">ORDER PANEL</a>
+                        </li>
+                    </ul>
+
+
+
+
+
                     @endguest
                     <!-- Right Side Of Navbar -->
                     <ul class="navbar-nav ms-auto">

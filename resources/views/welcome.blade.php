@@ -13,7 +13,7 @@
                     <h2>Kategoria: {{ $kategoria->nazwa }}</h2>
 
                     @foreach ($potrawy->where('id_kategorii', $kategoria->id) as $potrawa)
-                        <p>Nazwa potrawy: {{ $potrawa->nazwa }}</p>
+                        <p>{{ $potrawa->nazwa }} {{ $potrawa->cena}}zł</p>
                     @endforeach
                 @endforeach
             </div>

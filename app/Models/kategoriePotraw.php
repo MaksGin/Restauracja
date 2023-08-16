@@ -15,4 +15,9 @@ class kategoriePotraw extends Model
     {
         return $this->hasMany(Potrawa::class,'id_kategorii','id');
     }
+    public function miejsceRealizacji()
+    {
+        //kazda kategoria jest przypisana do jednego miejsca realizacji
+        return $this->belongsTo(MiejsceRealizacji::class, 'miejsce_realizacji');
+    }
 }
