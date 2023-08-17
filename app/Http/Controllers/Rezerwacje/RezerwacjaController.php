@@ -61,7 +61,43 @@ class RezerwacjaController extends Controller
 
         $currentDate = Carbon::now()->format('Y-m-d');
         $rezerwacja = Rezerwacje::whereDate('od', $currentDate)->get();
+        $jsonData = $rezerwacja->toJson();
+        return view('rezerwacje.lista', ['jsonData' => $jsonData],compact('lista_rezerwacji'));
 
-        return response()->json($rezerwacja);
     }
+
+    public function getRezerwacjeToday()
+    {
+        $currentDate = Carbon::now()->format('Y-m-d');
+        $reservations = Rezerwacje::whereDate('od', $currentDate)->get(); // Pobierz rezerwacje z bazy danych
+        return response()->json($reservations);
+    }
+
+    public function Rezerwacje7days(){
+
+        $currentDate = Carbon::now()->format('Y-m-d');
+        $futureDate = Carbon::now()->addDays(7)->format('Y-m-d');
+        $futureRezerwacje = Rezerwacje::whereDate('od','>',$currentDate)
+            ->whereDate('od','<=',$futureDate)->get();
+
+        $jsonDataNext7days = $futureRezerwacje->toJson();
+
+        return response()->json($jsonDataNext7days);
+    }
+
+    public function RezerwacjeDoTylu7Dni(){
+
+        $currentDate = Carbon::now()->format('Y-m-d');
+        $pastDate = Carbon::now()->subDays(7)->format('Y-m-d');
+        $pastRezerwacje = Rezerwacje::whereDate('od','<',$currentDate)
+            ->whereDate('od','>=',$pastDate)->get();
+
+        $toJson = $pastRezerwacje->toJson();
+
+        return response()->json($toJson);
+
+    }
+
+
+
 }

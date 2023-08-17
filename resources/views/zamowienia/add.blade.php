@@ -120,7 +120,7 @@
         <div id="stoliki" class="row">
             @foreach($id_stolikow as $stolik)
 
-                <div class="stolik-div kategoria col-sm-6 me-md-12" stolik_id="{{$stolik->id_stoly}}">
+                <div class="stolik-div kategoria col-sm-6 me-md-12">
                     {{$stolik->nazwa}}
                 </div>
             @endforeach
@@ -265,7 +265,7 @@
     potrawy.empty();
 
     $.ajax({
-            url: "/api/potrawy/" + id,
+            url: "/potrawy" + id,
             method: "GET",
             dataType: "json",
             success: function(data) {
@@ -273,7 +273,7 @@
                     const div = $("<div>")
                         .attr("potrawa_id", p.id)
                         .addClass("potrawa")
-                        .addClass(!p.dostep ? "potrawa-none" : "");
+
 
                     const text = $("<span>").text(p.nazwa);
                     div.append(text);
@@ -308,35 +308,27 @@
     function showAll() {
         var potrawy = document.getElementById('lista-potraw')
         potrawy.textContent = ''
-        fetch("{{url('/api/potrawy/')}}")
+        fetch("{{route('PotrawyAll')}}")
             .then(response => response.json())
             .then(data => {
+                data = JSON.parse(data);
                 btnBlocked = false;
-                data.forEach(p => {
-                    console.log(p.id)
-                    const div = document.createElement("div");
-                    div.setAttribute("potrawa_id", p.id);
-                    div.classList.add("potrawa");
-                    if(!p.dostep)
-                        div.classList.add("potrawa-none");
 
-                    const text = document.createTextNode(p.nazwa);
+                data.forEach(p => {
+
+                    const div = document.createElement("div");
+                    div.setAttribute("potrawa_id", p[0].id);
+                    div.classList.add("potrawa");
+
+
+                    const text = document.createTextNode(p[0].nazwa);
                     div.appendChild(text);
                     div.addEventListener('click', () => {
-                        if(!p.dostep)
-                        {
-                            var alert = document.getElementById('alert-box')
-                            alert.textContent = '';
-                            const info = document.createElement("div");
-                            info.classList.add("error");
-                            info.innerText = 'Potrawa jest niedostepna';
-                            alert.appendChild(info);
-                            return
-                        }
+
                         var alert = document.getElementById('alert-box')
                         alert.textContent = '';
-                        podsumowanie(p.id, p.cena, p.nazwa);
-                        addPrice(p.cena);
+                        podsumowanie(p[0].id, p[0].cena, p[0].nazwa);
+                        addPrice(p[0].cena);
                     })
                     potrawy.appendChild(div);
                 });

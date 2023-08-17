@@ -9,71 +9,97 @@
 
         <div class="row">
             <div class="col text-right">
-                <a class="m-3 btn btn-dark m-3 text-white" >Przeszłe rezerwacje stolików </a>
+                <a class="m-3 btn btn-dark m-3 text-white" id="pobierz-przeszle-rezerwacje" >Przeszłe rezerwacje stolików </a>
             </div>
-            <div class="col text-center">
-                <a class="m-3 btn btn-dark m-3 text-white" href="{{ route('ListaRezerwacji')}}}" id="todayReservations">Rezerwacje stolików na dzisiaj</a>
+            <div class="col">
+                <a class="m-3 btn btn-dark m-3 text-white" id="pobierz-rezerwacje">Rezerwacje stolików na dzisiaj</a>
 
 
             </div>
             <div class="col text-left">
-                <a class="m-3 btn btn-dark m-3 text-white" >Przyszłe rezerwacje stolików </a>
+                <a class="m-3 btn btn-dark m-3 text-white" id="pobierz-przyszle-rezerwacje" >Przyszłe rezerwacje stolików </a>
             </div>
           </div>
 </div>
 <div class="container">
-    <table class="table table-striped">
-        <thead style="background-color: ">
-            <tr>
-            <th scope="col">#</th>
-            <th scope="col">id_stołu</th>
-            <th scope="col">Godzina rozpoczęcia</th>
-            <th scope="col">Godzina zakończenia</th>
-            <th scope="col">Nazwisko</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach($lista_rezerwacji as $rezerwacja)
-                <tr>
-                <th scope="row">{{$rezerwacja->id}}</th>
-                <th scope="row">{{$rezerwacja->id_stoly}}</th>
-                <td>{{$rezerwacja->od}}</td>
-                <td>{{$rezerwacja->do}}</td>
-                <td>{{$rezerwacja->nazwisko}}</td>
-                </tr>
-            @endforeach
+<table class="table">
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>Data i Godzina rozpoczęcia</th>
+        <th>Data i Godzina zakończenia</th>
+        <th>Nazwisko</th>
+    </tr>
+    </thead>
+    <tbody id="wyniki"></tbody>
+</table>
+</div>
 
-        </tbody>
-    </table>
-</div>
-<div id="reservationTable" class="mt-5">
-    <!-- Tutaj zostanie wstawiona tabela z rezerwacjami -->
-</div>
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
-    $(document).ready(function () {
-        $('#todayReservations').click(function () {
-            $.ajax({
-                url: '/listaRezerwacji', // To jest poprawna ścieżka do Twojego kontrolera
-                type: 'GET',
-                dataType: 'json',
-                success: function (data) {
-                    var tableHtml = '<table><thead><tr><th>ID</th><th>Od</th><th>Do</th><th>Nazwisko</th></tr></thead><tbody>';
+    document.getElementById('pobierz-rezerwacje').addEventListener('click', function () {
+        // Wywołanie żądania AJAX do pobrania rezerwacji
+        fetch('{{ route("getRezerwacjeToday") }}')
+            .then(response => response.json())
+            .then(data => {
+                document.getElementById('wyniki').innerHTML = '';
+                data.forEach(reservation => {
+                    var row = document.createElement('tr');
+                    row.innerHTML =
+                        `<td> ${data[0].id} </td>
+                         <td> ${data[0].od} </td>
+                         <td> ${data[0].do} </td>
+                         <td> ${data[0].nazwisko} </td>`;
+                    document.getElementById('wyniki').appendChild(row);
+                });
+                console.log(data);
+            })
+            .catch(error => console.error(error));
+    });
+    document.getElementById('pobierz-przyszle-rezerwacje').addEventListener('click', function () {
+        // Wywołanie żądania AJAX do pobrania rezerwacji
+        fetch('{{ route("Rezerwacje7days") }}')
+            .then(response => response.json())
+            .then(data => {
+                document.getElementById('wyniki').innerHTML = '';
 
-                    // Tworzenie wierszy tabeli na podstawie danych zwróconych z serwera
-                    for (var i = 0; i < data.length; i++) {
-                        tableHtml += '<tr><td>' + data[i].id + '</td><td>' + data[i].od + '</td><td>' + data[i].do + '</td><td>' + data[i].nazwisko + '</td></tr>';
-                    }
+                // Sparsowanie JSON
+                data = JSON.parse(data);
 
-                    tableHtml += '</tbody></table>';
+                data.forEach(reservation => {
+                    var row = document.createElement('tr');
+                    row.innerHTML =
+                        `<td> ${reservation.id} </td>
+                     <td> ${reservation.od} </td>
+                     <td> ${reservation.do} </td>
+                     <td> ${reservation.nazwisko} </td>`;
+                    document.getElementById('wyniki').appendChild(row);
+                });
+                console.log(data);
+            })
+            .catch(error => console.error(error));
+    });
+    document.getElementById('pobierz-przeszle-rezerwacje').addEventListener('click', function () {
+        // Wywołanie żądania AJAX do pobrania rezerwacji
+        fetch('{{ route("RezerwacjeDoTylu7Dni") }}')
+            .then(response => response.json())
+            .then(data => {
+                document.getElementById('wyniki').innerHTML = '';
 
-                    $('#reservationTable').html(tableHtml);
-                },
-                error: function (xhr, status, error) {
-                    console.log(error); // Wyświetl błąd w konsoli
-                }
-            });
-        });
+                // Sparsowanie JSON
+                data = JSON.parse(data);
+
+                data.forEach(reservation => {
+                    var row = document.createElement('tr');
+                    row.innerHTML =
+                        `<td> ${reservation.id} </td>
+                     <td> ${reservation.od} </td>
+                     <td> ${reservation.do} </td>
+                     <td> ${reservation.nazwisko} </td>`;
+                    document.getElementById('wyniki').appendChild(row);
+                });
+                console.log(data);
+            })
+            .catch(error => console.error(error));
     });
 </script>
 

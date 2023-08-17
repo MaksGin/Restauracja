@@ -17,9 +17,16 @@ class ZamowieniaController extends Controller
         $id_stolikow = Stolik::all('id');
         $kategorie = kategoriePotraw::all();
         $potrawy = Potrawa::all();
-        return view('zamowienia.add',compact('id_stolikow','kategorie'));
+        return view('zamowienia.add',compact('id_stolikow','kategorie','potrawy'));
     }
 
+    public function PotrawyAll(){
+        $id_stolikow = Stolik::all('id');
+        $kategorie = kategoriePotraw::all();
+        $potrawy = Potrawa::all();
+        $toJson = $potrawy->toJson();
+        return response()->json($toJson);
 
+    }
 
 }

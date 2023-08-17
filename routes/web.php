@@ -56,8 +56,15 @@ Route::get('/stoliki',[StolikiController::class,'index'])->name('ListaStolikow')
 //Zamowienia
 Route::get('/zamowienia/add',[ZamowieniaController::class,'addZamowieniePanel'])->name('Panelzamowienia');
 
+Route::get("/zamowenia/potrawy/all",[ZamowieniaController::class,'PotrawyAll'])->name('PotrawyAll');
+
+
 //Rezerwacje
 Route::get('/rezerwacja',[RezerwacjaController::class,'index'])->name('rezerwacje.index');
 Route::post('rezerwacje/wybor', [RezerwacjaController::class, 'wybor'])->name('rezerwacje.wybor.daty');
 
 Route::get('/listaRezerwacji',[RezerwacjaController::class,'lista'])->name('ListaRezerwacji');
+Route::get('/pobierz-rezerwacje', [RezerwacjaController::class,'getRezerwacjeToday'])->name('getRezerwacjeToday');
+Route::get('/pobierz-przyszle-rezerwacje', [RezerwacjaController::class,'Rezerwacje7days'])->name('Rezerwacje7days');
+Route::get('/pobierz-przeszle-rezerwacje', [RezerwacjaController::class,'RezerwacjeDoTylu7Dni'])->name('RezerwacjeDoTylu7Dni');
+
