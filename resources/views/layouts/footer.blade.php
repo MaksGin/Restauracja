@@ -76,7 +76,7 @@
                 <!-- Grid column -->
                 <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mb-md-0 mb-4">
                     <!-- Links -->
-                    <h6 class="text-uppercase fw-bold mb-4">Contact</h6>
+                    <h6 class="text-uppercase fw-bold mb-4" id="contact">Contact</h6>
                     <p><i class="fas fa-home me-3"></i>Jarosław</p>
                     <p>
                         <i class="fas fa-envelope me-3"></i>

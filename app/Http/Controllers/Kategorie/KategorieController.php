@@ -19,12 +19,14 @@ class KategorieController extends Controller
 
         $validatedData = $request->validate([
             'nazwa' => 'required',
-            'miejsce' => 'required',
+            'miejsce' => 'required|in:bar,kuchnia',
         ]);
 
         $kategoria = new kategoriePotraw();
         $kategoria->nazwa = $validatedData['nazwa'];
-        $kategoria->miejsce_realizacji = $validatedData['miejsce'];
+        $miejsceRealizacjiId = $validatedData['miejsce'] == 'bar' ? 2 : 1; // Załóżmy, że 'bar' ma id = 2, 'kuchnia' ma id = 1
+        $kategoria->miejsce_realizacji = $miejsceRealizacjiId;
+
         $kategoria->save();
 
         return redirect()->route('ListaKategorii')->with('success', 'Kategoria została zaktualizowana.');

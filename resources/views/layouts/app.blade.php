@@ -26,7 +26,7 @@
     <div id="app">
         <nav class="navbar fixed-top navbar-expand-md navbar-light shadow-sm">
             <div class="container">
-                <img src="logo.png" alt="Logo" width="25" height="24" class="d-inline-block align-text-top">
+                <img src="{{ URL::to('/logo.png') }}" alt="Logo" width="25" height="24" class="d-inline-block align-text-top" style="margin-right: 10px">
                 <a class="navbar-brand" href="{{ url('/') }}">
                     Restaurant App
                 </a>
@@ -49,12 +49,12 @@
                     </ul>
                     <ul class="navbar-nav ms-auto">
                         <li class="nav-item">
-                            <a class="nav-link active" aria-current="page" href="#">CONTACT</a>
+                            <a class="nav-link active" aria-current="page" href="#contact">CONTACT</a>
                         </li>
                     </ul>
                     <ul class="navbar-nav ms-auto">
                         <li class="nav-item">
-                            <a class="nav-link active" aria-current="page" href="#">MAKE A RESERVATION</a>
+                            <a class="nav-link active" aria-current="page" href="{{ route('rezerwacje.index')}}">MAKE A RESERVATION</a>
                         </li>
                     </ul>
                     @else

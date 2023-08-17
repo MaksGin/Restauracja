@@ -36,6 +36,7 @@
                     </a>
                     <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDarkDropdownMenuLink">
                         <li><a class="dropdown-item" href="{{ route('ListaStolikow')}}">Lista Stolików</a></li>
+                        <li><a class="dropdown-item" href="{{ route('ListaRezerwacji')}}">Lista rezerwacji</a></li>
                     </ul>
                 </li>
                 <li class="nav-item dropdown">

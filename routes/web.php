@@ -9,6 +9,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\Potrawy\PotrawyController;
 use App\Http\Controllers\Kategorie\KategorieController;
 use App\Http\Controllers\Stoliki\StolikiController;
+use App\Http\Controllers\Rezerwacje\RezerwacjaController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -51,3 +52,12 @@ Route::put('/kategoria/{id}',[KategorieController::class,'update'])->name('kateg
 Route::post('/kategoria/add',[KategorieController::class,'store'])->name('kategorie.store');
 //Lista stolikow
 Route::get('/stoliki',[StolikiController::class,'index'])->name('ListaStolikow');
+
+//Zamowienia
+Route::get('/zamowienia/add',[ZamowieniaController::class,'addZamowieniePanel'])->name('Panelzamowienia');
+
+//Rezerwacje
+Route::get('/rezerwacja',[RezerwacjaController::class,'index'])->name('rezerwacje.index');
+Route::post('rezerwacje/wybor', [RezerwacjaController::class, 'wybor'])->name('rezerwacje.wybor.daty');
+
+Route::get('/listaRezerwacji',[RezerwacjaController::class,'lista'])->name('ListaRezerwacji');

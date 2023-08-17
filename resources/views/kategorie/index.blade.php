@@ -69,8 +69,11 @@
             <input type="text" name="nazwa" class="form-control" required/><br>
 
             <label>Miejsce realizacji:</label>
-            <input type="text" name="miejsce" class="form-control" required/><br>
-            <button type="submit" class="btn btn-success">Dodaj</button>
+            <select name="miejsce" class="form-control">
+                <option value="kuchnia" {{ $kategorie->miejsceRealizacji->id == 1 ? 'selected' : '' }}>Kuchnia</option>
+                <option value="bar" {{ $kategorie->miejsceRealizacji->id == 2 ? 'selected' : '' }}>Bar</option>
+            </select>
+            <button type="submit" class="btn btn-dark" style="margin-top: 20px;">Dodaj</button>
         </form>
     </div>
 </div>
