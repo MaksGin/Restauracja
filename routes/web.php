@@ -10,6 +10,8 @@ use App\Http\Controllers\Potrawy\PotrawyController;
 use App\Http\Controllers\Kategorie\KategorieController;
 use App\Http\Controllers\Stoliki\StolikiController;
 use App\Http\Controllers\Rezerwacje\RezerwacjaController;
+use App\Http\Controllers\Bar\BarController;
+use App\Http\Controllers\Kuchnia\KuchniaController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -21,7 +23,7 @@ use App\Http\Controllers\Rezerwacje\RezerwacjaController;
 |
 */
 Route::get("/login",[LoginController::class,'succeslogin']);
-Route::get('/zamowienia',[ZamowieniaController::class,'index']);
+Route::get('/zamowienia',[ZamowieniaController::class,'index'])->name('zamowienia');
 Route::get('/main', function () {
     return view('main.index');
 });
@@ -67,4 +69,21 @@ Route::get('/listaRezerwacji',[RezerwacjaController::class,'lista'])->name('List
 Route::get('/pobierz-rezerwacje', [RezerwacjaController::class,'getRezerwacjeToday'])->name('getRezerwacjeToday');
 Route::get('/pobierz-przyszle-rezerwacje', [RezerwacjaController::class,'Rezerwacje7days'])->name('Rezerwacje7days');
 Route::get('/pobierz-przeszle-rezerwacje', [RezerwacjaController::class,'RezerwacjeDoTylu7Dni'])->name('RezerwacjeDoTylu7Dni');
+
+
+
+//panel dodawania zamowienia
+Route::get('/pobierz-potrawy', [ZamowieniaController::class,'getPotrawy'])->name('getPotrawy');
+
+Route::get('/getPotrawyByCategory/{id_kategorii}', [ZamowieniaController::class,'getPotrawyByCategory'])->name('getPotrawyByCategory');
+
+Route::get('/pobierz-stoliki',[ZamowieniaController::class,'getStoliki'])->name('getStoliki');
+
+
+//panel dla kuchni
+Route::get('/panel/kuchnia',[KuchniaController::class,'index'])->name('panelKuchnia');
+
+//panel dla baru
+Route::get('/panel/bar',[BarController::class,'index'])->name('panelBar');
+
 

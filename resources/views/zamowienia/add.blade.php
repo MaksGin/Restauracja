@@ -43,6 +43,7 @@
     #lista-potraw {
         margin-top:10px;
     }
+
     .potrawa {
         cursor: pointer;
         font-size: 16px;
@@ -107,83 +108,166 @@
     .selected-stolik {
         background: #ffbc3d;
     }
+    #lista-stolikow {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); /* Dynamicznie tworzy kolumny w siatce */
+        gap: 10px; /* Odstępy między elementami */
+    }
+
+
+    .stolik {
+        cursor: pointer;
+        font-size: 16px;
+        padding:6px;
+        margin:2px;
+        background: #fff2d3;
+    }
+    #podsumowanie_panel{
+        background-color: #dbc694;
+        border-radius: 25px;
+
+    }
+
 </style>
 
 
-<div class="row">
+<div class="container">
+    <h1> Wybierz stolik </h1>
+        <div id="lista-stolikow">
 
-    <div class="col-sm-3">
-        <div class="title-col">
-            Stoliki
         </div>
 
-        <div id="stoliki" class="row">
-            @foreach($id_stolikow as $stolik)
+</div>
 
-                <div class="stolik-div kategoria col-sm-6 me-md-12">
-                    {{$stolik->nazwa}}
-                </div>
-            @endforeach
-        </div>
+
+<div class="container">
+    <div class="row">
+      <div class="col">
+        <center><button class="category-button m-3 btn btn-dark m-3 text-white" data-category-id="1">Fast Food</button>
+        <button class="category-button m-3 btn btn-dark m-3 text-white" data-category-id="2">Inne Dania</button></center>
+      </div>
+      <div class="col align-items-center">
+        <center><a class="m-3 btn btn-dark m-3 text-white" id="pobierz-potrawy">pobierz wszystkie potrawy</a><br>
+        <button class="category-button m-3 btn btn-dark m-3 text-white" data-category-id="4">Napoje</button></center>
+      </div>
+      <div class="col">
+        <center><button class="category-button m-3 btn btn-dark m-3 text-white" data-category-id="6">Desery</button>
+        <button class="category-button m-3 btn btn-dark m-3 text-white" data-category-id="7">Dodatki</button></center>
+      </div>
     </div>
+  </div>
 
-    <div class="col-sm-3">
-        <div class="title-col">
-            Kategorie
-            <button id="all_kategorie" class="btn btn-dark" style="float:right;border-radius: 50px;font-weight: 600;background: #111">Wszystkie</button>
-        </div>
 
-        <div id="kategorie" class="row">
-            @foreach($kategorie as $kategoria)
 
-                <div class="col-sm-6 kategoria me-md-12" kategoria_id="{{$kategoria->id}}">
-                    {{$kategoria->nazwa}}
-                </div>
-            @endforeach
-        </div>
-    </div>
 
-    <div class="col-sm-3">
-        <div class="col-sm-12">
-            <div class="title-col">
-                Potrawy
-            </div>
-            <div id="lista-potraw">
 
-            </div>
-        </div>
-    </div>
-    <div class="col-sm-3 podsuwanie-col">
-        <div class="title-col">
-            Podsumowanie
-        </div>
-        <div class="col-sm-12">
-            <div id="alert-box">
 
-            </div>
-            <div class="col-md-12">
-                <form action="create" method="POST">@csrf
-                    <div id="podsumowanie">
+<div class="container">
 
-                    </div>
-                    <input id="finnaly-price" value="0.00" type="hidden">
-                    <div class="col-box">
-                        <div>
-                            Suma:
-                            <span id="price">0.00</span> pln
-                        </div>
-                        <div>
-                            <button id="btn-sendRequest" class="btn btn-dark me-5">ZATWIERDZ</button>
-                        </div>
-                    </div>
-
-                </form>
-            </div>
-        </div>
-
+    <div id="lista-potraw">
 
     </div>
 </div>
+<div class="container" id="podsumowanie_panel" style="margin-top: 30px">
+    <form action="create" method="POST">
+        @csrf
+        <div id="podsumowanie">
+
+        </div>
+        <input id="finnaly-price" value="0.00" type="hidden">
+        <div class="col-box">
+            <div>
+                Suma:
+                <span id="price">0.00</span> pln
+            </div>
+
+        </div>
+
+    </form>
+</div>
+<script>
+
+
+    document.addEventListener('DOMContentLoaded', function () {
+    var stoliki = document.getElementById('lista-stolikow');
+        // Wywołanie żądania AJAX do pobrania rezerwacji
+        fetch('{{ route("getStoliki") }}')
+            .then(response => response.json())
+            .then(data => {
+                data = JSON.parse(data);
+                data.forEach(stolik => {
+                    const div = document.createElement("div");
+                    div.setAttribute("stolik_id", stolik.id);
+                    div.classList.add("stolik");
+
+                    const text = document.createTextNode(stolik.nazwa);
+                    div.appendChild(text);
+
+                    stoliki.appendChild(div);
+                });
+                console.log(data);
+            })
+            .catch(error => console.error(error));
+    });
+
+
+     var potrawy = document.getElementById('lista-potraw')
+        document.getElementById('pobierz-potrawy').addEventListener('click', function () {
+            // Wywołanie żądania AJAX do pobrania rezerwacji
+            fetch('{{ route("getPotrawy") }}')
+                .then(response => response.json())
+                .then(data => {
+                    document.getElementById('lista-potraw').innerHTML = '';
+
+                    data = JSON.parse(data);
+                    data.forEach(potrawa => {
+                        const div = document.createElement("div");
+                        div.setAttribute("potrawa_id", potrawa.id);
+                        div.classList.add("potrawa");
+
+                        const text = document.createTextNode(potrawa.nazwa);
+                        div.appendChild(text);
+
+
+                        potrawy.appendChild(div);
+                    });
+                    console.log(data);
+                })
+                .catch(error => console.error(error));
+        });
+
+        const categoryButtons = document.querySelectorAll('.category-button');
+        categoryButtons.forEach(button => {
+            button.addEventListener('click', () => {
+            const selectedCategoryID = button.getAttribute('data-category-id');
+            console.log(selectedCategoryID);
+
+                fetch('/getPotrawyByCategory/'+ selectedCategoryID)
+                    .then(response => response.json())
+                    .then(data => {
+
+                        document.getElementById('lista-potraw').innerHTML = '';
+                        data = JSON.parse(data);
+                        data.forEach(potrawa => {
+                            const div = document.createElement("div");
+                            div.setAttribute("potrawa_id", potrawa.id);
+                            div.classList.add("potrawa");
+
+                            const text = document.createTextNode(potrawa.nazwa);
+                            div.appendChild(text);
+
+
+                            potrawy.appendChild(div);
+                        });
+                        console.log(data);
+                    })
+                    .catch(error => console.error(error));
+            });
+        });
+
+
+
+</script>
 <script>
 
     var price = 0.00;

@@ -6,10 +6,16 @@ use Illuminate\Http\Request;
 use App\Models\Stolik;
 use App\Models\kategoriePotraw;
 use App\Models\Potrawa;
+use App\Models\Zamowienia;
 class ZamowieniaController extends Controller
 {
     public function index(){
-        return view('zamowienia.index');
+
+        $stoliki = Stolik::all();
+        $potrawy = Potrawa::all();
+        $zamowienia = Zamowienia::all();
+
+        return view('zamowienia.index',compact('stoliki','potrawy','zamowienia'));
     }
 
     public function addZamowieniePanel(){
@@ -29,4 +35,30 @@ class ZamowieniaController extends Controller
 
     }
 
+    public function getPotrawy(){
+
+        $wszystkie_potrawy = Potrawa::all();
+
+        $jsonData = $wszystkie_potrawy->toJson();
+
+        return response()->json($jsonData);
+    }
+
+
+    public function getPotrawyByCategory($id_kategorii){
+
+        $napoje = Potrawa::where('id_kategorii',$id_kategorii)->get();
+
+        $jsonData = $napoje->toJson();
+
+        return response()->json($jsonData);
+    }
+
+    public function getStoliki(){
+        $stoliki = Stolik::all();
+
+        $jsonData = $stoliki->toJson();
+
+        return response()->json($jsonData);
+    }
 }

@@ -44,10 +44,10 @@
                         Obsługa
                     </a>
                     <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDarkDropdownMenuLink">
-                        <li><a class="dropdown-item" href="#">Aktualne zamówienia</a></li>
-                        <li><a class="dropdown-item" href="#">Nowe zamówienie</a></li>
-                        <li><a class="dropdown-item" href="#">Panel dla kuchnii</a></li>
-                        <li><a class="dropdown-item" href="#">Panel dla baru</a></li>
+                        <li><a class="dropdown-item" href="{{ route('zamowienia')}}">Aktualne zamówienia</a></li>
+                        <li><a class="dropdown-item" href="{{ route('Panelzamowienia')}}">Nowe zamówienie</a></li>
+                        <li><a class="dropdown-item" href="{{ route('panelKuchnia')}}">Panel dla kuchnii</a></li>
+                        <li><a class="dropdown-item" href="{{ route('panelBar')}}">Panel dla baru</a></li>
                         <li><a class="dropdown-item" href="#">Panel dla kelnera</a></li>
                     </ul>
                 </li>
