@@ -59,7 +59,7 @@ Route::get('/stoliki',[StolikiController::class,'index'])->name('ListaStolikow')
 Route::get('/zamowienia/add',[ZamowieniaController::class,'addZamowieniePanel'])->name('Panelzamowienia');
 
 Route::get("/zamowenia/potrawy/all",[ZamowieniaController::class,'PotrawyAll'])->name('PotrawyAll');
-
+Route::post("/zamowienie/save",[ZamowieniaController::class,'SaveZamowienie'])->name('SaveZamowienie');
 
 //Rezerwacje
 Route::get('/rezerwacja',[RezerwacjaController::class,'index'])->name('rezerwacje.index');

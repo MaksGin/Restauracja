@@ -17,4 +17,9 @@ class Zamowienia extends Model
         'id_stoliku',
         'cena',
     ];
+
+    public function potrawy(){
+        return $this->belongsToMany(Potrawa::class,'zamowienia_potrawy','zamowienie_id','potrawa_id');
+   }
+
 }

@@ -18,8 +18,8 @@
         <thead>
             <tr>
               <th scope="col">#</th>
+              <th scope="col">Kelner</th>
               <th scope="col">Stolik</th>
-              <th scope="col">Potrawy</th>
               <th scope="col">Cena</th>
             </tr>
           </thead>

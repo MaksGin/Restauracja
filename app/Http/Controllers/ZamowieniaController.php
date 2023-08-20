@@ -7,6 +7,8 @@ use App\Models\Stolik;
 use App\Models\kategoriePotraw;
 use App\Models\Potrawa;
 use App\Models\Zamowienia;
+use Illuminate\Support\Facades\Auth;
+
 class ZamowieniaController extends Controller
 {
     public function index(){
@@ -61,4 +63,36 @@ class ZamowieniaController extends Controller
 
         return response()->json($jsonData);
     }
+
+    public function SaveZamowienie(Request $request)
+    {
+
+        $idKelnera = $request->input('id_kelnera');
+        $cenaPotrawy = $request->input('cena_potrawy');
+        $idStolika = $request->input('id_stolika');
+        $zaznaczonePotrawy = explode(',', $request->input('zaznaczone_potrawy'));
+
+
+        // Walidacja danych, jeśli to konieczne
+
+        // Zapisanie do bazy danych
+        $zamowienie = new Zamowienia();
+        $zamowienie->id_kelnera = $idKelnera;
+        $zamowienie->id_stoliku = $idStolika;
+        $zamowienie->cena = $cenaPotrawy;
+        $zamowienie->save();
+
+        // Zapisanie zaznaczonych potraw w relacji
+        foreach ($zaznaczonePotrawy as $potrawaId) {
+            // Tworzymy rekord w tabeli łączącej
+            $zamowienie->potrawy()->attach($potrawaId);
+        }
+
+        $stoliki = Stolik::all();
+        $potrawy = Potrawa::all();
+        $zamowienia = Zamowienia::all();
+
+        return view('zamowienia.index',compact('stoliki','potrawy','zamowienia'));
+    }
+
 }

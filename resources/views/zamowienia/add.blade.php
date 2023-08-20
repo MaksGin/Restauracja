@@ -127,6 +127,17 @@
         border-radius: 25px;
 
     }
+    .stolik.zaznaczony {
+        background-color: #3498db; /* Przykładowy kolor tła */
+        color: black; /* Przykładowy kolor tekstu */
+        border: 2px solid black; /* Przykładowe obramowanie */
+    }
+
+    .potrawa.zaznaczony {
+        background-color: #3498db; /* Przykładowy kolor tła */
+        color: black; /* Przykładowy kolor tekstu */
+        border: 2px solid black; /* Przykładowe obramowanie */
+    }
 
 </style>
 
@@ -143,16 +154,16 @@
 <div class="container">
     <div class="row">
       <div class="col">
-        <center><button class="category-button m-3 btn btn-dark m-3 text-white" data-category-id="1">Fast Food</button>
-        <button class="category-button m-3 btn btn-dark m-3 text-white" data-category-id="2">Inne Dania</button></center>
+        <center><button class="category-button m-3 btn btn-dark m-3 text-white" data-category-id="11">Fast Food</button>
+        <button class="category-button m-3 btn btn-dark m-3 text-white" data-category-id="8">Inne Dania</button></center>
       </div>
       <div class="col align-items-center">
         <center><a class="m-3 btn btn-dark m-3 text-white" id="pobierz-potrawy">pobierz wszystkie potrawy</a><br>
-        <button class="category-button m-3 btn btn-dark m-3 text-white" data-category-id="4">Napoje</button></center>
+        <button class="category-button m-3 btn btn-dark m-3 text-white" data-category-id="14">Napoje</button></center>
       </div>
       <div class="col">
-        <center><button class="category-button m-3 btn btn-dark m-3 text-white" data-category-id="6">Desery</button>
-        <button class="category-button m-3 btn btn-dark m-3 text-white" data-category-id="7">Dodatki</button></center>
+        <center><button class="category-button m-3 btn btn-dark m-3 text-white" data-category-id="12">Desery</button>
+        <button class="category-button m-3 btn btn-dark m-3 text-white" data-category-id="13">Dodatki</button></center>
       </div>
     </div>
   </div>
@@ -169,28 +180,52 @@
     </div>
 </div>
 <div class="container" id="podsumowanie_panel" style="margin-top: 30px">
-    <form action="create" method="POST">
+    <form action="{{ route('SaveZamowienie') }}" method="POST">
         @csrf
+        <input type="hidden" name="id_kelnera" value="1">
+
+        <div id="lista-stolikow">
+
+        </div>
+        <div id="lista-potraw">
+
+        </div>
+
         <div id="podsumowanie">
 
         </div>
-        <input id="finnaly-price" value="0.00" type="hidden">
+        <input type="hidden" name="cena_potrawy" id="cena_potrawy_input">
+        <input type="hidden" name="id_stolika" id="id_stolika_input">
+        <input type="hidden" name="zaznaczone_potrawy" id="zaznaczone_potrawy_input">
         <div class="col-box">
             <div>
                 Suma:
                 <span id="price">0.00</span> pln
+                <button class=" m-3 btn btn-dark m-3 text-white" id="zatwierdzBtn">Zatwierdź</button>
             </div>
 
         </div>
 
     </form>
+
 </div>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
+    const selectedPotrawa = {
+        id: null,
+        cena: null
+    };
+    const selectedStolik = {
+        id: null,
+    }
+    var stolikId;
+    let sumaCenPotraw = 0.0;
 
-
+    const selectedPotrawy = [];
     document.addEventListener('DOMContentLoaded', function () {
-    var stoliki = document.getElementById('lista-stolikow');
-        // Wywołanie żądania AJAX do pobrania rezerwacji
+
+        var stoliki = document.getElementById('lista-stolikow');
+
         fetch('{{ route("getStoliki") }}')
             .then(response => response.json())
             .then(data => {
@@ -200,19 +235,42 @@
                     div.setAttribute("stolik_id", stolik.id);
                     div.classList.add("stolik");
 
-                    const text = document.createTextNode(stolik.nazwa);
+                    const text = document.createTextNode(stolik.nazwa+' '+stolik.umiejscowienie);
                     div.appendChild(text);
 
                     stoliki.appendChild(div);
-                });
-                console.log(data);
-            })
-            .catch(error => console.error(error));
-    });
+                    // Dodaj obsługę zdarzenia kliknięcia do każdego diva stolika
+                    div.addEventListener('click', function () {
+
+                        stolikId = div.getAttribute("stolik_id");
 
 
-     var potrawy = document.getElementById('lista-potraw')
+                        const zaznaczoneStoliki = stoliki.querySelectorAll(".stolik.zaznaczony");
+                        zaznaczoneStoliki.forEach(zaznaczonyStolik => {
+                            zaznaczonyStolik.classList.remove("zaznaczony");
+                        });
+
+
+                        div.classList.add("zaznaczony");
+                        document.getElementById('id_stolika_input').value = stolikId;
+
+                        selectedStolik.idStolik = stolikId;
+                        console.log("Wybrano stolik o id:", stolikId);
+
+                    });
+
+                }).catch(error => console.error(error));
+            });
+
+
+
+        // Obsługa kliknięcia na element potrawy
+        const listaPotraw = document.getElementById('lista-potraw');
+
+        //Lista wszystkich potraw
+        var potrawy = document.getElementById('lista-potraw')
         document.getElementById('pobierz-potrawy').addEventListener('click', function () {
+
             // Wywołanie żądania AJAX do pobrania rezerwacji
             fetch('{{ route("getPotrawy") }}')
                 .then(response => response.json())
@@ -223,24 +281,61 @@
                     data.forEach(potrawa => {
                         const div = document.createElement("div");
                         div.setAttribute("potrawa_id", potrawa.id);
+                        div.setAttribute("potrawa_cena", potrawa.cena);
                         div.classList.add("potrawa");
 
-                        const text = document.createTextNode(potrawa.nazwa);
+                        const text = document.createTextNode(potrawa.nazwa+' '+potrawa.cena+'zł');
                         div.appendChild(text);
 
 
                         potrawy.appendChild(div);
-                    });
-                    console.log(data);
-                })
-                .catch(error => console.error(error));
+
+                        div.addEventListener('click', function () {
+                            const clickedDiv = event.target.closest('.potrawa'); // Znajdź najbliższy div.potrawa
+                            if (clickedDiv) {
+                                const potrawaId = clickedDiv.getAttribute("potrawa_id");
+                                const potrawaCena = clickedDiv.getAttribute("potrawa_cena");
+
+                                // Jeśli potrawa jest już zaznaczona, odznacz ją
+                                if (selectedPotrawy.includes(potrawaId)) {
+                                    selectedPotrawy.splice(selectedPotrawy.indexOf(potrawaId), 1);
+                                    sumaCenPotraw -= parseFloat(potrawaCena);
+                                    clickedDiv.classList.remove("zaznaczony");
+                                } else {
+                                    // W przeciwnym razie zaznacz potrawę i dodaj do listy zaznaczonych
+                                    selectedPotrawy.push(potrawaId);
+                                    sumaCenPotraw += parseFloat(potrawaCena);
+                                    clickedDiv.classList.add("zaznaczony");
+                                }
+                                console.log("Aktualna zawartość selectedPotrawy:", selectedPotrawy);
+                                var IdKelner = 10;
+
+
+                                console.log("Wybrano potrawę o id:", potrawaId);
+                                console.log("Cena potrawy:", potrawaCena);
+
+                                document.getElementById('cena_potrawy_input').value = sumaCenPotraw;
+                                document.getElementById('zaznaczone_potrawy_input').value = selectedPotrawy;
+
+                                zapiszDoBazy(IdKelner,stolikId,potrawaCena);
+                                // Tutaj możesz aktualizować wyświetlaną sumę itp.
+                                document.getElementById('price').textContent = sumaCenPotraw.toFixed(2) + ' pln';
+                            }
+
+                        });
+                        console.log(data);
+                    })
+                        .catch(error => console.error(error));
+                });
         });
 
+
+        //Lista potraw przypisanych do kategorii
         const categoryButtons = document.querySelectorAll('.category-button');
         categoryButtons.forEach(button => {
             button.addEventListener('click', () => {
-            const selectedCategoryID = button.getAttribute('data-category-id');
-            console.log(selectedCategoryID);
+                const selectedCategoryID = button.getAttribute('data-category-id');
+                console.log(selectedCategoryID);
 
                 fetch('/getPotrawyByCategory/'+ selectedCategoryID)
                     .then(response => response.json())
@@ -251,299 +346,102 @@
                         data.forEach(potrawa => {
                             const div = document.createElement("div");
                             div.setAttribute("potrawa_id", potrawa.id);
+                            div.setAttribute("potrawa_cena", potrawa.cena);
                             div.classList.add("potrawa");
 
-                            const text = document.createTextNode(potrawa.nazwa);
+                            const text = document.createTextNode(potrawa.nazwa+' '+potrawa.cena);
                             div.appendChild(text);
 
 
                             potrawy.appendChild(div);
+
+                            div.addEventListener('click', function () {
+                                const clickedDiv = event.target.closest('.potrawa'); // Znajdź najbliższy div.potrawa
+                                if (clickedDiv) {
+                                    const potrawaId = clickedDiv.getAttribute("potrawa_id");
+                                    const potrawaCena = clickedDiv.getAttribute("potrawa_cena");
+
+                                    // Jeśli potrawa jest już zaznaczona, odznacz ją
+                                    if (selectedPotrawy.includes(potrawaId)) {
+                                        selectedPotrawy.splice(selectedPotrawy.indexOf(potrawaId), 1);
+                                        sumaCenPotraw -= parseFloat(potrawaCena);
+                                        clickedDiv.classList.remove("zaznaczony");
+                                    } else {
+                                        // W przeciwnym razie zaznacz potrawę i dodaj do listy zaznaczonych
+                                        selectedPotrawy.push(potrawaId);
+                                        sumaCenPotraw += parseFloat(potrawaCena);
+                                        clickedDiv.classList.add("zaznaczony");
+                                    }
+                                    console.log("Aktualna zawartość selectedPotrawy:", selectedPotrawy);
+                                    var IdKelner = 10;
+
+
+                                    console.log("Wybrano potrawę o id:", potrawaId);
+                                    console.log("Cena potrawy:", potrawaCena);
+
+                                    document.getElementById('cena_potrawy_input').value = sumaCenPotraw;
+                                    document.getElementById('zaznaczone_potrawy_input').value = selectedPotrawy;
+
+                                    zapiszDoBazy(IdKelner, stolikId, potrawaCena);
+                                    // Tutaj możesz aktualizować wyświetlaną sumę itp.
+                                    document.getElementById('price').textContent = sumaCenPotraw.toFixed(2) + ' pln';
+                                }
+                            })
+
                         });
-                        console.log(data);
-                    })
-                    .catch(error => console.error(error));
+            console.log(data);
+        })
+            .catch(error => console.error(error));
+
             });
         });
 
+        function zapiszDoBazy(id_kelnera, id_stolika, cena_potrawy) {
+            const zatwierdzBtn = document.getElementById('zatwierdzBtn');
+            console.log("Aktualna zawartość selectedPotrawy:", selectedPotrawy);
+            zatwierdzBtn.addEventListener('click', () => {
+                if (selectedStolik.id !== null && selectedPotrawy.length > 0) {
+                    const requestData = {
+                        id_kelnera: id_kelnera,
+                        cena_potrawy: cena_potrawy,
+                        id_stolika: id_stolika,
+                        zaznaczone_potrawy: selectedPotrawy
+                    };
 
+                    const xhr = new XMLHttpRequest();
+                    xhr.open("POST", "/zamowienie/save", true);
+                    xhr.setRequestHeader("Content-Type", "application/json");
+                    xhr.setRequestHeader("X-CSRF-Token", "{{ csrf_token() }}");
 
-</script>
-<script>
-
-    var price = 0.00;
-    var numberId = 1;
-    var btnBlocked = false;
-
-    var SendInfo = {};
-
-    var stolik = null;
-
-    let kategorie = document.getElementById("kategorie").querySelectorAll('.kategoria');
-
-    var lastDivStolik;
-
-    showAll();
-
-    $("#all_kategorie").click(function (event) {
-        showAll();
-    });
-
-    for (var i = 0; i < kategorie.length; i++) {
-        let id = kategorie[i].getAttribute("kategoria_id");
-        kategorie[i].addEventListener('click', () => {
-            if (btnBlocked)
-                return;
-
-            show(id)
-            btnBlocked = true;
-        })
-    }
-
-    function addPrice(price) {
-        this.price += price;
-        showPrice();
-    }
-
-    function setPrice(price)
-    {
-        this.price = price;
-        showPrice();
-        SendInfo = {};
-    }
-
-    function takePrice(price) {
-        this.price -= price;
-        showPrice();
-
-    }
-
-    $(".stolik-div").click(function (event) {
-        selectStolik(this, this.getAttribute("stolik_id"));
-    })
-
-
-    function selectStolik(div, id)
-    {
-        resetStolikBg();
-        stolik = id;
-        lastDivStolik = div;
-        lastDivStolik.classList.add('selected-stolik');
-    }
-
-    function resetStolikBg()
-    {
-        if(lastDivStolik==null)
-            return;
-
-        lastDivStolik.classList.remove('selected-stolik')
-    }
-
-    function showPrice() {
-        let priceInput = document.getElementById("price");
-        priceInput.setAttribute("finnaly-price", this.price);
-        document.getElementById("price").innerText = parseFloat(this.price).toFixed(2);
-    }
-
-    function show(id) {
-    var potrawy = $("#lista-potraw");
-    potrawy.empty();
-
-    $.ajax({
-            url: "/potrawy" + id,
-            method: "GET",
-            dataType: "json",
-            success: function(data) {
-                data.forEach(p => {
-                    const div = $("<div>")
-                        .attr("potrawa_id", p.id)
-                        .addClass("potrawa")
-
-
-                    const text = $("<span>").text(p.nazwa);
-                    div.append(text);
-
-                    div.on("click", () => {
-                        if (!p.dostep) {
-                            var alert = $("#alert-box");
-                            alert.empty();
-                            const info = $("<div>")
-                                .addClass("error")
-                                .text("Potrawa jest niedostępna");
-                            alert.append(info);
-                            return;
+                    xhr.onreadystatechange = function () {
+                        if (xhr.readyState === XMLHttpRequest.DONE) {
+                            if (xhr.status === 200) {
+                                const response = JSON.parse(xhr.responseText);
+                                console.log("Zapisano pomyślnie!", response);
+                            } else {
+                                console.error("Błąd podczas zapisywania:", xhr.statusText);
+                            }
                         }
+                    };
 
-                        var alert = $("#alert-box");
-                        alert.empty();
-                        podsumowanie(p.id, p.cena, p.nazwa);
-                        addPrice(p.cena);
-                    });
-
-                    potrawy.append(div);
-                });
-            },
-            error: function(xhr, status, error) {
-                console.error("Błąd pobierania danych: " + error);
-            }
-        });
-    }
-
-
-    function showAll() {
-        var potrawy = document.getElementById('lista-potraw')
-        potrawy.textContent = ''
-        fetch("{{route('PotrawyAll')}}")
-            .then(response => response.json())
-            .then(data => {
-                data = JSON.parse(data);
-                btnBlocked = false;
-
-                data.forEach(p => {
-
-                    const div = document.createElement("div");
-                    div.setAttribute("potrawa_id", p[0].id);
-                    div.classList.add("potrawa");
-
-
-                    const text = document.createTextNode(p[0].nazwa);
-                    div.appendChild(text);
-                    div.addEventListener('click', () => {
-
-                        var alert = document.getElementById('alert-box')
-                        alert.textContent = '';
-                        podsumowanie(p[0].id, p[0].cena, p[0].nazwa);
-                        addPrice(p[0].cena);
-                    })
-                    potrawy.appendChild(div);
-                });
-
-            })
-    }
-
-    function podsumowanie(id, cena, nazwa) {
-        var podsumowanie = document.getElementById('podsumowanie')
-
-
-        // main div
-        const main = document.createElement("div");
-        main.classList.add("col-potrawa")
-
-        // input
-        const input = document.createElement("input");
-        input.setAttribute("type", "hidden");
-        input.setAttribute("name", "id_potrawy");
-        input.setAttribute("value", id);
-        main.appendChild(input);
-
-        // left div - name
-        const nameDiv = document.createElement("div");
-        nameDiv.classList.add("potrawa-podsumowanie");
-        nameDiv.innerText = nazwa;
-        main.appendChild(nameDiv);
-
-        // right div - price
-        const priceDiv = document.createElement("div");
-        priceDiv.classList.add("cena-podsumowanie");
-        priceDiv.innerText = cena;
-        main.appendChild(priceDiv);
-
-        // right div - price
-        const divBtn = document.createElement("div");
-        divBtn.classList.add("btn-box");
-
-        // button delete
-        const buttonDiv = document.createElement("div");
-        buttonDiv.innerText = "X";
-        buttonDiv.classList.add("btn-delete")
-        divBtn.appendChild(buttonDiv);
-        var key = this.numberId;
-        buttonDiv.addEventListener('click', () => {
-            takePrice(cena);
-            delete this.SendInfo[key]
-            main.remove();
-        })
-        this.SendInfo[this.numberId] = {
-            "id_potrawy": id
+                    xhr.send(JSON.stringify(requestData));
+                }
+            });
         }
-        this.numberId++;
-        main.appendChild(divBtn);
-        podsumowanie.appendChild(main);
-        console.log("" + JSON.stringify(this.SendInfo))
 
-    }
-
-    $("#btn-sendRequest").click(function (event) {
-        event.preventDefault();
-        let _token = $('meta[name="csrf-token"]').attr('content');
-        if(stolik==null)
-        {
-            var alert = document.getElementById('alert-box')
-            alert.textContent = '';
-            const info = document.createElement("div");
-            info.classList.add("error");
-            info.innerText = 'Wybierz id stolika';
-            alert.appendChild(info);
-            return;
-        }
-        if(Object.keys(SendInfo).length===0)
-        {
-            var alert = document.getElementById('alert-box')
-            alert.textContent = '';
-            const info = document.createElement("div");
-            info.classList.add("error");
-            info.innerText = 'Wybierz potrawe';
-            alert.appendChild(info);
-            return;
-        }
-        $.ajax({
-            url: "{{url("/api/zamowienie/create")}}",
-            type: "POST",
-            data: {
-                "cena": price,
-                "potrawy": JSON.stringify(SendInfo),
-                "id_stoliku": stolik,
-                "id_kelnera": 1,
-                _token: _token
-            },
-
-            success: function (response) {
-
-                // right div - price
-                var alert = document.getElementById('alert-box')
-                alert.textContent = '';
-                const info = document.createElement("div");
-                info.classList.add("success");
-                info.innerText = response;
-                alert.appendChild(info);
-                document.getElementById('podsumowanie').textContent = '';
-                setPrice(0.00);
-                stolik = null;
-                resetStolikBg();
-                console.log(response)
-
-            },
-            error: function (error) {
-                var alert = document.getElementById('alert-box')
-                alert.textContent = '';
-                const info = document.createElement("div");
-                info.classList.add("error");
-                info.innerText = error;
-                alert.appendChild(info);
-            }
-
-        });
     });
 
 
-    //let kategorie = document.querySelectorAll('.kategorie');
-    /*for(let i = 0; i < kategorie.length;i++)
-    {
-        console.log("#");
-        kategorie[i].addEventListener('click', () => {
-            kategorie[i].hidden();
-        })
-    }*/
+
+
+
+
+
+
+
+
 
 
 </script>
+
 @endsection
