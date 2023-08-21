@@ -7,7 +7,7 @@
     }
 
 </style>
-<center><h1>Szczegóły zamówienia</h1></center>
+<center><h1>Szczegóły zamówienia nr. {{$zamowienie->id}}</h1></center>
 <div class="container">
     <div class="row">
       <div class="col">
