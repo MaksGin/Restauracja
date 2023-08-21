@@ -16,7 +16,7 @@
 <div class="container" style="margin-top: 50px;">
     <table class="table table-hover">
         <thead>
-            <tr>
+            <tr >
               <th scope="col">#</th>
               <th scope="col">Kelner</th>
               <th scope="col">Stolik</th>
@@ -25,11 +25,11 @@
           </thead>
           <tbody>
             @foreach($zamowienia as $zamowienie)
-            <tr>
+            <tr onclick="window.location='{{ route('details', $zamowienie['id']) }}'">
                 <td>{{$zamowienie->id}}</td>
                 <td>{{$zamowienie->id_kelnera}}</td> <!-- wyswietlic imie kelnera , nazwe stolika z relacji -->
                 <td>{{$zamowienie->id_stoliku}}</td>
-                <td>{{$zamowienie->cena}}</td>
+                <td>{{$zamowienie->cena}} zł</td>
             </tr>
             @endforeach
           </tbody>

@@ -7,6 +7,8 @@ use App\Models\Stolik;
 use App\Models\kategoriePotraw;
 use App\Models\Potrawa;
 use App\Models\Zamowienia;
+use App\Models\Kuchnia;
+use App\Models\ZamowieniaPotrawy;
 use Illuminate\Support\Facades\Auth;
 
 class ZamowieniaController extends Controller
@@ -73,9 +75,6 @@ class ZamowieniaController extends Controller
         $zaznaczonePotrawy = explode(',', $request->input('zaznaczone_potrawy'));
 
 
-        // Walidacja danych, jeśli to konieczne
-
-        // Zapisanie do bazy danych
         $zamowienie = new Zamowienia();
         $zamowienie->id_kelnera = $idKelnera;
         $zamowienie->id_stoliku = $idStolika;
@@ -84,15 +83,33 @@ class ZamowieniaController extends Controller
 
         // Zapisanie zaznaczonych potraw w relacji
         foreach ($zaznaczonePotrawy as $potrawaId) {
-            // Tworzymy rekord w tabeli łączącej
+            // Rekord do tabeli potrawy_zamowienia
             $zamowienie->potrawy()->attach($potrawaId);
         }
+        $IDzamowienia = $zamowienie->id;
+
+
+        $zamowienie->kuchnie()->attach($IDzamowienia);
+
+
+        //$zamowienie->kuchnia()->associate($IDzamowienia);
+
 
         $stoliki = Stolik::all();
         $potrawy = Potrawa::all();
         $zamowienia = Zamowienia::all();
 
         return view('zamowienia.index',compact('stoliki','potrawy','zamowienia'));
+    }
+
+    public function details($id){
+
+        $zamowienie = Zamowienia::findOrFail($id);
+
+        $potrawy_zamowienia = ZamowieniaPotrawy::where("zamowienie_id",$zamowienie->id)->get(); //pobieram potrawy z tabeli potrawy_zamowienia odpowiadajace id zamowienia
+
+
+        return view('zamowienia.details',compact('zamowienie','potrawy_zamowienia'));
     }
 
 }

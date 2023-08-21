@@ -17,4 +17,8 @@ class ZamowieniaPotrawy extends Model
         'potrawa_id',
 
     ];
+
+    public function potrawy(){
+        return $this->belongsTo(Potrawa::class,'potrawa_id');
+   }
 }

@@ -154,16 +154,16 @@
 <div class="container">
     <div class="row">
       <div class="col">
-        <center><button class="category-button m-3 btn btn-dark m-3 text-white" data-category-id="11">Fast Food</button>
-        <button class="category-button m-3 btn btn-dark m-3 text-white" data-category-id="8">Inne Dania</button></center>
+        <center><button class="category-button m-3 btn btn-dark m-3 text-white" data-category-id="1">Fast Food</button>
+        <button class="category-button m-3 btn btn-dark m-3 text-white" data-category-id="2">Inne Dania</button></center>
       </div>
       <div class="col align-items-center">
         <center><a class="m-3 btn btn-dark m-3 text-white" id="pobierz-potrawy">pobierz wszystkie potrawy</a><br>
-        <button class="category-button m-3 btn btn-dark m-3 text-white" data-category-id="14">Napoje</button></center>
+        <button class="category-button m-3 btn btn-dark m-3 text-white" data-category-id="4">Napoje</button></center>
       </div>
       <div class="col">
-        <center><button class="category-button m-3 btn btn-dark m-3 text-white" data-category-id="12">Desery</button>
-        <button class="category-button m-3 btn btn-dark m-3 text-white" data-category-id="13">Dodatki</button></center>
+        <center><button class="category-button m-3 btn btn-dark m-3 text-white" data-category-id="6">Desery</button>
+        <button class="category-button m-3 btn btn-dark m-3 text-white" data-category-id="7">Dodatki</button></center>
       </div>
     </div>
   </div>
@@ -179,6 +179,8 @@
 
     </div>
 </div>
+
+<!-- formularz -->
 <div class="container" id="podsumowanie_panel" style="margin-top: 30px">
     <form action="{{ route('SaveZamowienie') }}" method="POST">
         @csrf
@@ -200,7 +202,7 @@
         <div class="col-box">
             <div>
                 Suma:
-                <span id="price">0.00</span> pln
+                <span id="price">0.00</span>
                 <button class=" m-3 btn btn-dark m-3 text-white" id="zatwierdzBtn">Zatwierdź</button>
             </div>
 
@@ -239,7 +241,8 @@
                     div.appendChild(text);
 
                     stoliki.appendChild(div);
-                    // Dodaj obsługę zdarzenia kliknięcia do każdego diva stolika
+
+                    //nasluch na klikniecie
                     div.addEventListener('click', function () {
 
                         stolikId = div.getAttribute("stolik_id");
@@ -264,20 +267,23 @@
 
 
 
-        // Obsługa kliknięcia na element potrawy
-        const listaPotraw = document.getElementById('lista-potraw');
+
 
         //Lista wszystkich potraw
         var potrawy = document.getElementById('lista-potraw')
         document.getElementById('pobierz-potrawy').addEventListener('click', function () {
 
-            // Wywołanie żądania AJAX do pobrania rezerwacji
+            // Wywołanie żądania AJAX do pobrania potraw
             fetch('{{ route("getPotrawy") }}')
                 .then(response => response.json())
                 .then(data => {
                     document.getElementById('lista-potraw').innerHTML = '';
 
+
+                    //jeszcze raz parsowanie do formatu json
                     data = JSON.parse(data);
+
+                    //pętla przchodzi po wszystkich potrawach i wyswietla je w osobnych divach
                     data.forEach(potrawa => {
                         const div = document.createElement("div");
                         div.setAttribute("potrawa_id", potrawa.id);
@@ -291,19 +297,25 @@
                         potrawy.appendChild(div);
 
                         div.addEventListener('click', function () {
-                            const clickedDiv = event.target.closest('.potrawa'); // Znajdź najbliższy div.potrawa
+
+                            const clickedDiv = event.target.closest('.potrawa');
+
                             if (clickedDiv) {
                                 const potrawaId = clickedDiv.getAttribute("potrawa_id");
                                 const potrawaCena = clickedDiv.getAttribute("potrawa_cena");
 
                                 // Jeśli potrawa jest już zaznaczona, odznacz ją
                                 if (selectedPotrawy.includes(potrawaId)) {
-                                    selectedPotrawy.splice(selectedPotrawy.indexOf(potrawaId), 1);
+
+                                    selectedPotrawy.splice(selectedPotrawy.indexOf(potrawaId), 1); //usuniecie id potraw z tablicy, wartosci oddzielone przecinkiem
+
                                     sumaCenPotraw -= parseFloat(potrawaCena);
                                     clickedDiv.classList.remove("zaznaczony");
+
                                 } else {
                                     // W przeciwnym razie zaznacz potrawę i dodaj do listy zaznaczonych
                                     selectedPotrawy.push(potrawaId);
+
                                     sumaCenPotraw += parseFloat(potrawaCena);
                                     clickedDiv.classList.add("zaznaczony");
                                 }
@@ -314,11 +326,12 @@
                                 console.log("Wybrano potrawę o id:", potrawaId);
                                 console.log("Cena potrawy:", potrawaCena);
 
+                                //przypisuje wartosci do formularza
                                 document.getElementById('cena_potrawy_input').value = sumaCenPotraw;
                                 document.getElementById('zaznaczone_potrawy_input').value = selectedPotrawy;
 
                                 zapiszDoBazy(IdKelner,stolikId,potrawaCena);
-                                // Tutaj możesz aktualizować wyświetlaną sumę itp.
+
                                 document.getElementById('price').textContent = sumaCenPotraw.toFixed(2) + ' pln';
                             }
 
@@ -330,9 +343,11 @@
         });
 
 
-        //Lista potraw przypisanych do kategorii
+        //Lista potraw po kategorii
         const categoryButtons = document.querySelectorAll('.category-button');
+
         categoryButtons.forEach(button => {
+
             button.addEventListener('click', () => {
                 const selectedCategoryID = button.getAttribute('data-category-id');
                 console.log(selectedCategoryID);
@@ -342,7 +357,9 @@
                     .then(data => {
 
                         document.getElementById('lista-potraw').innerHTML = '';
+
                         data = JSON.parse(data);
+
                         data.forEach(potrawa => {
                             const div = document.createElement("div");
                             div.setAttribute("potrawa_id", potrawa.id);
@@ -356,17 +373,21 @@
                             potrawy.appendChild(div);
 
                             div.addEventListener('click', function () {
-                                const clickedDiv = event.target.closest('.potrawa'); // Znajdź najbliższy div.potrawa
+
+                                const clickedDiv = event.target.closest('.potrawa');
+
                                 if (clickedDiv) {
                                     const potrawaId = clickedDiv.getAttribute("potrawa_id");
                                     const potrawaCena = clickedDiv.getAttribute("potrawa_cena");
 
                                     // Jeśli potrawa jest już zaznaczona, odznacz ją
                                     if (selectedPotrawy.includes(potrawaId)) {
+
                                         selectedPotrawy.splice(selectedPotrawy.indexOf(potrawaId), 1);
                                         sumaCenPotraw -= parseFloat(potrawaCena);
                                         clickedDiv.classList.remove("zaznaczony");
                                     } else {
+
                                         // W przeciwnym razie zaznacz potrawę i dodaj do listy zaznaczonych
                                         selectedPotrawy.push(potrawaId);
                                         sumaCenPotraw += parseFloat(potrawaCena);
@@ -397,18 +418,23 @@
         });
 
         function zapiszDoBazy(id_kelnera, id_stolika, cena_potrawy) {
+
             const zatwierdzBtn = document.getElementById('zatwierdzBtn');
+
             console.log("Aktualna zawartość selectedPotrawy:", selectedPotrawy);
+
             zatwierdzBtn.addEventListener('click', () => {
-                if (selectedStolik.id !== null && selectedPotrawy.length > 0) {
-                    const requestData = {
-                        id_kelnera: id_kelnera,
-                        cena_potrawy: cena_potrawy,
-                        id_stolika: id_stolika,
-                        zaznaczone_potrawy: selectedPotrawy
+                if (selectedStolik.id !== null && selectedPotrawy.length > 0) { //do przesłania formularza musi być zaznaczony stolik i co najmniej jedna potrawa
+
+                        const requestData = {
+                            id_kelnera: id_kelnera,
+                            cena_potrawy: cena_potrawy,
+                            id_stolika: id_stolika,
+                            zaznaczone_potrawy: selectedPotrawy
                     };
 
                     const xhr = new XMLHttpRequest();
+
                     xhr.open("POST", "/zamowienie/save", true);
                     xhr.setRequestHeader("Content-Type", "application/json");
                     xhr.setRequestHeader("X-CSRF-Token", "{{ csrf_token() }}");

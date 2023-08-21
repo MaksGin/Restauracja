@@ -61,6 +61,10 @@ Route::get('/zamowienia/add',[ZamowieniaController::class,'addZamowieniePanel'])
 Route::get("/zamowenia/potrawy/all",[ZamowieniaController::class,'PotrawyAll'])->name('PotrawyAll');
 Route::post("/zamowienie/save",[ZamowieniaController::class,'SaveZamowienie'])->name('SaveZamowienie');
 
+//Szczegóły zamówienia
+Route::get('/zamowienie/details/{id}',[ZamowieniaController::class,'details'])->name('details');
+
+
 //Rezerwacje
 Route::get('/rezerwacja',[RezerwacjaController::class,'index'])->name('rezerwacje.index');
 Route::post('rezerwacje/wybor', [RezerwacjaController::class, 'wybor'])->name('rezerwacje.wybor.daty');

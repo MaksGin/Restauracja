@@ -18,8 +18,17 @@ class Zamowienia extends Model
         'cena',
     ];
 
+
+
     public function potrawy(){
         return $this->belongsToMany(Potrawa::class,'zamowienia_potrawy','zamowienie_id','potrawa_id');
    }
 
+   public function stolik(){
+        return $this->belongsTo(Stolik::class, 'id_stoliku');
+   }
+   public function kuchnie()
+    {
+        return $this->belongsToMany(Kuchnia::class, 'kuchnia_zamowienia', 'id_zamowienia', 'id');
+    }
 }
