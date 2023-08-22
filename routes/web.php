@@ -12,6 +12,7 @@ use App\Http\Controllers\Stoliki\StolikiController;
 use App\Http\Controllers\Rezerwacje\RezerwacjaController;
 use App\Http\Controllers\Bar\BarController;
 use App\Http\Controllers\Kuchnia\KuchniaController;
+use App\Http\Controllers\Kelner\KelnerController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -65,6 +66,7 @@ Route::post("/zamowienie/save",[ZamowieniaController::class,'SaveZamowienie'])->
 Route::get('/zamowienie/details/{id}',[ZamowieniaController::class,'details'])->name('details');
 
 
+
 //Rezerwacje
 Route::get('/rezerwacja',[RezerwacjaController::class,'index'])->name('rezerwacje.index');
 Route::post('rezerwacje/wybor', [RezerwacjaController::class, 'wybor'])->name('rezerwacje.wybor.daty');
@@ -84,10 +86,18 @@ Route::get('/getPotrawyByCategory/{id_kategorii}', [ZamowieniaController::class,
 Route::get('/pobierz-stoliki',[ZamowieniaController::class,'getStoliki'])->name('getStoliki');
 
 
+
 //panel dla kuchni
 Route::get('/panel/kuchnia',[KuchniaController::class,'index'])->name('panelKuchnia');
+
+Route::post('/kuchnia/zamowienia/modify', [KuchniaController::class,'modifyKuchnia'])->name('kuchnia.zamowienia.modify');
+Route::post('/kuchnia/zamowienia/ready', [KuchniaController::class,'readyKuchnia'])->name('kuchnia.zamowienia.ready');
+Route::get('/get-waiting-potrawy', [KuchniaController::class,'getWaitingPotrawy'])->name('getWaitingPotrawy');
+Route::delete('/kuchnia/zamowienia/cancel', [KuchniaController::class,'CancelKuchnia'])->name('kuchnia.zamowienia.cancel');
 
 //panel dla baru
 Route::get('/panel/bar',[BarController::class,'index'])->name('panelBar');
 
+//panel dla kelnera
 
+Route::get('/panel/kelner',[KelnerController::class,'index'])->name('panelKelner');

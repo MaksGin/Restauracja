@@ -20,6 +20,7 @@
               <th scope="col">#</th>
               <th scope="col">Kelner</th>
               <th scope="col">Stolik</th>
+              <th scope="col">Status</th>
               <th scope="col">Cena</th>
             </tr>
           </thead>
@@ -29,6 +30,7 @@
                 <td>{{$zamowienie->id}}</td>
                 <td>{{$zamowienie->id_kelnera}}</td> <!-- wyswietlic imie kelnera , nazwe stolika z relacji -->
                 <td>{{$zamowienie->id_stoliku}}</td>
+                <td>{{$zamowienie->status->status}}</td>
                 <td>{{$zamowienie->cena}} zł</td>
             </tr>
             @endforeach

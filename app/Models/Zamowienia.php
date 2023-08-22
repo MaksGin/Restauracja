@@ -31,4 +31,9 @@ class Zamowienia extends Model
     {
         return $this->belongsToMany(Kuchnia::class, 'kuchnia_zamowienia', 'id_zamowienia', 'id');
     }
+
+    public function status()
+    {
+        return $this->belongsTo(Status::class, 'id_statusu_kuchnia');
+    }
 }

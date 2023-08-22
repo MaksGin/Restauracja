@@ -48,7 +48,7 @@
                         <li><a class="dropdown-item" href="{{ route('Panelzamowienia')}}">Nowe zamówienie</a></li>
                         <li><a class="dropdown-item" href="{{ route('panelKuchnia')}}">Panel dla kuchnii</a></li>
                         <li><a class="dropdown-item" href="{{ route('panelBar')}}">Panel dla baru</a></li>
-                        <li><a class="dropdown-item" href="#">Panel dla kelnera</a></li>
+                        <li><a class="dropdown-item" href="{{ route('panelKelner')}}">Panel dla kelnera</a></li>
                     </ul>
                 </li>
             </ul>

@@ -72,12 +72,14 @@ class ZamowieniaController extends Controller
         $idKelnera = $request->input('id_kelnera');
         $cenaPotrawy = $request->input('cena_potrawy');
         $idStolika = $request->input('id_stolika');
+        $id_statusu_kuchnia = $request->input('id_statusu_kuchnia');
         $zaznaczonePotrawy = explode(',', $request->input('zaznaczone_potrawy'));
 
 
         $zamowienie = new Zamowienia();
         $zamowienie->id_kelnera = $idKelnera;
         $zamowienie->id_stoliku = $idStolika;
+        $zamowienie->id_statusu_kuchnia = $id_statusu_kuchnia;
         $zamowienie->cena = $cenaPotrawy;
         $zamowienie->save();
 

@@ -17,12 +17,17 @@ return new class extends Migration
             $table->foreign('id_kelnera')->references('id')->on('users');
             $table->unsignedBigInteger('id_stoliku');
             $table->foreign('id_stoliku')->references('id')->on('stolies');
+            $table->unsignedBigInteger('id_statusu_kuchnia')->nullable();
+            $table->unsignedBigInteger('id_statusu_bar')->nullable();
             $table->double('cena');
 
             $table->timestamps();
+            $table->foreign('id_statusu_kuchnia')->references('id')->on('status_zamowienia');
+            $table->foreign('id_statusu_bar')->references('id')->on('status_zamowienia');
         });
 
     }
+
 
     /**
      * Reverse the migrations.

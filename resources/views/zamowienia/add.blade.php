@@ -198,6 +198,7 @@
         </div>
         <input type="hidden" name="cena_potrawy" id="cena_potrawy_input">
         <input type="hidden" name="id_stolika" id="id_stolika_input">
+        <input type="hidden" name="id_statusu_kuchnia" id="id_statusu_kuchnia">
         <input type="hidden" name="zaznaczone_potrawy" id="zaznaczone_potrawy_input">
         <div class="col-box">
             <div>
@@ -329,8 +330,9 @@
                                 //przypisuje wartosci do formularza
                                 document.getElementById('cena_potrawy_input').value = sumaCenPotraw;
                                 document.getElementById('zaznaczone_potrawy_input').value = selectedPotrawy;
-
-                                zapiszDoBazy(IdKelner,stolikId,potrawaCena);
+                                var status = 5;
+                                document.getElementById('id_statusu_kuchnia').value = status;
+                                zapiszDoBazy(IdKelner,stolikId,potrawaCena,status);
 
                                 document.getElementById('price').textContent = sumaCenPotraw.toFixed(2) + ' pln';
                             }
@@ -402,8 +404,9 @@
 
                                     document.getElementById('cena_potrawy_input').value = sumaCenPotraw;
                                     document.getElementById('zaznaczone_potrawy_input').value = selectedPotrawy;
-
-                                    zapiszDoBazy(IdKelner, stolikId, potrawaCena);
+                                    var status = 5;
+                                    document.getElementById('id_statusu_kuchnia').value = status;
+                                    zapiszDoBazy(IdKelner, stolikId, potrawaCena,status);
                                     // Tutaj możesz aktualizować wyświetlaną sumę itp.
                                     document.getElementById('price').textContent = sumaCenPotraw.toFixed(2) + ' pln';
                                 }
@@ -417,7 +420,7 @@
             });
         });
 
-        function zapiszDoBazy(id_kelnera, id_stolika, cena_potrawy) {
+        function zapiszDoBazy(id_kelnera, id_stolika, cena_potrawy,status) {
 
             const zatwierdzBtn = document.getElementById('zatwierdzBtn');
 
@@ -430,6 +433,7 @@
                             id_kelnera: id_kelnera,
                             cena_potrawy: cena_potrawy,
                             id_stolika: id_stolika,
+                            id_statusu_kuchnia: status,
                             zaznaczone_potrawy: selectedPotrawy
                     };
 
