@@ -17,131 +17,210 @@
     </div>
 @endif
 
+
+
 <div class="container">
     <h1>Oczekujące</h1>
-<table class="table table-striped table-light">
-    <thead>
-        <tr>
-        <th scope="col">Id</th>
-        <th scope="col">Potrawy</th>
-        <th scope="col">Stolik</th>
-        <th scope="col">Działania</th>
-        </tr>
-    </thead>
-  <tbody>
-@foreach ($oczekujace as $zamowienie)
-
-<tr>
-    <th>{{$zamowienie->id}}</th>
-    <td>
-       @foreach($zamowienie->potrawy as $potrawa)
-        <li>{{$potrawa->nazwa}}</li>
-
-       @endforeach
-    </td>
-    <td>{{$zamowienie->id_stoliku}}</td>
-    <td>
-        <form method="POST" action="{{ route('kuchnia.zamowienia.modify') }}">
-            @csrf
-            <input type="hidden" name="orderId" value="{{$zamowienie['id']}}">
-            <button type="submit" class="btn btn-success btn-sm">
-                <i class="fa fa-pencil-square-o" aria-hidden="true"></i> Przyjmij
-            </button>
-        </form>
-
-        <form method="POST" action="{{ route('kuchnia.zamowienia.cancel') }}">
-            @csrf
-            @method('DELETE')
-            <input type="hidden" name="orderId" value="{{$zamowienie['id']}}">
-            <button type="submit" class="btn btn-danger btn-sm">
-                <i class="fa fa-pencil-square-o" aria-hidden="true"></i> Anuluj
-            </button>
-        </form>
-    </td>
-</tr>
-
-@endforeach
-
-</tbody>
-</table>
-</div>
-<div class="container">
-    <h1>W trakcie</h1>
-    <table class="table table-striped table-warning" style="margin-top:20px;">
+<table class="table table-striped table-warning" style="margin-top:20px;">
         <thead>
             <tr>
             <th scope="col">Id</th>
             <th scope="col">Potrawy</th>
             <th scope="col">Stolik</th>
+            <th scope="col">Cena</th>
             <th scope="col">Działania</th>
             </tr>
         </thead>
-        <tbody>
-            @foreach ($wTrakcie as $zamowienie)
+        <tbody id="waiting_potrawy">
 
-            <tr>
-                <th>{{$zamowienie->id}}</th>
-                <td>
-                   @foreach($zamowienie->potrawy as $potrawa)
-                    <li>{{$potrawa->nazwa}}</li>
-
-                   @endforeach
-                </td>
-                <td>{{$zamowienie->id_stoliku}}</td>
-                <td>
-                    <form method="POST" action="{{ route('kuchnia.zamowienia.ready') }}">
-                        @csrf
-                        <input type="hidden" name="orderId" value="{{$zamowienie['id']}}">
-                        <button type="submit" class="btn btn-success btn-sm">
-                            <i class="fa fa-pencil-square-o" aria-hidden="true"></i> Gotowe
-                        </button>
-                    </form>
-
-                    <form method="POST" action="{{ route('kuchnia.zamowienia.cancel') }}">
-                        @csrf
-                        @method('DELETE')
-                        <input type="hidden" name="orderId" value="{{$zamowienie['id']}}">
-                        <button type="submit" class="btn btn-danger btn-sm">
-                            <i class="fa fa-pencil-square-o" aria-hidden="true"></i> Anuluj
-                        </button>
-                    </form>
-                </td>
-            </tr>
-
-            @endforeach
         </tbody>
-    </table>
-
+</table>
 </div>
+<div class="container">
+    <h1>W Trakcie</h1>
+<table class="table table-striped table-warning" style="margin-top:20px;">
+        <thead>
+            <tr>
+            <th scope="col">Id</th>
+            <th scope="col">Potrawy</th>
+            <th scope="col">Stolik</th>
+            <th scope="col">Cena</th>
+            <th scope="col">Działania</th>
+            </tr>
+        </thead>
+        <tbody id="potrawy-wtrakcie">
 
-<div id="oczekujace-potrawy"></div>
+        </tbody>
+</table>
+</div>
 @endsection
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-
 <script>
-    document.addEventListener('DOMContentLoaded', function () {
-    var oczekujace_potrawy = document.getElementById('oczekujace-potrawy');
 
-    fetch('/get-waiting-potrawy')
+    function doRefresh() {
+
+
+        var potrawy_wTrakcie = document.getElementById('potrawy-wtrakcie');
+        fetch('/get-potrawy-wtrakcie')
         .then(response => response.json())
         .then(data => {
-            data = JSON.parse(data);
-            data.forEach(oczekujace => {
-                //wygenerować tabele lub inny sposob
-                const div = document.createElement("div");
-                div.setAttribute("zamowienie_id", oczekujace.id);
-                div.classList.add("zamowienie");
+            data = JSON.parse(data); //parsowanie do formatu JSON
+            potrawy_wTrakcie.innerHTML = '';
 
-                const text = document.createTextNode(oczekujace.id_stoliku);
-                div.appendChild(text);
+            data.forEach(w_trakcie => {
 
-                oczekujace_potrawy.appendChild(div);
+                //tworze zawartosc tabeli
+                const tr = document.createElement("tr");
+
+                const th = document.createElement("th");
+                th.textContent = w_trakcie.id;
+                tr.appendChild(th);
+
+                const tdPotrawy = document.createElement("td");
+                const potrawyList = document.createElement("ul");
+
+                w_trakcie.potrawy.forEach(potrawa => {
+                    const li = document.createElement("li");
+                    li.textContent = potrawa;
+                    potrawyList.appendChild(li);
+                });
+
+                tdPotrawy.appendChild(potrawyList);
+                tr.appendChild(tdPotrawy);
+
+                const tdStolik = document.createElement("td");
+                tdStolik.textContent = w_trakcie.id_stoliku;
+                tr.appendChild(tdStolik);
+
+                const tdCena = document.createElement("td");
+                tdCena.textContent = w_trakcie.cena + "zł";
+                tr.appendChild(tdCena);
+
+                const tdPrzycisk = document.createElement("td");
+                const button = document.createElement("button");
+                button.textContent = "Gotowe";
+
+                button.addEventListener("click", function(){
+                    var csrfToken = $('meta[name="csrf-token"]').attr('content');
 
 
+                    $.ajax({
+                        method: 'PUT',
+                        url: '/set-status-gotowe',
+                        data: JSON.stringify({ orderId: w_trakcie.id }),
+                        contentType: 'application/json',
+                        headers: {
+                            'X-CSRF-TOKEN': csrfToken
+                        }
+                    })
+                    .done(function (data) {
+                        console.log(data);
+
+                        tr.remove();
+                    })
+                    .fail(function (error) {
+                        console.error('Błąd aktualizacji statusu zamówienia');
+                    });
+                });
+
+                tdPrzycisk.appendChild(button);
+                tr.appendChild(tdPrzycisk);
+
+
+                potrawy_wTrakcie.appendChild(tr);
             });
-        })
-        .catch(error => console.error(error));
-});
+        }).catch(error => console.error('Error loading content:', error))
+            .finally(() => {
+                setTimeout(doRefresh, 10000);
+            });
+    }
+
+    document.addEventListener('DOMContentLoaded', function () {
+        var gotowe_potrawy = document.getElementById('waiting_potrawy');
+
+        fetch('/get-waiting-potrawy')
+        .then(response => response.json())
+        .then(data => {
+            data = JSON.parse(data); //parsowanie do formatu JSON
+
+
+            data.forEach(oczekujace => {
+
+                //tworze zawartosc tabeli
+                const tr = document.createElement("tr");
+
+                const th = document.createElement("th");
+                th.textContent = oczekujace.id;
+                tr.appendChild(th);
+
+                const tdPotrawy = document.createElement("td");
+                const potrawyList = document.createElement("ul");
+
+                oczekujace.potrawy.forEach(potrawa => {
+                    const li = document.createElement("li");
+                    li.textContent = potrawa;
+                    potrawyList.appendChild(li);
+                });
+
+                tdPotrawy.appendChild(potrawyList);
+                tr.appendChild(tdPotrawy);
+
+                const tdStolik = document.createElement("td");
+                tdStolik.textContent = oczekujace.id_stoliku;
+                tr.appendChild(tdStolik);
+
+                const tdCena = document.createElement("td");
+                tdCena.textContent = oczekujace.cena + "zł";
+                tr.appendChild(tdCena);
+
+                const tdPrzycisk = document.createElement("td");
+                const button = document.createElement("button");
+                button.textContent = "Przyjmij";
+
+
+                button.addEventListener("click", function(){
+                    var csrfToken = $('meta[name="csrf-token"]').attr('content');
+
+
+                    $.ajax({
+                        method: 'PUT',
+                        url: '/set-status-wTrakcie',
+                        data: JSON.stringify({ orderId: oczekujace.id }),
+                        contentType: 'application/json',
+                        headers: {
+                            'X-CSRF-TOKEN': csrfToken
+                        }
+                    })
+                    .done(function (data) {
+                        console.log(data);
+
+                        tr.remove();
+                    })
+                    .fail(function (error) {
+                        console.error('Błąd aktualizacji statusu zamówienia');
+                    });
+                });
+
+
+
+
+
+
+                tdPrzycisk.appendChild(button);
+                tr.appendChild(tdPrzycisk);
+
+
+                gotowe_potrawy.appendChild(tr);
+            });
+        });
+        doRefresh();
+
+
+    });
+
+
+
+
 
 </script>
 

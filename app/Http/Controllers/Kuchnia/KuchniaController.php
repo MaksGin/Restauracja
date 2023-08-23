@@ -31,7 +31,7 @@ class KuchniaController extends Controller
         return view('kuchnia.index',compact('kuchnie','zamowienia','jsonData','oczekujace','wTrakcie'));
     }
 
-    public function modifyKuchnia(Request $request)
+    public function ChangeStatus(Request $request)
     {
         try {
             $orderId = $request->input('orderId');
@@ -75,7 +75,7 @@ class KuchniaController extends Controller
         //znajdz zamowienie z pobranego id
         $order = Zamowienia::find($orderId);
 
-        // update statusu do 1 czyli 'gotowe do odbioru'
+        // update statusu do 3 czyli 'gotowe do odbioru'
         $order->id_statusu_kuchnia = $newStatus;
         $order->save();
 
@@ -126,11 +126,56 @@ class KuchniaController extends Controller
 
     public function getWaitingPotrawy(){
 
+        $waiting_zamowienia = Zamowienia::where('id_statusu_kuchnia','5')->get();
+        $waiting_zamowienia_ID = $waiting_zamowienia->pluck('id');
 
-        $oczekujace_zamowienia = Zamowienia::where('id_statusu_kuchnia','3')->get();
-        $jsonData = $oczekujace_zamowienia->toJson();
+        $Lista_oczekujacych = ZamowieniaPotrawy::whereIn('zamowienie_id', $waiting_zamowienia_ID)
+        ->with('potrawy') //ładuje relacje potrawy
+        ->get();
+
+
+        //tablica tych samych właściwosci co w zapytaniu gotowe_zamowienia ale z uwzględnieniem nazwy potrawy w relacji
+        $transformedData = $waiting_zamowienia->map(function ($item) {
+            return [
+                'id' => $item->id,
+                'id_kelnera' => $item->id_kelnera,
+                'id_stoliku' => $item->id_stoliku,
+                'id_statusu_kuchnia' => $item->id_statusu_kuchnia,
+                'cena' => $item->cena,
+                'potrawy' => $item->potrawy->pluck('nazwa')->toArray()
+            ];
+        });
+        $jsonData = $transformedData->toJson();
 
         return response()->json($jsonData);
+
+    }
+
+    public function getPotrawyWtrakcie(){
+
+        $zamowienia_wTrakcie = Zamowienia::where('id_statusu_kuchnia','1')->get();
+        $zamowienia_wTrakcie_ID = $zamowienia_wTrakcie->pluck('id');
+
+        $Lista_wTrakcie = ZamowieniaPotrawy::whereIn('zamowienie_id', $zamowienia_wTrakcie_ID)
+        ->with('potrawy') //ładuje relacje potrawy
+        ->get();
+
+
+
+        $transformedData = $zamowienia_wTrakcie->map(function ($item) {
+            return [
+                'id' => $item->id,
+                'id_kelnera' => $item->id_kelnera,
+                'id_stoliku' => $item->id_stoliku,
+                'id_statusu_kuchnia' => $item->id_statusu_kuchnia,
+                'cena' => $item->cena,
+                'potrawy' => $item->potrawy->pluck('nazwa')->toArray()
+            ];
+        });
+        $jsonData = $transformedData->toJson();
+
+        return response()->json($jsonData);
+
     }
 
 }

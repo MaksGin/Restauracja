@@ -92,8 +92,18 @@ Route::get('/panel/kuchnia',[KuchniaController::class,'index'])->name('panelKuch
 
 Route::post('/kuchnia/zamowienia/modify', [KuchniaController::class,'modifyKuchnia'])->name('kuchnia.zamowienia.modify');
 Route::post('/kuchnia/zamowienia/ready', [KuchniaController::class,'readyKuchnia'])->name('kuchnia.zamowienia.ready');
-Route::get('/get-waiting-potrawy', [KuchniaController::class,'getWaitingPotrawy'])->name('getWaitingPotrawy');
+Route::get('/get-ready-potrawy', [KelnerController::class,'getReadyPotrawy'])->name('getReadyPotrawy');
 Route::delete('/kuchnia/zamowienia/cancel', [KuchniaController::class,'CancelKuchnia'])->name('kuchnia.zamowienia.cancel');
+
+Route::put('/update-order-status/',[KelnerController::class,'updateOrderStatus'])->name('updateOrderStatus');
+
+
+Route::get('/get-waiting-potrawy', [KuchniaController::class,'getWaitingPotrawy'])->name('getWaitingPotrawy');
+
+Route::put('/set-status-wTrakcie',[KuchniaController::class,'ChangeStatus'])->name('ChangeStatus');
+Route::put('/set-status-gotowe',[KuchniaController::class,'readyKuchnia'])->name('readyKuchnia');
+
+Route::get('/get-potrawy-wtrakcie', [KuchniaController::class,'getPotrawyWtrakcie'])->name('getPotrawyWtrakcie');
 
 //panel dla baru
 Route::get('/panel/bar',[BarController::class,'index'])->name('panelBar');
@@ -101,3 +111,4 @@ Route::get('/panel/bar',[BarController::class,'index'])->name('panelBar');
 //panel dla kelnera
 
 Route::get('/panel/kelner',[KelnerController::class,'index'])->name('panelKelner');
+
