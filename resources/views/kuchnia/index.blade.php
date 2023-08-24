@@ -90,7 +90,7 @@
                 tr.appendChild(tdPotrawy);
 
                 const tdStolik = document.createElement("td");
-                tdStolik.textContent = w_trakcie.id_stoliku;
+                tdStolik.textContent = 'numer stolika: '+w_trakcie.id_stoliku+' '+w_trakcie.nazwa+' '+w_trakcie.umiejscowienie;
                 tr.appendChild(tdStolik);
 
                 const tdCena = document.createElement("td");
@@ -161,7 +161,7 @@
                 tr.appendChild(tdPotrawy);
 
                 const tdStolik = document.createElement("td");
-                tdStolik.textContent = oczekujace.id_stoliku;
+                tdStolik.textContent = 'numer stolika: '+oczekujace.id_stoliku+' '+oczekujace.nazwa+' '+oczekujace.umiejscowienie;
                 tr.appendChild(tdStolik);
 
                 const tdCena = document.createElement("td");

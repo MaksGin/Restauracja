@@ -3,7 +3,7 @@
 @section('content')
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+
 <meta name="csrf-token" content="{{ csrf_token() }}"/>
 
 <style>
@@ -159,10 +159,10 @@
       </div>
       <div class="col align-items-center">
         <center><a class="m-3 btn btn-dark m-3 text-white" id="pobierz-potrawy">pobierz wszystkie potrawy</a><br>
-        <button class="category-button m-3 btn btn-dark m-3 text-white" data-category-id="4">Napoje</button></center>
+        <button class="category-button m-3 btn btn-dark m-3 text-white" data-category-id="14">Napoje</button></center>
       </div>
       <div class="col">
-        <center><button class="category-button m-3 btn btn-dark m-3 text-white" data-category-id="6">Desery</button>
+        <center><button class="category-button m-3 btn btn-dark m-3 text-white" data-category-id="12">Desery</button>
         <button class="category-button m-3 btn btn-dark m-3 text-white" data-category-id="7">Dodatki</button></center>
       </div>
     </div>

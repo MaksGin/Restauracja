@@ -59,7 +59,7 @@
                 tr.appendChild(tdPotrawy);
 
                 const tdStolik = document.createElement("td");
-                tdStolik.textContent = oczekujace.id_stoliku;
+                tdStolik.textContent = 'numer stolika: '+oczekujace.id_stoliku+' '+oczekujace.nazwa+' '+oczekujace.umiejscowienie;
                 tr.appendChild(tdStolik);
 
                 const tdCena = document.createElement("td");

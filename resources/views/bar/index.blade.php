@@ -28,7 +28,6 @@
             <th scope="col">Potrawy</th>
             <th scope="col">Stolik</th>
 
-            <th scope="col">Działania</th>
             </tr>
         </thead>
         <tbody id="waiting_potrawy">
@@ -61,18 +60,26 @@
 
                 const tdPotrawy = document.createElement("td");
                 const potrawyList = document.createElement("ul");
+                const zawieraPotrawy = oczekujace.potrawy.length > 0;
+                if (!zawieraPotrawy) {
 
-                oczekujace.potrawy.forEach(potrawa => {
-                    const li = document.createElement("li");
-                    li.textContent = potrawa;
-                    potrawyList.appendChild(li);
-                });
+                    tdPotrawy.textContent = "Brak napojów do zamówienia";
+                    tr.style.backgroundColor = 'black'; // Zmień kolor wiersza na szary
+                    tr.appendChild(tdPotrawy);
+                } else {
+                    oczekujace.potrawy.forEach(potrawa => {
+                        const li = document.createElement("li");
+                        li.textContent = potrawa;
+                        potrawyList.appendChild(li);
+                    });
+                }
+
 
                 tdPotrawy.appendChild(potrawyList);
                 tr.appendChild(tdPotrawy);
 
                 const tdStolik = document.createElement("td");
-                tdStolik.textContent = oczekujace.id_stoliku;
+                tdStolik.textContent = 'numer stolika: '+oczekujace.id_stoliku+' '+oczekujace.nazwa+' '+oczekujace.umiejscowienie;
                 tr.appendChild(tdStolik);
 
                 /*
@@ -80,40 +87,20 @@
                 tdCena.textContent = oczekujace.cena + "zł";
                 tr.appendChild(tdCena);
                 */
-                const tdDzialania = document.createElement("td");
-                const checkbox = document.createElement('input');
 
-                checkbox.type = "checkbox";
-                checkbox.name = "name";
-                checkbox.value = "value";
-                checkbox.id = "id";
-                var label = document.createElement('label');
 
-                label.htmlFor = "id";
 
-                // appending the created text to
-                // the created label tag
-                label.appendChild(document.createTextNode('Wydane'));
 
-                // appending the checkbox
-                // and label to div
-                tdDzialania.appendChild(checkbox);
-                tdDzialania.appendChild(label);
-                tr.appendChild(tdDzialania);
                 gotowe_potrawy.appendChild(tr);
 
-                checkbox.addEventListener('change', function () {
-                    if (this.checked) {
-                        tr.style.backgroundColor = 'gray';
-                    } else {
-                        tr.style.backgroundColor = ''; // Przywróć domyślny kolor
-                    }
-                });
+
             });
         }).catch(error => console.error('Error loading content:', error))
-            .finally(() => {
+                .finally(() => {
                 setTimeout(doRefresh, 3000);
             });
+
+
     }
 
     document.addEventListener('DOMContentLoaded', function () {

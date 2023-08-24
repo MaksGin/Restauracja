@@ -16,17 +16,17 @@ class BarController extends Controller
         return view('bar.index');
     }
 
-    public function getWaitingPotrawy(){
+    public function getWaitingPotrawy(): \Illuminate\Http\JsonResponse
+    {
 
         /*
         $bar_zamowienia = Bar::with(['zamowienia' => function ($query) {
             $query->where('id_statusu_kuchnia', '5');
         }])->get();
         */
-
-
         $waiting_zamowienia = Zamowienia::where('id_statusu_kuchnia', 3)
         ->orWhere('id_statusu_kuchnia', 5)
+        ->orWhere('id_statusu_kuchnia',1)
         ->get();
 
         $waiting_zamowienia_ID = $waiting_zamowienia->pluck('id');
@@ -41,13 +41,15 @@ class BarController extends Controller
 
             //filtruje potrawy po kategoriach i wyswietlam tylko desery i napoje
             $filteredPotrawy = $item->potrawy->filter(function ($potrawa) {
-                return in_array($potrawa->kategoria->id, [4, 6]);
+                return in_array($potrawa->kategoria->id, [12, 14]);
             });
 
             return [
                 'id' => $item->id,
                 'id_kelnera' => $item->id_kelnera,
                 'id_stoliku' => $item->id_stoliku,
+                'nazwa' => $item->stolik->nazwa,
+                'umiejscowienie' => $item->stolik->umiejscowienie,
                 'id_statusu_kuchnia' => $item->id_statusu_kuchnia,
                 'cena' => $item->cena,
                 'potrawy' => $filteredPotrawy->pluck('nazwa')->toArray()

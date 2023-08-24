@@ -134,7 +134,7 @@ class KuchniaController extends Controller
 
 
         $transformedData = $waiting_zamowienia->map(function ($item) {
-            $excludedIds = [4, 6];
+            $excludedIds = [12, 14];
 
             $filteredPotrawy = $item->potrawy->filter(function ($potrawa) use ($excludedIds) {
                 return !in_array($potrawa->kategoria->id, $excludedIds);
@@ -145,6 +145,8 @@ class KuchniaController extends Controller
                 'id_kelnera' => $item->id_kelnera,
                 'id_stoliku' => $item->id_stoliku,
                 'id_statusu_kuchnia' => $item->id_statusu_kuchnia,
+                'nazwa' => $item->stolik->nazwa,
+                'umiejscowienie' => $item->stolik->umiejscowienie,
                 'cena' => $item->cena,
                 'potrawy' => $filteredPotrawy->pluck('nazwa')->toArray()
             ];
@@ -173,6 +175,8 @@ class KuchniaController extends Controller
                 'id_kelnera' => $item->id_kelnera,
                 'id_stoliku' => $item->id_stoliku,
                 'id_statusu_kuchnia' => $item->id_statusu_kuchnia,
+                'nazwa' => $item->stolik->nazwa,
+                'umiejscowienie' => $item->stolik->umiejscowienie,
                 'cena' => $item->cena,
                 'potrawy' => $item->potrawy->pluck('nazwa')->toArray()
             ];

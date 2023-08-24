@@ -33,6 +33,8 @@ class KelnerController extends Controller
                 'id_kelnera' => $item->id_kelnera,
                 'id_stoliku' => $item->id_stoliku,
                 'id_statusu_kuchnia' => $item->id_statusu_kuchnia,
+                'nazwa' => $item->stolik->nazwa,
+                'umiejscowienie' => $item->stolik->umiejscowienie,
                 'cena' => $item->cena,
                 'potrawy' => $item->potrawy->pluck('nazwa')->toArray()
             ];

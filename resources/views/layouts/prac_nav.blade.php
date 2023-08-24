@@ -13,10 +13,6 @@
                     </a>
                     <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDarkDropdownMenuLink">
                         <li><a class="dropdown-item" href="{{ route('pracownicy.index') }}">Lista Pracowników</a></li>
-                        <li><a class="dropdown-item" href="#">Przypisz Pracownika do zmiany</a></li>
-                        <li><a class="dropdown-item" href="#">Pokaż harmonogram zmian</a></li>
-                        <li><a class="dropdown-item" href="#">Pokaż harmonogram stolików</a></li>
-                        <li><a class="dropdown-item" href="#">Wybór stolik dla kelnera</a></li>
                         <li><a class="dropdown-item" href="{{ route('stanowiska.index') }}">Lista Stanowisk</a></li>
                         <li><a class="dropdown-item" href="#">Raporty Kelnerów</a></li>
                     </ul>
