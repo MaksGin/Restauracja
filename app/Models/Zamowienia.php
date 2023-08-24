@@ -36,4 +36,10 @@ class Zamowienia extends Model
     {
         return $this->belongsTo(Status::class, 'id_statusu_kuchnia');
     }
+
+    public function bar()
+    {
+        return $this->belongsToMany(Bar::class,'bar_zamowienia','id_zamowienia','id');
+
+    }
 }

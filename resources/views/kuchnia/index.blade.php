@@ -20,6 +20,7 @@
 
 
 <div class="container">
+    <center><h1>Panel Kuchnia</h1></center>
     <h1>Oczekujące</h1>
 <table class="table table-striped table-warning" style="margin-top:20px;">
         <thead>
@@ -129,20 +130,14 @@
 
                 potrawy_wTrakcie.appendChild(tr);
             });
-        }).catch(error => console.error('Error loading content:', error))
-            .finally(() => {
-                setTimeout(doRefresh, 10000);
-            });
-    }
+        })
 
-    document.addEventListener('DOMContentLoaded', function () {
         var gotowe_potrawy = document.getElementById('waiting_potrawy');
-
-        fetch('/get-waiting-potrawy')
+            fetch('/get-waiting-potrawy')
         .then(response => response.json())
         .then(data => {
             data = JSON.parse(data); //parsowanie do formatu JSON
-
+            gotowe_potrawy.innerHTML = ''; //czyszczenie po kazdym refreshu
 
             data.forEach(oczekujace => {
 
@@ -212,7 +207,16 @@
 
                 gotowe_potrawy.appendChild(tr);
             });
-        });
+        }).catch(error => console.error('Error loading content:', error))
+            .finally(() => {
+                setTimeout(doRefresh, 3000);
+            });
+    }
+
+    document.addEventListener('DOMContentLoaded', function () {
+
+
+
         doRefresh();
 
 

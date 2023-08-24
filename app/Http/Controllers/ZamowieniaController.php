@@ -86,6 +86,7 @@ class ZamowieniaController extends Controller
         // Zapisanie zaznaczonych potraw w relacji
         foreach ($zaznaczonePotrawy as $potrawaId) {
             // Rekord do tabeli potrawy_zamowienia
+
             $zamowienie->potrawy()->attach($potrawaId);
         }
         $IDzamowienia = $zamowienie->id;
@@ -93,6 +94,10 @@ class ZamowieniaController extends Controller
 
         $zamowienie->kuchnie()->attach($IDzamowienia);
 
+        //jestli zamowienia zawiera potrawe o kategorii 6 czyli deser to zapisz rekord w tabeli bar_zamowienia
+        if($zamowienie->potrawy()->where('id_kategorii','=',6)){
+            $zamowienie->bar()->attach($IDzamowienia);
+        }
 
         //$zamowienie->kuchnia()->associate($IDzamowienia);
 

@@ -108,6 +108,8 @@ Route::get('/get-potrawy-wtrakcie', [KuchniaController::class,'getPotrawyWtrakci
 //panel dla baru
 Route::get('/panel/bar',[BarController::class,'index'])->name('panelBar');
 
+Route::get('/get-waiting-potrawy-bar', [BarController::class,'getWaitingPotrawy'])->name('getWaitingPotrawy');
+Route::get('/get-potrawy-wtrakcie-bar', [BarController::class,'getPotrawyWtrakcie'])->name('getPotrawyWtrakcie');
 //panel dla kelnera
 
 Route::get('/panel/kelner',[KelnerController::class,'index'])->name('panelKelner');

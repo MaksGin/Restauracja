@@ -368,7 +368,7 @@
                             div.setAttribute("potrawa_cena", potrawa.cena);
                             div.classList.add("potrawa");
 
-                            const text = document.createTextNode(potrawa.nazwa+' '+potrawa.cena);
+                            const text = document.createTextNode(potrawa.nazwa+' '+potrawa.cena+'zł');
                             div.appendChild(text);
 
 

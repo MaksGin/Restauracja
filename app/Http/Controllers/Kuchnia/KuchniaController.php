@@ -25,9 +25,6 @@ class KuchniaController extends Controller
 
         $jsonData = $zamowienia->toJson();
 
-
-
-
         return view('kuchnia.index',compact('kuchnie','zamowienia','jsonData','oczekujace','wTrakcie'));
     }
 
@@ -69,6 +66,7 @@ class KuchniaController extends Controller
     }
 
     public function readyKuchnia(Request $request){
+
         $orderId = $request->input('orderId');
         $newStatus = 3;
 
@@ -98,6 +96,7 @@ class KuchniaController extends Controller
     }
 
     public function CancelKuchnia(Request $request){
+
         $orderId = $request->input('orderId');
         $order = Zamowienia::find($orderId);
         $zamowienie_w_kuchni = Kuchnia::where('id_zamowienia','=',$orderId);
@@ -130,26 +129,32 @@ class KuchniaController extends Controller
         $waiting_zamowienia_ID = $waiting_zamowienia->pluck('id');
 
         $Lista_oczekujacych = ZamowieniaPotrawy::whereIn('zamowienie_id', $waiting_zamowienia_ID)
-        ->with('potrawy') //ładuje relacje potrawy
-        ->get();
+            ->with('potrawy')
+            ->get();
 
 
-        //tablica tych samych właściwosci co w zapytaniu gotowe_zamowienia ale z uwzględnieniem nazwy potrawy w relacji
         $transformedData = $waiting_zamowienia->map(function ($item) {
+            $excludedIds = [4, 6];
+
+            $filteredPotrawy = $item->potrawy->filter(function ($potrawa) use ($excludedIds) {
+                return !in_array($potrawa->kategoria->id, $excludedIds);
+            });
+
             return [
                 'id' => $item->id,
                 'id_kelnera' => $item->id_kelnera,
                 'id_stoliku' => $item->id_stoliku,
                 'id_statusu_kuchnia' => $item->id_statusu_kuchnia,
                 'cena' => $item->cena,
-                'potrawy' => $item->potrawy->pluck('nazwa')->toArray()
+                'potrawy' => $filteredPotrawy->pluck('nazwa')->toArray()
             ];
         });
+
         $jsonData = $transformedData->toJson();
 
         return response()->json($jsonData);
-
     }
+
 
     public function getPotrawyWtrakcie(){
 
