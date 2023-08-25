@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Zamowienia;
 use App\Models\ZamowieniaPotrawy;
+use Carbon\Carbon;
+use PDF;
 
 class KelnerController extends Controller
 {
@@ -13,6 +15,66 @@ class KelnerController extends Controller
 
 
         return view('kelner.index');
+    }
+
+
+    public function raporty(){
+
+        //data zamowienia
+        $aktualna_data = Carbon::now();
+        $dzisiejsza_data = $aktualna_data->format('Y-m-d');
+        $poland_time = $aktualna_data->setTimezone('EET'); //timezone na wschodnia europe
+
+        $zamowienia = Zamowienia::whereDate('Data', '=', $dzisiejsza_data)->get();
+
+
+        $podsumowanie = 0;
+
+        foreach ($zamowienia as $zamowienie) {
+            $zamowienie_potrawy = ZamowieniaPotrawy::where("zamowienie_id", $zamowienie->id)->get();
+
+            // Zaktualizuj podsumowanie o cenę zamówienia
+            $podsumowanie += $zamowienie->cena;
+
+            // Przekazanie listy potraw do tablicy w zamówieniu
+            $zamowienie->potrawy->nazwa = $zamowienie_potrawy;
+        }
+
+
+        return view('kelner.raport',compact('dzisiejsza_data','zamowienia','podsumowanie','zamowienie_potrawy'));
+
+    }
+
+    public function exportPDF(){
+
+
+        $aktualna_data = Carbon::now();
+        $dzisiejsza_data = $aktualna_data->format('Y-m-d');
+        $poland_time = $aktualna_data->setTimezone('EET');
+
+        $zamowienia = Zamowienia::whereDate('Data', '=', $dzisiejsza_data)->get();
+        $podsumowanie = 0;
+
+        //zliczanie ceny wszystkich zamowien w dniu
+        foreach($zamowienia as $zamowienie){
+
+            $podsumowanie += $zamowienie->cena;
+        }
+
+        $tableData = [
+            'dzisiejsza_data'=>$dzisiejsza_data,
+            'zamowienia' => $zamowienia,
+            'podsumowanie' => $podsumowanie,
+
+
+        ];
+
+
+
+        $pdf = PDF::loadView('kelner.pdf', $tableData);
+
+        // Pobierz PDF
+        return $pdf->download("zamowienia z dnia $dzisiejsza_data.pdf");
     }
 
     public function getReadyPotrawy(){

@@ -42,4 +42,7 @@ class Zamowienia extends Model
         return $this->belongsToMany(Bar::class,'bar_zamowienia','id_zamowienia','id');
 
     }
+    public function user(){
+        return $this->belongsTo(User::class,'id_kelnera');
+    }
 }

@@ -10,6 +10,8 @@ use App\Models\Zamowienia;
 use App\Models\Kuchnia;
 use App\Models\ZamowieniaPotrawy;
 use Illuminate\Support\Facades\Auth;
+use Carbon\Carbon;
+
 
 class ZamowieniaController extends Controller
 {
@@ -69,14 +71,23 @@ class ZamowieniaController extends Controller
     public function SaveZamowienie(Request $request)
     {
 
+
+
         $idKelnera = $request->input('id_kelnera');
         $cenaPotrawy = $request->input('cena_potrawy');
         $idStolika = $request->input('id_stolika');
         $id_statusu_kuchnia = $request->input('id_statusu_kuchnia');
         $zaznaczonePotrawy = explode(',', $request->input('zaznaczone_potrawy'));
 
+        //data zamowienia
+        $aktualna_data = Carbon::now();
+        $format_daty = $aktualna_data->format('Y-m-d H:i:s');
+        $poland_time = $aktualna_data->setTimezone('EET');
+
+
 
         $zamowienie = new Zamowienia();
+        $zamowienie->data = $format_daty;
         $zamowienie->id_kelnera = $idKelnera;
         $zamowienie->id_stoliku = $idStolika;
         $zamowienie->id_statusu_kuchnia = $id_statusu_kuchnia;

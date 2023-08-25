@@ -49,4 +49,5 @@ class User extends Authenticatable
     {
         return $this->belongsTo(Stanowisko::class,'id_stanowiska','id');
     }
+
 }

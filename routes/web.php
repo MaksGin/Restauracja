@@ -110,7 +110,11 @@ Route::get('/panel/bar',[BarController::class,'index'])->name('panelBar');
 
 Route::get('/get-waiting-potrawy-bar', [BarController::class,'getWaitingPotrawy'])->name('getWaitingPotrawy');
 Route::get('/get-potrawy-wtrakcie-bar', [BarController::class,'getPotrawyWtrakcie'])->name('getPotrawyWtrakcie');
-//panel dla kelnera
 
+
+//panel dla kelnera
 Route::get('/panel/kelner',[KelnerController::class,'index'])->name('panelKelner');
 
+//raport dla kelnera
+Route::get('/kelner/raport',[KelnerController::class,'raporty'])->name('raportyKelner');
+Route::get('/zamowienia/pdf', [KelnerController::class, 'exportPDF'])->name('zamowienia.export.pdf');

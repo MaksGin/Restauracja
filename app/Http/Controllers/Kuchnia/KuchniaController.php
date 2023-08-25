@@ -134,7 +134,7 @@ class KuchniaController extends Controller
 
 
         $transformedData = $waiting_zamowienia->map(function ($item) {
-            $excludedIds = [12, 14];
+            $excludedIds = [4, 6];
 
             $filteredPotrawy = $item->potrawy->filter(function ($potrawa) use ($excludedIds) {
                 return !in_array($potrawa->kategoria->id, $excludedIds);

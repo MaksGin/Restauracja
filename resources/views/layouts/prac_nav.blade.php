@@ -14,7 +14,7 @@
                     <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDarkDropdownMenuLink">
                         <li><a class="dropdown-item" href="{{ route('pracownicy.index') }}">Lista Pracowników</a></li>
                         <li><a class="dropdown-item" href="{{ route('stanowiska.index') }}">Lista Stanowisk</a></li>
-                        <li><a class="dropdown-item" href="#">Raporty Kelnerów</a></li>
+                        <li><a class="dropdown-item" href="{{ route('raportyKelner') }}">Raporty Kelnerów</a></li>
                     </ul>
                 </li>
                 <li class="nav-item dropdown">
