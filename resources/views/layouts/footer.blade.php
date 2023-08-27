@@ -42,7 +42,7 @@
                         <i class="fas fa-gem me-3"></i>Restaurant App
                     </h6>
                     <p>
-                        Best restaurant in your town!
+                        Najlepsza restauracja w twoim mieście!
                     </p>
                 </div>
                 <!-- Grid column -->
@@ -51,10 +51,10 @@
                 <div class="col-md-2 col-lg-2 col-xl-2 mx-auto mb-4">
                     <!-- Links -->
                     <h6 class="text-uppercase fw-bold mb-4">
-                        Products
+                        Produkty
                     </h6>
                     <p>
-                        <a href="#!" class="text-reset">Angular</a>
+                        <a href="#!" class="text-reset">Tylko świeże polskie produkty</a>
                     </p>
 
                 </div>
@@ -64,10 +64,10 @@
                 <div class="col-md-3 col-lg-2 col-xl-2 mx-auto mb-4">
                     <!-- Links -->
                     <h6 class="text-uppercase fw-bold mb-4">
-                        Useful links
+                        Linki
                     </h6>
                     <p>
-                        <a href="#!" class="text-reset">Pricing</a>
+                        <a href="#!" class="text-reset">Skład potraw</a>
                     </p>
 
                 </div>

@@ -37,6 +37,8 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 
 //Lista pracowników
 Route::get('/pracownicy',[PracownicyController::class,'index'])->name('pracownicy.index');
+
+//edycja, usuwanie
 Route::get('pracownik/{id}/edit',[PracownicyController::class,'edit'])->name('pracownik.edit');
 Route::delete('pracownik/{id}/destroy',[PracownicyController::class,'destroy'])->name('pracownik.destroy');
 Route::put('/pracownik/{user}', [PracownicyController::class, 'update'])->name('pracownik.update');
@@ -59,13 +61,12 @@ Route::get('/stoliki',[StolikiController::class,'index'])->name('ListaStolikow')
 //Zamowienia
 Route::get('/zamowienia/add',[ZamowieniaController::class,'addZamowieniePanel'])->name('Panelzamowienia');
 
+//Wszystkie potrawy w panelu dodawania zamowienia
 Route::get("/zamowenia/potrawy/all",[ZamowieniaController::class,'PotrawyAll'])->name('PotrawyAll');
 Route::post("/zamowienie/save",[ZamowieniaController::class,'SaveZamowienie'])->name('SaveZamowienie');
 
 //Szczegóły zamówienia
 Route::get('/zamowienie/details/{id}',[ZamowieniaController::class,'details'])->name('details');
-
-
 
 //Rezerwacje
 Route::get('/rezerwacja',[RezerwacjaController::class,'index'])->name('rezerwacje.index');
@@ -85,32 +86,31 @@ Route::get('/getPotrawyByCategory/{id_kategorii}', [ZamowieniaController::class,
 
 Route::get('/pobierz-stoliki',[ZamowieniaController::class,'getStoliki'])->name('getStoliki');
 
-
-
 //panel dla kuchni
 Route::get('/panel/kuchnia',[KuchniaController::class,'index'])->name('panelKuchnia');
 
 Route::post('/kuchnia/zamowienia/modify', [KuchniaController::class,'modifyKuchnia'])->name('kuchnia.zamowienia.modify');
 Route::post('/kuchnia/zamowienia/ready', [KuchniaController::class,'readyKuchnia'])->name('kuchnia.zamowienia.ready');
 Route::get('/get-ready-potrawy', [KelnerController::class,'getReadyPotrawy'])->name('getReadyPotrawy');
-Route::delete('/kuchnia/zamowienia/cancel', [KuchniaController::class,'CancelKuchnia'])->name('kuchnia.zamowienia.cancel');
+
 
 Route::put('/update-order-status/',[KelnerController::class,'updateOrderStatus'])->name('updateOrderStatus');
 
-
+//potrawy oczekujące/w trakcie dla kuchni
 Route::get('/get-waiting-potrawy', [KuchniaController::class,'getWaitingPotrawy'])->name('getWaitingPotrawy');
-
-Route::put('/set-status-wTrakcie',[KuchniaController::class,'ChangeStatus'])->name('ChangeStatus');
-Route::put('/set-status-gotowe',[KuchniaController::class,'readyKuchnia'])->name('readyKuchnia');
-
 Route::get('/get-potrawy-wtrakcie', [KuchniaController::class,'getPotrawyWtrakcie'])->name('getPotrawyWtrakcie');
+
+//obsługa przycisku gotowe i w trakcie dla zamowienia kuchnii
+Route::put('/set-status-gotowe',[KuchniaController::class,'readyKuchnia'])->name('readyKuchnia');
+Route::put('/set-status-wTrakcie',[KuchniaController::class,'ChangeStatus'])->name('ChangeStatus');
+Route::delete('kuchnia/zamowienia/cancel', [KuchniaController::class,'CancelKuchnia'])->name('kuchnia.zamowienia.cancel');
+
 
 //panel dla baru
 Route::get('/panel/bar',[BarController::class,'index'])->name('panelBar');
 
 Route::get('/get-waiting-potrawy-bar', [BarController::class,'getWaitingPotrawy'])->name('getWaitingPotrawy');
 Route::get('/get-potrawy-wtrakcie-bar', [BarController::class,'getPotrawyWtrakcie'])->name('getPotrawyWtrakcie');
-
 
 //panel dla kelnera
 Route::get('/panel/kelner',[KelnerController::class,'index'])->name('panelKelner');

@@ -3,11 +3,14 @@
 @section('content')
 
 <center><h1>Raport z dnia {{$dzisiejsza_data}}</h1></center>
+@if($brak_zamowien)
+   <center><p>Brak zamówień</p></center>
+@else
 
 <div class="container" style="margin-top: 50px;">
     <table class="table table-hover">
         <thead>
-            <tr >
+            <tr>
               <th scope="col">#</th>
               <th scope="col">Kelner</th>
               <th scope="col">Zawartość</th>
@@ -52,4 +55,6 @@
       </div>
     </div>
   </div>
+
+@endif
 @endsection

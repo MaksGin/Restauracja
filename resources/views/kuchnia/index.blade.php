@@ -3,7 +3,12 @@
 @section('content')
 <head>
     <meta name="csrf-token" content="{{ csrf_token() }}">
+    <style>
 
+        .anuluj{
+            margin-left: 20px;
+        }
+    </style>
 </head>
 
 
@@ -124,8 +129,10 @@
                     });
                 });
 
+
                 tdPrzycisk.appendChild(button);
                 tr.appendChild(tdPrzycisk);
+
 
 
                 potrawy_wTrakcie.appendChild(tr);
@@ -151,11 +158,21 @@
                 const tdPotrawy = document.createElement("td");
                 const potrawyList = document.createElement("ul");
 
+                const zawieraPotrawy = oczekujace.potrawy.length > 0;
+                if (!zawieraPotrawy) {
+
+                    tdPotrawy.textContent = "Brak potraw do zamówienia";
+                    tr.style.backgroundColor = 'black'; // Zmień kolor wiersza na szary
+                    tr.appendChild(tdPotrawy);
+                    tr.style.display = 'none';
+                } else {
                 oczekujace.potrawy.forEach(potrawa => {
                     const li = document.createElement("li");
                     li.textContent = potrawa;
                     potrawyList.appendChild(li);
-                });
+                })
+                }
+
 
                 tdPotrawy.appendChild(potrawyList);
                 tr.appendChild(tdPotrawy);
@@ -197,14 +214,41 @@
                 });
 
 
-
-
-
-
                 tdPrzycisk.appendChild(button);
                 tr.appendChild(tdPrzycisk);
+                /*
+                const tdPrzyciskAnuluj = document.createElement("td");
+
+                const anuluj = document.createElement("button");
+                anuluj.classList.add("anuluj");
+                anuluj.textContent = "Anuluj";
+
+                anuluj.addEventListener("click", function(){
+                    var csrfToken = $('meta[name="csrf-token"]').attr('content');
 
 
+                    $.ajax({
+                        method: 'DELETE',
+                        url: 'kuchnia/zamowienia/cancel',
+                        data: JSON.stringify({ orderId: oczekujace.id }),
+                        contentType: 'application/json',
+                        headers: {
+                            'X-CSRF-TOKEN': csrfToken
+                        }
+                    })
+                        .done(function (data) {
+                            console.log(data);
+
+                            tr.remove();
+                        })
+                        .fail(function (error) {
+                            console.error('Błąd aktualizacji statusu zamówienia');
+                        });
+                });
+
+                tdPrzyciskAnuluj.appendChild(anuluj);
+                tr.appendChild(tdPrzyciskAnuluj);
+                */
                 gotowe_potrawy.appendChild(tr);
             });
         }).catch(error => console.error('Error loading content:', error))

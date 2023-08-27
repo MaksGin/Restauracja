@@ -17,11 +17,14 @@ class ZamowieniaController extends Controller
 {
     public function index(){
 
+        $teraz = Carbon::now();
+        $Data = $teraz->format('Y-m-d');
+        $data_slownie = $teraz->locale('pl')->isoFormat('dddd D MMMM','pl');
         $stoliki = Stolik::all();
         $potrawy = Potrawa::all();
-        $zamowienia = Zamowienia::all();
+        $zamowienia = Zamowienia::whereDate('Data','=',$Data)->get();
 
-        return view('zamowienia.index',compact('stoliki','potrawy','zamowienia'));
+        return view('zamowienia.index',compact('stoliki','potrawy','zamowienia','data_slownie'));
     }
 
     public function addZamowieniePanel(){
@@ -29,16 +32,18 @@ class ZamowieniaController extends Controller
         $id_stolikow = Stolik::all('id');
         $kategorie = kategoriePotraw::all();
         $potrawy = Potrawa::all();
+
         return view('zamowienia.add',compact('id_stolikow','kategorie','potrawy'));
     }
 
     public function PotrawyAll(){
+
         $id_stolikow = Stolik::all('id');
         $kategorie = kategoriePotraw::all();
         $potrawy = Potrawa::all();
         $toJson = $potrawy->toJson();
-        return response()->json($toJson);
 
+        return response()->json($toJson);
     }
 
     public function getPotrawy(){
@@ -53,6 +58,7 @@ class ZamowieniaController extends Controller
 
     public function getPotrawyByCategory($id_kategorii){
 
+        //pobieram potrawy z konkretnej kategorii i wysyłam je formatem json
         $napoje = Potrawa::where('id_kategorii',$id_kategorii)->get();
 
         $jsonData = $napoje->toJson();
@@ -61,6 +67,7 @@ class ZamowieniaController extends Controller
     }
 
     public function getStoliki(){
+
         $stoliki = Stolik::all();
 
         $jsonData = $stoliki->toJson();
@@ -71,7 +78,8 @@ class ZamowieniaController extends Controller
     public function SaveZamowienie(Request $request)
     {
 
-
+        $teraz = Carbon::now();
+        $Data = $teraz->format('Y-m-d');
 
         $idKelnera = $request->input('id_kelnera');
         $cenaPotrawy = $request->input('cena_potrawy');
@@ -83,7 +91,7 @@ class ZamowieniaController extends Controller
         $aktualna_data = Carbon::now();
         $format_daty = $aktualna_data->format('Y-m-d H:i:s');
         $poland_time = $aktualna_data->setTimezone('EET');
-
+        $data_slownie = $teraz->locale('pl')->isoFormat('dddd D MMMM','pl');
 
 
         $zamowienie = new Zamowienia();
@@ -94,14 +102,12 @@ class ZamowieniaController extends Controller
         $zamowienie->cena = $cenaPotrawy;
         $zamowienie->save();
 
-        // Zapisanie zaznaczonych potraw w relacji
+        // Zapisuje zaznaczone potrawy do tabeli zamowienia_potrawy
         foreach ($zaznaczonePotrawy as $potrawaId) {
-            // Rekord do tabeli potrawy_zamowienia
-
             $zamowienie->potrawy()->attach($potrawaId);
         }
-        $IDzamowienia = $zamowienie->id;
 
+        $IDzamowienia = $zamowienie->id;
 
         $zamowienie->kuchnie()->attach($IDzamowienia);
 
@@ -112,12 +118,12 @@ class ZamowieniaController extends Controller
 
         //$zamowienie->kuchnia()->associate($IDzamowienia);
 
-
+        //zmienne potrzebne do widoku po dodaniu zamowienia
         $stoliki = Stolik::all();
         $potrawy = Potrawa::all();
-        $zamowienia = Zamowienia::all();
+        $zamowienia = Zamowienia::whereDate('Data','=',$Data)->get();
 
-        return view('zamowienia.index',compact('stoliki','potrawy','zamowienia'));
+        return view('zamowienia.index',compact('stoliki','potrawy','zamowienia','data_slownie'));
     }
 
     public function details($id){
@@ -125,7 +131,6 @@ class ZamowieniaController extends Controller
         $zamowienie = Zamowienia::findOrFail($id);
 
         $potrawy_zamowienia = ZamowieniaPotrawy::where("zamowienie_id",$zamowienie->id)->get(); //pobieram potrawy z tabeli potrawy_zamowienia odpowiadajace id zamowienia
-
 
         return view('zamowienia.details',compact('zamowienie','potrawy_zamowienia'));
     }

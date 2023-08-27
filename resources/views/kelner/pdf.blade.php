@@ -44,16 +44,20 @@
 
     </style>
 </head>
+@php
+$user = Auth::user();
+
+@endphp
 <body>
     <center><h1>Raport z dnia {{$dzisiejsza_data}}</h1></center>
 
-
+    <center><h1>Zmiana Kelnera: {{$user->name}}</h1></center>
     <div class="container" style="margin-top: 50px;">
         <table class="table table-hover">
             <thead>
                 <tr >
                   <th scope="col">#</th>
-                  <th scope="col">Kelner</th>
+                  <th scope="col">Potrawy</th>
                   <th scope="col">Stolik</th>
                   <th scope="col">Status</th>
                   <th scope="col">Cena</th>
@@ -63,7 +67,6 @@
                 @foreach($zamowienia as $zamowienie)
                 <tr onclick="window.location='{{ route('details', $zamowienie['id']) }}'">
                     <td>Nr.{{$zamowienie->id}}</td>
-                    <td>{{$zamowienie->user->name}}</td>
                     <td>
                         @foreach ($zamowienie->potrawy as $potrawa)
                             <li>{{ $potrawa->nazwa }} ({{ $potrawa->cena }})</li>

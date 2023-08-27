@@ -3,11 +3,14 @@
 namespace App\Http\Controllers\Kelner;
 
 use App\Http\Controllers\Controller;
+use Barryvdh\DomPDF\Facade\Pdf;
+
 use Illuminate\Http\Request;
 use App\Models\Zamowienia;
 use App\Models\ZamowieniaPotrawy;
 use Carbon\Carbon;
-use PDF;
+use Illuminate\Support\Facades\Auth;
+
 
 class KelnerController extends Controller
 {
@@ -36,12 +39,17 @@ class KelnerController extends Controller
             // Zaktualizuj podsumowanie o cenę zamówienia
             $podsumowanie += $zamowienie->cena;
 
-            // Przekazanie listy potraw do tablicy w zamówieniu
-            $zamowienie->potrawy->nazwa = $zamowienie_potrawy;
+
+                // Przekazanie listy potraw do tablicy w zamówieniu
+                $zamowienie->potrawy->nazwa = $zamowienie_potrawy;
+
+
+
         }
+        $brak_zamowien = $zamowienia->isEmpty();
 
 
-        return view('kelner.raport',compact('dzisiejsza_data','zamowienia','podsumowanie','zamowienie_potrawy'));
+        return view('kelner.raport',compact('dzisiejsza_data','zamowienia','podsumowanie','brak_zamowien'));
 
     }
 

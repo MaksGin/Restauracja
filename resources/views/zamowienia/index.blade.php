@@ -1,12 +1,8 @@
 @extends('layouts.app')
 @extends('layouts.prac_nav')
 @section('content')
-<style>
 
-
-</style>
-
-
+<h1><center>Zamówienia w dniu {{$data_slownie}}</center></h1>
 
 <center>
     <a href="{{ route('Panelzamowienia')}}">
@@ -16,7 +12,7 @@
 <div class="container" style="margin-top: 50px;">
     <table class="table table-hover">
         <thead>
-            <tr >
+            <tr>
               <th scope="col">#</th>
               <th scope="col">Kelner</th>
               <th scope="col">Stolik</th>

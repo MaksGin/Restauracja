@@ -41,7 +41,7 @@ class BarController extends Controller
 
             //filtruje potrawy po kategoriach i wyswietlam tylko desery i napoje
             $filteredPotrawy = $item->potrawy->filter(function ($potrawa) {
-                return in_array($potrawa->kategoria->id, [4, 6]); //dla bazy na praktykach 4 i 6 a w domu 12 i 14
+                return in_array($potrawa->kategoria->id, [12, 14]); //dla bazy na praktykach 4 i 6 a w domu 12 i 14
             });
 
             return [

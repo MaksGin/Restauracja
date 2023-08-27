@@ -62,7 +62,7 @@
     </div>
     <hr>
     <div class="container">
-        <h2>Dodaj miejsce:</h2>
+        <h2>Dodaj kategorie potrawy:</h2>
         <form action="{{ route('kategorie.store') }} " method="POST">
             @csrf
             <label>Nazwa kategorii:</label>

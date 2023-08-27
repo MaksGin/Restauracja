@@ -39,28 +39,23 @@
                     @guest
                     <ul class="navbar-nav ms-auto">
                         <li class="nav-item">
-                            <a class="nav-link active" aria-current="page" href="#menu">VIEW OUR MENU</a>
+                            <a class="nav-link active" aria-current="page" href="#menu">ZOBACZ MENU</a>
                         </li>
                     </ul>
                     <ul class="navbar-nav ms-auto">
                         <li class="nav-item">
-                            <a class="nav-link active" aria-current="page" href="#">ORDER TAKEOUT</a>
+                            <a class="nav-link active" aria-current="page" href="#contact">KONTAKT</a>
                         </li>
                     </ul>
                     <ul class="navbar-nav ms-auto">
                         <li class="nav-item">
-                            <a class="nav-link active" aria-current="page" href="#contact">CONTACT</a>
-                        </li>
-                    </ul>
-                    <ul class="navbar-nav ms-auto">
-                        <li class="nav-item">
-                            <a class="nav-link active" aria-current="page" href="{{ route('rezerwacje.index')}}">MAKE A RESERVATION</a>
+                            <a class="nav-link active" aria-current="page" href="{{ route('rezerwacje.index')}}">ZAREZERWUJ STOLIK</a>
                         </li>
                     </ul>
                     @else
                     <ul class="navbar-nav ms-auto">
                         <li class="nav-item">
-                            <a class="nav-link active" aria-current="page" href="/zamowienia">ORDER PANEL</a>
+                            <a class="nav-link active" aria-current="page" href="/zamowienia">PANEL PRACOWNIKA</a>
                         </li>
                     </ul>
 
@@ -75,13 +70,7 @@
                         @guest
                             @if (Route::has('login'))
                                 <li class="nav-item">
-                                    <a class="nav-link" href="{{ route('login') }}">{{ __('LOGIN') }}</a>
-                                </li>
-                            @endif
-
-                            @if (Route::has('register'))
-                                <li class="nav-item">
-                                    <a class="nav-link" href="{{ route('register') }}">{{ __('REGISTER') }}</a>
+                                    <a class="nav-link" href="{{ route('login') }}">{{ __('ZALOGUJ') }}</a>
                                 </li>
                             @endif
                         @else
