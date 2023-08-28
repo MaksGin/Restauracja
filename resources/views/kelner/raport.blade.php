@@ -4,7 +4,7 @@
 
 <center><h1>Raport z dnia {{$dzisiejsza_data}}</h1></center>
 @if($brak_zamowien)
-   <center><p>Brak zamówień</p></center>
+   <center><p>Brak zrealizowanych zamówień</p></center>
 @else
 
 <div class="container" style="margin-top: 50px;">

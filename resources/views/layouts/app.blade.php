@@ -39,17 +39,17 @@
                     @guest
                     <ul class="navbar-nav ms-auto">
                         <li class="nav-item">
-                            <a class="nav-link active" aria-current="page" href="#menu">ZOBACZ MENU</a>
+                            <a class="nav-link active" aria-current="page" href="#menu">@lang('public.ZOBACZ MENU')</a>
                         </li>
                     </ul>
                     <ul class="navbar-nav ms-auto">
                         <li class="nav-item">
-                            <a class="nav-link active" aria-current="page" href="#contact">KONTAKT</a>
+                            <a class="nav-link active" aria-current="page" href="#contact">@lang('public.KONTAKT')</a>
                         </li>
                     </ul>
                     <ul class="navbar-nav ms-auto">
                         <li class="nav-item">
-                            <a class="nav-link active" aria-current="page" href="{{ route('rezerwacje.index')}}">ZAREZERWUJ STOLIK</a>
+                            <a class="nav-link active" aria-current="page" href="{{ route('rezerwacje.index')}}">@lang('public.ZAREZERWUJ STOLIK')</a>
                         </li>
                     </ul>
                     @else
@@ -70,7 +70,7 @@
                         @guest
                             @if (Route::has('login'))
                                 <li class="nav-item">
-                                    <a class="nav-link" href="{{ route('login') }}">{{ __('ZALOGUJ') }}</a>
+                                    <a class="nav-link" href="{{ route('login') }}">@lang('public.ZALOGUJ')</a>
                                 </li>
                             @endif
                         @else
@@ -92,7 +92,17 @@
                                 </div>
                             </li>
                         @endguest
+                        <div class="dropdown">
+                            <button class="btn btn-warning dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                                @lang('public.Wybierz język')
+                            </button>
+                            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                                <li><a class="dropdown-item" href="/locale/pl">POLISH<img src="poland.png"/></a></li>
+                                <li><a class="dropdown-item" href="/locale/en">ENGLISH<img src="united-kingdom.png"/></a></li>
+                            </ul>
+                        </div>
                     </ul>
+
                 </div>
             </div>
         </nav>

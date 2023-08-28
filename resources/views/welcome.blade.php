@@ -31,7 +31,7 @@
                 @endforeach
             </div>
             <div class="col text-center" >
-                <h1>Lista potraw</h1>
+                <h1>@lang('public.Lista Potraw')</h1>
             </div>
             <div class="col">
 

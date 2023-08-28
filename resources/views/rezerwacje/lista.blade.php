@@ -8,15 +8,15 @@
 
 
         <div class="row">
-            <div class="col text-right">
+            <div class="col text-center">
                 <a class="m-3 btn btn-dark m-3 text-white" id="pobierz-przeszle-rezerwacje" >Przeszłe rezerwacje stolików </a>
             </div>
-            <div class="col">
+            <div class="col text-center">
                 <a class="m-3 btn btn-dark m-3 text-white" id="pobierz-rezerwacje">Rezerwacje stolików na dzisiaj</a>
 
 
             </div>
-            <div class="col text-left">
+            <div class="col text-center">
                 <a class="m-3 btn btn-dark m-3 text-white" id="pobierz-przyszle-rezerwacje" >Przyszłe rezerwacje stolików </a>
             </div>
           </div>

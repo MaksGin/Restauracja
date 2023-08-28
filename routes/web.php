@@ -119,3 +119,7 @@ Route::get('/panel/kelner',[KelnerController::class,'index'])->name('panelKelner
 //raport dla kelnera
 Route::get('/kelner/raport',[KelnerController::class,'raporty'])->name('raportyKelner');
 Route::get('/zamowienia/pdf', [KelnerController::class, 'exportPDF'])->name('zamowienia.export.pdf');
+
+
+//lokalizacja
+Route::get('locale/{lange}',[\App\Http\Controllers\Location\LocationController::class,'setLang']);
