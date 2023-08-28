@@ -97,14 +97,26 @@ class KuchniaController extends Controller
 
     public function CancelKuchnia(Request $request){
 
+        /*
         $orderId = $request->input('orderId');
         $order = Zamowienia::find($orderId);
+        $bar_zamowienie = Bar::where('id_zamowienia','=',$orderId);
         $zamowienie_w_kuchni = Kuchnia::where('id_zamowienia','=',$orderId);
         $potrawy_zamowienia = ZamowieniaPotrawy::where('zamowienie_id','=',$orderId);
         $potrawy_zamowienia->delete();
         $zamowienie_w_kuchni->delete();
+        $bar_zamowienie->delete();
         $order->delete();
+        */
+        $orderId = $request->input('orderId');
+        $newStatus = 2;
 
+        //znajdz zamowienie z pobranego id
+        $order = Zamowienia::find($orderId);
+
+        // update statusu do 3 czyli 'gotowe do odbioru'
+        $order->id_statusu_kuchnia = $newStatus;
+        $order->save();
 
         // pobierz dane do zwrócenia widoku
         $kuchnie = Kuchnia::all();
@@ -134,7 +146,7 @@ class KuchniaController extends Controller
 
 
         $transformedData = $waiting_zamowienia->map(function ($item) {
-            $excludedIds = [12, 14];
+            $excludedIds = [4, 6];
 
             $filteredPotrawy = $item->potrawy->filter(function ($potrawa) use ($excludedIds) {
                 return !in_array($potrawa->kategoria->id, $excludedIds);

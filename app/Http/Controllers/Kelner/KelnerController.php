@@ -28,7 +28,9 @@ class KelnerController extends Controller
         $dzisiejsza_data = $aktualna_data->format('Y-m-d');
         $poland_time = $aktualna_data->setTimezone('EET'); //timezone na wschodnia europe
 
-        $zamowienia = Zamowienia::whereDate('Data', '=', $dzisiejsza_data)->get();
+        $zamowienia = Zamowienia::whereDate('Data', '=', $dzisiejsza_data)
+        ->where('id_statusu_kuchnia', '!=', 2)
+        ->get();
 
 
         $podsumowanie = 0;

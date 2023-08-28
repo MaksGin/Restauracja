@@ -103,7 +103,8 @@ Route::get('/get-potrawy-wtrakcie', [KuchniaController::class,'getPotrawyWtrakci
 //obsługa przycisku gotowe i w trakcie dla zamowienia kuchnii
 Route::put('/set-status-gotowe',[KuchniaController::class,'readyKuchnia'])->name('readyKuchnia');
 Route::put('/set-status-wTrakcie',[KuchniaController::class,'ChangeStatus'])->name('ChangeStatus');
-Route::delete('kuchnia/zamowienia/cancel', [KuchniaController::class,'CancelKuchnia'])->name('kuchnia.zamowienia.cancel');
+
+Route::put('/kuchnia/zamowienia/cancel', [KuchniaController::class,'CancelKuchnia'])->name('kuchnia.zamowienia.cancel');
 
 
 //panel dla baru

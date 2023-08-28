@@ -30,11 +30,11 @@
 <table class="table table-striped table-warning" style="margin-top:20px;">
         <thead>
             <tr>
-            <th scope="col">Id</th>
-            <th scope="col">Potrawy</th>
-            <th scope="col">Stolik</th>
-            <th scope="col">Cena</th>
-            <th scope="col">Działania</th>
+                <th scope="col">Id</th>
+                <th scope="col">Potrawy</th>
+                <th scope="col">Stolik</th>
+                <th scope="col">Cena</th>
+                <th scope="col" colspan="2">Działania</th>
             </tr>
         </thead>
         <tbody id="waiting_potrawy">
@@ -216,7 +216,7 @@
 
                 tdPrzycisk.appendChild(button);
                 tr.appendChild(tdPrzycisk);
-                /*
+
                 const tdPrzyciskAnuluj = document.createElement("td");
 
                 const anuluj = document.createElement("button");
@@ -228,8 +228,8 @@
 
 
                     $.ajax({
-                        method: 'DELETE',
-                        url: 'kuchnia/zamowienia/cancel',
+                        method: 'put',
+                        url: '/kuchnia/zamowienia/cancel',
                         data: JSON.stringify({ orderId: oczekujace.id }),
                         contentType: 'application/json',
                         headers: {
@@ -248,7 +248,7 @@
 
                 tdPrzyciskAnuluj.appendChild(anuluj);
                 tr.appendChild(tdPrzyciskAnuluj);
-                */
+
                 gotowe_potrawy.appendChild(tr);
             });
         }).catch(error => console.error('Error loading content:', error))
