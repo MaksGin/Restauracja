@@ -7,14 +7,14 @@
 
             </div>
             <div class="col text-center">
-                <h1>Lista pracowników</h1>
+                <h1>@lang('public.Lista Pracowników')</h1>
                 <table class="table">
                     <thead>
                     <tr>
                         <th scope="col">id</th>
-                        <th scope="col">Imie</th>
-                        <th scope="col">Stanowisko</th>
-                        <th scope="col">Działania</th>
+                        <th scope="col">@lang('public.Imie')</th>
+                        <th scope="col">@lang('public.Stanowisko')</th>
+                        <th scope="col">@lang('public.Działania')</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -22,17 +22,17 @@
                     <tr>
                         <th scope="row">{{$pracownik->id}}</th>
                         <td>{{$pracownik -> name }}</td>
-                        <td>{{$pracownik->stanowisko->stanowisko}}</td>
+                        <td>{{ trans('public.' .$pracownik->stanowisko->stanowisko)}}</td>
                         <td>
                             <a href="{{ route('pracownik.edit',[$pracownik->id])}}" class="btn btn-secondary">
-                                Edytuj
+                                @lang('public.Edytuj')
                             </a>
                         </td>
                         <td>
                             <form action="{{ route('pracownik.destroy',[$pracownik->id]) }}" method="POST">
                                 @csrf
                                 @method('DELETE')
-                                <button type="submit" class="btn btn-danger">Usuń</button>
+                                <button type="submit" class="btn btn-danger">@lang('public.Usuń')</button>
                             </form>
                         </td>
                     </tr>

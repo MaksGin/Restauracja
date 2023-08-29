@@ -42,7 +42,7 @@
                         <i class="fas fa-gem me-3"></i>Restaurant App
                     </h6>
                     <p>
-                        Najlepsza restauracja w twoim mieście!
+                        @lang('public.Najlepsza restauracja w twoim mieście!')
                     </p>
                 </div>
                 <!-- Grid column -->
@@ -51,10 +51,10 @@
                 <div class="col-md-2 col-lg-2 col-xl-2 mx-auto mb-4">
                     <!-- Links -->
                     <h6 class="text-uppercase fw-bold mb-4">
-                        Produkty
+                        @lang('public.Produkty')
                     </h6>
                     <p>
-                        <a href="#!" class="text-reset">Tylko świeże polskie produkty</a>
+                        <a href="#!" class="text-reset">@lang('public.Tylko świeże polskie produkty')</a>
                     </p>
 
                 </div>
@@ -64,10 +64,10 @@
                 <div class="col-md-3 col-lg-2 col-xl-2 mx-auto mb-4">
                     <!-- Links -->
                     <h6 class="text-uppercase fw-bold mb-4">
-                        Linki
+                        @lang('public.Linki')
                     </h6>
                     <p>
-                        <a href="#!" class="text-reset">Skład potraw</a>
+                        <a href="#!" class="text-reset">@lang('public.Skład potraw')</a>
                     </p>
 
                 </div>
@@ -76,7 +76,7 @@
                 <!-- Grid column -->
                 <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mb-md-0 mb-4">
                     <!-- Links -->
-                    <h6 class="text-uppercase fw-bold mb-4" id="contact">Contact</h6>
+                    <h6 class="text-uppercase fw-bold mb-4" id="contact">@lang('public.Kontakt')</h6>
                     <p><i class="fas fa-home me-3"></i>Jarosław</p>
                     <p>
                         <i class="fas fa-envelope me-3"></i>

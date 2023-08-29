@@ -23,10 +23,10 @@
         <div class="row">
             <div class="col" id="menu" style="margin-top: 100px">
                 @foreach ($kategorie as $kategoria)
-                    <h2>{{ $kategoria->nazwa }}</h2>
+                    <h2>{{ trans('public.' .$kategoria->nazwa )}}</h2>
 
                     @foreach ($potrawy->where('id_kategorii', $kategoria->id) as $potrawa)
-                        <p>{{ $potrawa->nazwa }} {{ $potrawa->cena}}zł</p>
+                        <p>{{ trans('public.' .$potrawa->nazwa) }} {{ $potrawa->cena}}zł</p>
                     @endforeach
                 @endforeach
             </div>

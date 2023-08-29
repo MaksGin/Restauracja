@@ -6,7 +6,7 @@
 
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark" style="margin-top: 50px">
     <div class="container-fluid">
-        <a class="navbar-brand" href="/home">Strona Główna</a>
+        <a class="navbar-brand" href="/home">@lang('public.Strona Główna')</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDarkDropdown" aria-controls="navbarNavDarkDropdown" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
@@ -16,56 +16,56 @@
                 <li class="nav-item dropdown">
                     @if($stanowisko === 1)
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDarkDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                        Pracownicy
+                        @lang('public.Pracownicy')
                     </a>
 
                     <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDarkDropdownMenuLink">
 
-                        <li><a class="dropdown-item" href="{{ route('pracownicy.index') }}">Lista Pracowników</a></li>
-                        <li><a class="dropdown-item" href="{{ route('stanowiska.index') }}">Lista Stanowisk</a></li>
+                        <li><a class="dropdown-item" href="{{ route('pracownicy.index') }}">@lang('public.Lista Pracowników')</a></li>
+                        <li><a class="dropdown-item" href="{{ route('stanowiska.index') }}">@lang('public.Lista Stanowisk')</a></li>
 
                         @if($stanowisko === 2 || $stanowisko === 1)
-                        <li><a class="dropdown-item" href="{{ route('raportyKelner') }}">Raporty Kelnerów</a></li>
+                        <li><a class="dropdown-item" href="{{ route('raportyKelner') }}">@lang('public.Raporty Kelnerów')</a></li>
                         @endif
                     </ul>
                     @endif
                 </li>
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDarkDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                        Potrawy
+                        @lang('public.Potrawy')
                     </a>
                     <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDarkDropdownMenuLink">
-                        <li><a class="dropdown-item" href="{{ route('ListaPotraw') }}">Lista Potraw</a></li>
-                        <li><a class="dropdown-item" href="{{ route('ListaKategorii')}}">Lista Kategorii Potraw</a></li>
+                        <li><a class="dropdown-item" href="{{ route('ListaPotraw') }}">@lang('public.Lista Potraw')</a></li>
+                        <li><a class="dropdown-item" href="{{ route('ListaKategorii')}}">@lang('public.Lista Kategorii Potraw')</a></li>
                     </ul>
                 </li>
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDarkDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                        Stoliki
+                        @lang('public.Stoliki')
                     </a>
                     <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDarkDropdownMenuLink">
-                        <li><a class="dropdown-item" href="{{ route('ListaStolikow')}}">Lista Stolików</a></li>
-                        <li><a class="dropdown-item" href="{{ route('ListaRezerwacji')}}">Lista rezerwacji</a></li>
+                        <li><a class="dropdown-item" href="{{ route('ListaStolikow')}}">@lang('public.Lista Stolików')</a></li>
+                        <li><a class="dropdown-item" href="{{ route('ListaRezerwacji')}}">@lang('public.Lista rezerwacji')</a></li>
                     </ul>
                 </li>
                 <li class="nav-item dropdown">
 
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDarkDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                        Obsługa
+                        @lang('public.Obsługa')
                     </a>
                     <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDarkDropdownMenuLink">
                         @if($stanowisko === 2 || $stanowisko === 1)
-                        <li><a class="dropdown-item" href="{{ route('zamowienia')}}">Aktualne zamówienia</a></li>
-                        <li><a class="dropdown-item" href="{{ route('Panelzamowienia')}}">Nowe zamówienie</a></li>
+                        <li><a class="dropdown-item" href="{{ route('zamowienia')}}">@lang('public.Aktualne zamówienia')</a></li>
+                        <li><a class="dropdown-item" href="{{ route('Panelzamowienia')}}">@lang('public.Nowe zamówienie')</a></li>
                         @endif
                         @if($stanowisko === 3 || $stanowisko === 1)
-                        <li><a class="dropdown-item" href="{{ route('panelKuchnia')}}">Panel dla kuchnii</a></li>
+                        <li><a class="dropdown-item" href="{{ route('panelKuchnia')}}">@lang('public.Panel dla kuchnii')</a></li>
                         @endif
                         @if($stanowisko === 4 || $stanowisko === 1)
-                            <li><a class="dropdown-item" href="{{ route('panelBar')}}">Panel dla baru</a></li>
+                            <li><a class="dropdown-item" href="{{ route('panelBar')}}">@lang('public.Panel dla baru')</a></li>
                         @endif
                         @if($stanowisko === 2 || $stanowisko === 1)
-                            <li><a class="dropdown-item" href="{{ route('panelKelner')}}">Panel dla kelnera</a></li>
+                            <li><a class="dropdown-item" href="{{ route('panelKelner')}}">@lang('public.Panel dla kelnera')</a></li>
                         @endif
                     </ul>
                 </li>

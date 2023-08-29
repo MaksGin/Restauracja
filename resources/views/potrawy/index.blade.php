@@ -20,11 +20,11 @@
                             $naglowekKategorii = $potrawa->kategoria->nazwa;
                         @endphp
                         <tr>
-                            <th scope="col" colspan="3">{{ $naglowekKategorii }}</th>
+                            <th scope="col" colspan="3">{{ trans('public.' .$naglowekKategorii) }}</th>
                         </tr>
                     @endif
                         <tr>
-                            <td>{{ $potrawa->nazwa }}</td>
+                            <td>{{ trans('public.' . $potrawa->nazwa )}}</td>
                             <td>{{ $potrawa->opis }}</td>
                             <td>{{ $potrawa->cena }} zł</td>
                         </tr>

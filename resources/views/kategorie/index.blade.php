@@ -20,14 +20,14 @@
 
         </div>
         <div class="col text-center">
-            <h1>Lista kategorii</h1>
+            <h1>@lang('public.Lista kategorii')</h1>
             <table class="table">
                 <thead>
                 <tr>
                     <th scope="col">id</th>
-                    <th scope="col">nazwa</th>
-                    <th scope="col">miejsce realizacji</th>
-                    <th scope="col">Działania</th>
+                    <th scope="col">@lang('public.nazwa')</th>
+                    <th scope="col">@lang('public.miejsce realizacji</th>')'
+                    <th scope="col">@lang('public.Działania')</th>
                     <th scope="col"></th>
                 </tr>
                 </thead>
@@ -35,18 +35,18 @@
                     @foreach($lista_kategorii as $kategorie)
                     <tr>
                         <td scope="row">{{ $kategorie->id }}</td>
-                        <td scope="row">{{ $kategorie->nazwa }}</td>
-                        <td scope="row">{{ $kategorie->miejsceRealizacji->nazwa}}</td>
+                        <td scope="row">{{ trans('public.' .$kategorie->nazwa )}}</td>
+                        <td scope="row">{{ trans('public.' .$kategorie->miejsceRealizacji->nazwa)}}</td>
                         <td>
                             <a href="{{ route('kategorie.edit',[$kategorie->id])}}" class="btn btn-secondary">
-                                Edytuj
+                                @lang('public.Edytuj')
                             </a>
                         </td>
                         <td>
                             <form action="{{ route('kategorie.destroy',[$kategorie->id]) }}" method="POST">
                                 @csrf
                                 @method('DELETE')
-                                <button type="submit" class="btn btn-danger">Usuń</button>
+                                <button type="submit" class="btn btn-danger">@lang('public.Usuń')</button>
                             </form>
                         </td>
                     </tr>

@@ -7,13 +7,13 @@
 
             </div>
             <div class="col text-center">
-                <h1>Lista stanowisk</h1>
+                <h1>@lang('public.Lista Stanowisk')</h1>
                 <table class="table">
                     <thead>
                     <tr>
                         <th scope="col">id</th>
-                        <th scope="col">Stanowisko</th>
-                        <th scope="col">Opis</th>
+                        <th scope="col">@lang('public.Stanowisko')</th>
+                        <th scope="col">@lang('public.Opis')</th>
 
                     </tr>
                     </thead>
@@ -21,8 +21,8 @@
                     @foreach($stanowiska as $stanowisko)
                         <tr>
                             <th scope="row">{{$stanowisko->id}}</th>
-                            <td>{{$stanowisko -> stanowisko }}</td>
-                            <td>{{$stanowisko->opis}}</td>
+                            <td>{{ trans('public.' .$stanowisko -> stanowisko)}}</td>
+                            <td>{{ trans('public.'.$stanowisko->opis)}}</td>
 
                         </tr>
                     @endforeach

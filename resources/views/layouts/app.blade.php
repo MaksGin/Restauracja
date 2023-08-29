@@ -55,7 +55,7 @@
                     @else
                     <ul class="navbar-nav ms-auto">
                         <li class="nav-item">
-                            <a class="nav-link active" aria-current="page" href="/zamowienia">PANEL PRACOWNIKA</a>
+                            <a class="nav-link active" aria-current="page" href="/zamowienia">@lang('public.PANEL PRACOWNIKA')</a>
                         </li>
                     </ul>
 
