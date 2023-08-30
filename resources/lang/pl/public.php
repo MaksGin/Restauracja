@@ -89,6 +89,10 @@ return [
     //Lista Zamowien
     'Zamówienia w dniu' => 'Zamówienia w dniu',
     'Oczekujace' => 'Oczekujące',
+    'Anulowane' => 'Anulowane',
+    'Gotowe do odbioru' => 'Gotowe do odbioru',
+    'Zrealizowane' => 'Zrealizowane',
+    'W trakcie realizacji' => 'W trakcie realizacji',
 
     //Details
     'Szczegóły zamówienia' => 'Szczegóły zamówienia',
@@ -98,7 +102,84 @@ return [
     //Kategorie Potraw
     'Lista kategorii' => 'Lista Kategorii',
 
+    'miejsce realizacji' => 'miejsce realizacji',
+    'kuchnia' => 'kuchnia',
+    'bar' => 'bar',
+    'Dodaj kategorie potrawy' => 'Dodaj kategorie potrawy',
+    'Nazwa kategorii' => 'Nazwa kategorii',
+    'Dodatki' => 'Dodatki',
+    'Dodaj' => 'Dodaj',
+    'nazwa' => 'nazwa',
+    //Stoliki
+    '4-osobowy' => '4-osobowy',
+    '2-osobowy' => '2-osobowy',
+    '2-osobowy' => '2-osobowy',
+    '3-osobowy' => '3-osobowy',
+    '4-osobowy' => '4-osobowy',
+    '3-osobowy' => '3-osobowy',
+    '5-osobowy' => '5-osobowy',
+    '4-osobowy' => '4-osobowy',
+    '2-osobowy' => '2-osobowy',
+    '2-osobowy' => '2-osobowy',
+    '2-osobowy' => '2-osobowy',
+    '4-osobowy' => '4-osobowy',
+    '4-osobowy' => '4-osobowy',
+    '2-osobowy' => '2-osobowy',
+    '4-osobowy' => '4-osobowy',
+    '2-osobowy' => '2-osobowy',
+    '3-osobowy' => '3-osobowy',
+    '2-osobowy' => '2-osobowy',
+    '5-osobowy' => '5-osobowy',
+    '5-osobowy' => '5-osobowy',
+    '4-osobowy' => '4-osobowy',
 
+    //Lista rezerwacji
+    'Data i Godzina rozpoczęcia' => 'Data i Godzina rozpoczęcia',
+    'Data i Godzina zakończenia' => 'Data i Godzina zakończenia',
+    'Nazwisko' => 'Nazwisko',
+
+    'Przeszłe rezerwacje stolików' => 'Przeszłe rezerwacje stolików',
+    'Rezerwacje stolików na dzisiaj' => 'Rezerwacje stolików na dzisiaj',
+    'Przyszłe rezerwacje stolików' => 'Przyszłe rezerwacje stolików',
+
+    //Rezerwacje
+    'Wybierz datę rezerwacji' => 'Wybierz datę rezerwacji',
+    'Dnia' => 'Dnia',
+    'Na czas' => 'Na czas',
+    'Wybierz stolik' => 'Wybierz stolik',
+    'Na nazwisko' => 'Na nazwisko',
+    'Zarezerwuj' => 'Zarezerwuj',
+
+    //kuchnia
+    'Panel Kuchnia' => 'Panel Kuchnia',
+    'W Trakcie' => 'W trakcie',
+    'Anuluj' => 'Anuluj',
+    'Gotowe' => 'Gotowe',
+    'Przyjmij' => 'Przyjmij',
+
+
+     //Bar
+     'Panel Bar' => 'Panel Bar',
+     'Do wydania' => 'Do wydania',
+
+     //Kelner Panel
+    'Panel Kelnera' => 'Panel Kelnera',
+    'Gotowe Potrawy' => 'Gotowe Potrawy',
+    'Zrealizowane i opłacone' => 'Zrealizowane i opłacone',
+
+    //zamowienie add
+    'Fast Food' => 'Fast Food',
+    'pobierz wszystkie potrawy' => 'pobierz wszystkie potrawy',
+    'Desery' => 'Desery',
+    'Inne Dania' => 'Inne Dania',
+    'Zatwierdź' => 'Zatwierdź',
+    'Suma' => 'Suma',
+
+    //Raport Kelner
+    'Zawartość' => 'Zawartość',
+    'Pobierz PDF' => 'Pobierz PDF',
+    'Raport z dnia' => 'Raport z dnia',
+    'Podsumowanie' => 'Podsumowanie',
 ];
 
 ?>

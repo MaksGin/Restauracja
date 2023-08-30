@@ -6,18 +6,18 @@
 
 </head>
 
-<center><h1>Panel Kelnera</h1>
+<center><h1>@lang('public.Panel Kelnera')</h1>
 <div id="main">
     <div class="container">
-            <h1>Gotowe Potrawy</h1>
+            <h1>@lang('public.Gotowe Potrawy')</h1>
         <table class="table table-striped table-warning" style="margin-top:20px;">
                 <thead>
                     <tr>
                     <th scope="col">Id</th>
-                    <th scope="col">Potrawy</th>
-                    <th scope="col">Stolik</th>
-                    <th scope="col">Cena</th>
-                    <th scope="col">Działania</th>
+                    <th scope="col">@lang('public.Potrawy')</th>
+                    <th scope="col">@lang('public.Stolik')</th>
+                    <th scope="col">@lang('public.Cena')</th>
+                    <th scope="col">@lang('public.Działania')</th>
                     </tr>
                 </thead>
                 <tbody id="gotowe_potrawy">
@@ -68,7 +68,7 @@
 
                 const tdPrzycisk = document.createElement("td");
                 const button = document.createElement("button");
-                button.textContent = "Zrealizowane i opłacone";
+                button.textContent = "@lang('public.Zrealizowane i opłacone')";
 
 
                 //nasłuch przycisku w tabeli

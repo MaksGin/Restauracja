@@ -68,6 +68,10 @@ return [
 
     'Zamówienia w dniu' => 'Orders on day',
     'Oczekujace' => 'Waiting',
+    'Anulowane' => 'Canceled',
+    'Gotowe do odbioru' => 'Ready to be delivered',
+    'Zrealizowane' => 'Completed',
+    'W trakcie realizacji' => 'In progress',
     //Lista Pracowników
     'Imie' => 'Name',
     'Stanowisko' => 'Positon',
@@ -96,6 +100,90 @@ return [
 
     //Kategorie Potraw
     'Lista kategorii' => 'Category List',
+    'miejsce realizacji' => 'Place',
+    'kuchnia' => 'kitchen',
+    'bar' => 'bar',
+    'Dodaj kategorie potrawy' => 'Add Dish Categories',
+    'Nazwa kategorii' => 'Category Name',
+    'Dodatki' => 'Extras',
+    'Dodaj' => 'Add',
+
+
+    //Stoliki
+    'nazwa' => 'Name',
+    'pojemnosc' => 'Capacity',
+    'miejsce' => 'Place',
+    '4-osobowy' => '4-person 1st floor',
+    '2-osobowy' => '2-person 1st floor',
+    '2-osobowy' => '2-person 1st floor',
+    '3-osobow' => '3-person 1st floor',
+    '4-osobowy' => '4-person 1st floor',
+    '3-osobowy' => '3-person ground floor',
+    '5-osobowy' => '5-person ground floor',
+    '4-osobowy' => '4-person ground floor',
+    '2-osobowy' => '2-person ground floor',
+    '2-osobowy' => '2-person ground floor',
+    '2-osobowy' => '2-person ground floor',
+    '4-osobowy' => '4-person 2nd floor',
+    '4-osobowy' => '4-person 2nd floor',
+    '2-osobowy' => '2-person 2nd floor',
+    '4-osobowy' => '4-person 2nd floor',
+    '2-osobowy' => '2-person 2nd floor',
+    '3-osobowy' => '3-person courtyard',
+    '2-osobowy' => '2-person courtyard',
+    '5-osobowy' => '5-person courtyard',
+    '5-osobowy' => '5-person courtyard',
+    '4-osobowy' => '4-person courtyard',
+
+
+    //Lista rezerwacji
+    'Data i Godzina rozpoczęcia' => 'Date and Start Time',
+    'Data i Godzina zakończenia' => 'Date and End Time',
+    'Nazwisko' => 'Last Name',
+    'Przeszłe rezerwacje stolików' => 'Past Table Reservations',
+    'Rezerwacje stolików na dzisiaj' => 'Table Reservations for Today',
+    'Przyszłe rezerwacje stolików' => 'Future Table Reservations',
+
+    //Rezerwacje
+    'Wybierz datę rezerwacji' => 'Choose reservation date',
+    'Dnia' => 'Day',
+    'Na czas' => 'Time',
+    'Wybierz stolik' => 'Choose table',
+    'Na nazwisko' => 'Name',
+    'Zarezerwuj' => 'Book',
+
+    //kuchnia
+    'Panel Kuchnia' => 'Kitchen Panel',
+    'W Trakcie' => 'In progress',
+    'Anuluj' => 'Cancel',
+    'Gotowe' => 'Ready',
+    'Przyjmij' => 'Accept',
+
+    //Bar
+    'Panel Bar' => 'Bar Panel',
+    'Do wydania' => 'For release',
+
+    //Kelner Panel
+    'Panel Kelnera' => 'Waiter Panel',
+    'Gotowe Potrawy' => 'Ready meals',
+    'Zrealizowane i opłacone' => 'Completed and paid',
+
+    //zamowienie add
+    'Fast Food' => 'Fast Food',
+    'pobierz wszystkie potrawy' => 'All Dishes',
+    'Desery' => 'Desserts',
+    'Inne Dania' => 'Other Dishes',
+    'Zatwierdź' => 'Accept',
+    'Suma' => 'Amount',
+
+    //Raport Kelner
+    'Zawartość' => 'Content',
+    'Pobierz PDF' => 'Download PDF',
+    'Raport z dnia' => 'Report',
+    'Podsumowanie' => 'Summary',
+
+
+
 
 ];
 

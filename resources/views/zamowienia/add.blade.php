@@ -143,7 +143,7 @@
 
 
 <div class="container">
-    <h1> Wybierz stolik </h1>
+    <h1> @lang('public.Wybierz stolik') </h1>
         <div id="lista-stolikow">
 
         </div>
@@ -154,16 +154,16 @@
 <div class="container">
     <div class="row">
       <div class="col">
-        <center><button class="category-button m-3 btn btn-dark m-3 text-white" data-category-id="1">Fast Food</button>
-        <button class="category-button m-3 btn btn-dark m-3 text-white" data-category-id="2">Inne Dania</button></center>
+        <center><button class="category-button m-3 btn btn-dark m-3 text-white" data-category-id="1">@lang('public.Fast Food')</button>
+        <button class="category-button m-3 btn btn-dark m-3 text-white" data-category-id="2">@lang('public.Inne Dania')</button></center>
       </div>
       <div class="col align-items-center">
-        <center><a class="m-3 btn btn-dark m-3 text-white" id="pobierz-potrawy">pobierz wszystkie potrawy</a><br>
-        <button class="category-button m-3 btn btn-dark m-3 text-white" data-category-id="14">Napoje</button></center>
+        <center><a class="m-3 btn btn-dark m-3 text-white" id="pobierz-potrawy">@lang('public.pobierz wszystkie potrawy')</a><br>
+        <button class="category-button m-3 btn btn-dark m-3 text-white" data-category-id="14">@lang('public.Napoje')</button></center>
       </div>
       <div class="col">
-        <center><button class="category-button m-3 btn btn-dark m-3 text-white" data-category-id="12">Desery</button>
-        <button class="category-button m-3 btn btn-dark m-3 text-white" data-category-id="7">Dodatki</button></center>
+        <center><button class="category-button m-3 btn btn-dark m-3 text-white" data-category-id="12">@lang('public.Desery')</button>
+        <button class="category-button m-3 btn btn-dark m-3 text-white" data-category-id="7">@lang('public.Dodatki')</button></center>
       </div>
     </div>
   </div>
@@ -202,9 +202,9 @@
         <input type="hidden" name="zaznaczone_potrawy" id="zaznaczone_potrawy_input">
         <div class="col-box">
             <div>
-                Suma:
+                @lang('public.Suma'):
                 <span id="price">0.00</span>
-                <button class=" m-3 btn btn-dark m-3 text-white" id="zatwierdzBtn">Zatwierdź</button>
+                <button class=" m-3 btn btn-dark m-3 text-white" id="zatwierdzBtn">@lang('public.Zatwierdź')</button>
             </div>
 
         </div>
@@ -212,8 +212,10 @@
     </form>
 
 </div>
+
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
+    const currentLocale = '{{ App::getLocale() }}';
     const selectedPotrawa = {
         id: null,
         cena: null
@@ -223,7 +225,7 @@
     }
     var stolikId;
     let sumaCenPotraw = 0.0;
-
+    const translatedTableNames = @json($translatedStoliki);
     const selectedPotrawy = [];
     document.addEventListener('DOMContentLoaded', function () {
 
@@ -238,8 +240,15 @@
                     div.setAttribute("stolik_id", stolik.id);
                     div.classList.add("stolik");
 
-                    const text = document.createTextNode(stolik.nazwa+' '+stolik.umiejscowienie);
-                    div.appendChild(text);
+
+                    let textContent = stolik.nazwa + '<br><hr>' + stolik.umiejscowienie;
+
+                    if (currentLocale === 'en') {
+                        textContent = translatedTableNames[stolik.nazwa] || stolik.nazwa;
+                        textContent += '<br><hr>' + stolik.umiejscowienie;
+                    }
+
+                    div.innerHTML = textContent;
 
                     stoliki.appendChild(div);
 

@@ -2,6 +2,7 @@
 
 @section('content')
 <body class="antialiased">
+
     <img  src="MainPagePhoto.jpg" alt="Opis obrazka" style="width: 90%; height: auto; margin: 0 auto;" class="rounded mx-auto d-block img-fluid">
     <div class="container">
         <div class="row align-items-start">
@@ -21,16 +22,10 @@
 
     <div class="container">
         <div class="row">
-            <div class="col" id="menu" style="margin-top: 100px">
-                @foreach ($kategorie as $kategoria)
-                    <h2>{{ trans('public.' .$kategoria->nazwa )}}</h2>
+            <div class="col">
 
-                    @foreach ($potrawy->where('id_kategorii', $kategoria->id) as $potrawa)
-                        <p>{{ trans('public.' .$potrawa->nazwa) }} {{ $potrawa->cena}}zł</p>
-                    @endforeach
-                @endforeach
             </div>
-            <div class="col text-center" >
+            <div class="col text-center" id="menu">
                 <h1>@lang('public.Lista Potraw')</h1>
             </div>
             <div class="col">
@@ -38,8 +33,18 @@
             </div>
         </div>
     </div>
+    <div class="container">
 
+        <div class="col" style="margin-top: 100px">
+        @foreach ($kategorie as $kategoria)
+            <h2>{{ trans('public.' .$kategoria->nazwa )}}</h2>
 
+            @foreach ($potrawy->where('id_kategorii', $kategoria->id) as $potrawa)
+                <p>{{ trans('public.' .$potrawa->nazwa) }} {{ $potrawa->cena}}zł</p>
+            @endforeach
+        @endforeach
+    </div>
+</div>
 
 
 

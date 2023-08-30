@@ -19,14 +19,14 @@
 
 
 <div class="container">
-    <center><h1>Panel Bar</h1></center>
-    <h1>Do wydania</h1>
+    <center><h1>@lang('public.Panel Bar')</h1></center>
+    <h1>@lang('public.Do wydania')</h1>
 <table class="table table-striped table-warning" style="margin-top:20px;">
         <thead>
             <tr>
             <th scope="col">Id</th>
-            <th scope="col">Potrawy</th>
-            <th scope="col">Stolik</th>
+            <th scope="col">@lang('public.Potrawy')</th>
+            <th scope="col">@lang('public.Stolik')</th>
 
             </tr>
         </thead>
@@ -37,6 +37,7 @@
 </div>
 
 @endsection
+
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
 

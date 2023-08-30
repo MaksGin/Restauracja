@@ -93,12 +93,12 @@
                             </li>
                         @endguest
                         <div class="dropdown">
-                            <button class="btn btn-warning dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                            <button class="btn dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
                                 @lang('public.Wybierz język')
                             </button>
                             <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                                <li><a class="dropdown-item" href="/locale/pl">POLISH<img src="poland.png"/></a></li>
-                                <li><a class="dropdown-item" href="/locale/en">ENGLISH<img src="united-kingdom.png"/></a></li>
+                                <li><a class="dropdown-item" href="/locale/pl">POLISH<img src="{{ URL::to('/poland.png') }}"/></a></li>
+                                <li><a class="dropdown-item" href="/locale/en">ENGLISH<img src="{{ URL::to('/united-kingdom.png') }}"/></a></li>
                             </ul>
                         </div>
                     </ul>

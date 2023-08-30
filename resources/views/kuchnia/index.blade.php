@@ -25,16 +25,16 @@
 
 
 <div class="container">
-    <center><h1>Panel Kuchnia</h1></center>
-    <h1>Oczekujące</h1>
+    <center><h1>@lang('public.Panel Kuchnia')</h1></center>
+    <h1>@lang('public.Oczekujace')</h1>
 <table class="table table-striped table-warning" style="margin-top:20px;">
         <thead>
             <tr>
                 <th scope="col">Id</th>
-                <th scope="col">Potrawy</th>
-                <th scope="col">Stolik</th>
-                <th scope="col">Cena</th>
-                <th scope="col" colspan="2">Działania</th>
+                <th scope="col">@lang('public.Potrawy')</th>
+                <th scope="col">@lang('public.Stolik')</th>
+                <th scope="col">@lang('public.Cena')</th>
+                <th scope="col" colspan="2">@lang('public.Działania')</th>
             </tr>
         </thead>
         <tbody id="waiting_potrawy">
@@ -43,15 +43,15 @@
 </table>
 </div>
 <div class="container">
-    <h1>W Trakcie</h1>
+    <h1>@lang('public.W Trakcie')</h1>
 <table class="table table-striped table-warning" style="margin-top:20px;">
         <thead>
             <tr>
             <th scope="col">Id</th>
-            <th scope="col">Potrawy</th>
-            <th scope="col">Stolik</th>
-            <th scope="col">Cena</th>
-            <th scope="col">Działania</th>
+            <th scope="col">@lang('public.Potrawy')</th>
+            <th scope="col">@lang('public.Stolik')</th>
+            <th scope="col">@lang('public.Cena')</th>
+            <th scope="col">@lang('public.Działania')</th>
             </tr>
         </thead>
         <tbody id="potrawy-wtrakcie">
@@ -104,7 +104,7 @@
 
                 const tdPrzycisk = document.createElement("td");
                 const button = document.createElement("button");
-                button.textContent = "Gotowe";
+                button.textContent = "@lang('public.Gotowe')";
 
                 button.addEventListener("click", function(){
                     var csrfToken = $('meta[name="csrf-token"]').attr('content');
@@ -187,7 +187,7 @@
 
                 const tdPrzycisk = document.createElement("td");
                 const button = document.createElement("button");
-                button.textContent = "Przyjmij";
+                button.textContent = "@lang('public.Przyjmij')";
 
 
                 button.addEventListener("click", function(){
@@ -221,7 +221,7 @@
 
                 const anuluj = document.createElement("button");
                 anuluj.classList.add("anuluj");
-                anuluj.textContent = "Anuluj";
+                anuluj.textContent = "@lang('public.Anuluj')";
 
                 anuluj.addEventListener("click", function(){
                     var csrfToken = $('meta[name="csrf-token"]').attr('content');

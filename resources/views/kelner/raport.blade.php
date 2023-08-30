@@ -2,7 +2,7 @@
 @extends('layouts.prac_nav')
 @section('content')
 
-<center><h1>Raport z dnia {{$dzisiejsza_data}}</h1></center>
+<center><h1>@lang('public.Raport z dnia') {{$dzisiejsza_data}}</h1></center>
 @if($brak_zamowien)
    <center><p>Brak zrealizowanych zamówień</p></center>
 @else
@@ -12,11 +12,11 @@
         <thead>
             <tr>
               <th scope="col">#</th>
-              <th scope="col">Kelner</th>
-              <th scope="col">Zawartość</th>
-              <th scope="col">Stolik</th>
-              <th scope="col">Status</th>
-              <th scope="col">Cena</th>
+              <th scope="col">@lang('public.Kelner')</th>
+              <th scope="col">@lang('public.Zawartość')</th>
+              <th scope="col">@lang('public.Stolik')</th>
+              <th scope="col">@lang('public.Status')</th>
+              <th scope="col">@lang('public.Cena')</th>
             </tr>
           </thead>
           <tbody>
@@ -26,11 +26,11 @@
                 <td>{{$zamowienie->user->name}}</td>
                 <td>
                     @foreach ($zamowienie->potrawy as $potrawa)
-                        <li>{{ $potrawa->nazwa }} ({{ $potrawa->cena }})</li>
+                        <li>{{ trans('public.' .$potrawa->nazwa )}} ({{ $potrawa->cena }})</li>
                     @endforeach
                 </td>
                 <td>{{$zamowienie->id_stoliku}}</td>
-                <td>{{$zamowienie->status->status}}</td>
+                <td>{{ trans('public.' .$zamowienie->status->status)}}</td>
                 <td>{{$zamowienie->cena}} zł</td>
             </tr>
             @endforeach
@@ -46,10 +46,10 @@
 
       </div>
       <div class="col">
-        <h4>Podsumowanie: {{$podsumowanie}} zł</h4><br>
+        <h4>@lang('public.Podsumowanie'): {{$podsumowanie}} zł</h4><br>
         <!-- przycisk Pobierz PDF -->
         <a href="{{ route('zamowienia.export.pdf') }}"><button class="btn btn-dark btn-sm">
-            <i class="fa fa-pencil-square-o" aria-hidden="true"></i> Pobierz PDF
+            <i class="fa fa-pencil-square-o" aria-hidden="true"></i> @lang('public.Pobierz PDF')
         </button></a>
 
       </div>

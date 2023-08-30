@@ -11,7 +11,7 @@ use App\Models\Kuchnia;
 use App\Models\ZamowieniaPotrawy;
 use Illuminate\Support\Facades\Auth;
 use Carbon\Carbon;
-
+use Illuminate\Support\Facades\App;
 
 class ZamowieniaController extends Controller
 {
@@ -19,12 +19,12 @@ class ZamowieniaController extends Controller
 
         $teraz = Carbon::now();
         $Data = $teraz->format('Y-m-d');
-        $data_slownie = $teraz->locale('pl')->isoFormat('dddd D MMMM','pl');
+
         $stoliki = Stolik::all();
         $potrawy = Potrawa::all();
         $zamowienia = Zamowienia::whereDate('Data','=',$Data)->get();
 
-        return view('zamowienia.index',compact('stoliki','potrawy','zamowienia','data_slownie'));
+        return view('zamowienia.index',compact('stoliki','potrawy','zamowienia','Data'));
     }
 
     public function addZamowieniePanel(){
@@ -32,8 +32,13 @@ class ZamowieniaController extends Controller
         $id_stolikow = Stolik::all('id');
         $kategorie = kategoriePotraw::all();
         $potrawy = Potrawa::all();
+        $stoliki = Stolik::all();
+        $translatedStoliki = [];
 
-        return view('zamowienia.add',compact('id_stolikow','kategorie','potrawy'));
+        foreach ($stoliki as $stolik) {
+            $translatedStoliki[$stolik->nazwa] = __('public.' . $stolik->nazwa);
+        }
+        return view('zamowienia.add',compact('id_stolikow','kategorie','potrawy','stoliki','translatedStoliki'));
     }
 
     public function PotrawyAll(){
@@ -89,13 +94,11 @@ class ZamowieniaController extends Controller
 
         //data zamowienia
         $aktualna_data = Carbon::now();
-        $format_daty = $aktualna_data->format('Y-m-d H:i:s');
-        $poland_time = $aktualna_data->setTimezone('EET');
-        $data_slownie = $teraz->locale('pl')->isoFormat('dddd D MMMM','pl');
+        $Data = $teraz->format('Y-m-d');
 
 
         $zamowienie = new Zamowienia();
-        $zamowienie->data = $format_daty;
+        $zamowienie->data = $Data;
         $zamowienie->id_kelnera = $idKelnera;
         $zamowienie->id_stoliku = $idStolika;
         $zamowienie->id_statusu_kuchnia = $id_statusu_kuchnia;
@@ -123,7 +126,7 @@ class ZamowieniaController extends Controller
         $potrawy = Potrawa::all();
         $zamowienia = Zamowienia::whereDate('Data','=',$Data)->get();
 
-        return view('zamowienia.index',compact('stoliki','potrawy','zamowienia','data_slownie'));
+        return view('zamowienia.index',compact('stoliki','potrawy','zamowienia','Data'));
     }
 
     public function details($id){

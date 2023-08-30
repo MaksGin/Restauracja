@@ -26,7 +26,7 @@
                 <tr>
                     <th scope="col">id</th>
                     <th scope="col">@lang('public.nazwa')</th>
-                    <th scope="col">@lang('public.miejsce realizacji</th>')'
+                    <th scope="col">@lang('public.miejsce realizacji')</th>
                     <th scope="col">@lang('public.Działania')</th>
                     <th scope="col"></th>
                 </tr>
@@ -62,18 +62,18 @@
     </div>
     <hr>
     <div class="container">
-        <h2>Dodaj kategorie potrawy:</h2>
+        <h2>@lang('public.Dodaj kategorie potrawy'):</h2>
         <form action="{{ route('kategorie.store') }} " method="POST">
             @csrf
-            <label>Nazwa kategorii:</label>
+            <label>@lang('public.Nazwa kategorii'):</label>
             <input type="text" name="nazwa" class="form-control" required/><br>
 
-            <label>Miejsce realizacji:</label>
+            <label>@lang('public.miejsce realizacji'):</label>
             <select name="miejsce" class="form-control">
-                <option value="kuchnia" {{ $kategorie->miejsceRealizacji->id == 1 ? 'selected' : '' }}>Kuchnia</option>
-                <option value="bar" {{ $kategorie->miejsceRealizacji->id == 2 ? 'selected' : '' }}>Bar</option>
+                <option value="kuchnia" {{ $kategorie->miejsceRealizacji->id == 1 ? 'selected' : '' }}>@lang('public.kuchnia')</option>
+                <option value="bar" {{ $kategorie->miejsceRealizacji->id == 2 ? 'selected' : '' }}>@lang('public.bar')</option>
             </select>
-            <button type="submit" class="btn btn-dark" style="margin-top: 20px;">Dodaj</button>
+            <button type="submit" class="btn btn-dark" style="margin-top: 20px;">@lang('public.Dodaj')</button>
         </form>
     </div>
 </div>

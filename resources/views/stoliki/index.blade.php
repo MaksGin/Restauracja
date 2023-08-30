@@ -11,16 +11,16 @@
         <thead style="background-color: ">
             <tr>
             <th scope="col">#</th>
-            <th scope="col">nazwa</th>
-            <th scope="col">pojemnosc</th>
-            <th scope="col">miejsce</th>
+            <th scope="col">@lang('public.nazwa')</th>
+            <th scope="col">@lang('public.pojemnosc')</th>
+            <th scope="col">@lang('public.miejsce')</th>
             </tr>
         </thead>
         <tbody>
             @foreach($stoliki as $stolik)
                 <tr>
                 <th scope="row">{{$stolik->id}}</th>
-                <td>{{$stolik->nazwa}}</td>
+                <td>{{ trans('public.' .$stolik->nazwa)}}</td>
                 <td>{{$stolik->pojemnosc}}</td>
                 <td>{{$stolik->umiejscowienie}}</td>
                 </tr>

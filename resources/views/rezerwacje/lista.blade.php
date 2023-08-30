@@ -4,20 +4,20 @@
 
 
 <div class="container">
-    <h1>Lista rezerwacji</h1>
+    <h1>@lang('public.Lista rezerwacji')</h1>
 
 
         <div class="row">
             <div class="col text-center">
-                <a class="m-3 btn btn-dark m-3 text-white" id="pobierz-przeszle-rezerwacje" >Przeszłe rezerwacje stolików </a>
+                <a class="m-3 btn btn-dark m-3 text-white" id="pobierz-przeszle-rezerwacje" >@lang('public.Przeszłe rezerwacje stolików')</a>
             </div>
             <div class="col text-center">
-                <a class="m-3 btn btn-dark m-3 text-white" id="pobierz-rezerwacje">Rezerwacje stolików na dzisiaj</a>
+                <a class="m-3 btn btn-dark m-3 text-white" id="pobierz-rezerwacje">@lang('public.Rezerwacje stolików na dzisiaj')</a>
 
 
             </div>
             <div class="col text-center">
-                <a class="m-3 btn btn-dark m-3 text-white" id="pobierz-przyszle-rezerwacje" >Przyszłe rezerwacje stolików </a>
+                <a class="m-3 btn btn-dark m-3 text-white" id="pobierz-przyszle-rezerwacje" >@lang('public.Przyszłe rezerwacje stolików') </a>
             </div>
           </div>
 </div>
@@ -26,9 +26,9 @@
     <thead>
     <tr>
         <th>ID</th>
-        <th>Data i Godzina rozpoczęcia</th>
-        <th>Data i Godzina zakończenia</th>
-        <th>Nazwisko</th>
+        <th>@lang('public.Data i Godzina rozpoczęcia')</th>
+        <th>@lang('public.Data i Godzina zakończenia')</th>
+        <th>@lang('public.Nazwisko')</th>
     </tr>
     </thead>
     <tbody id="wyniki"></tbody>

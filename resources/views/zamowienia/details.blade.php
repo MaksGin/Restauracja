@@ -12,7 +12,7 @@
     <div class="row">
       <div class="col">
         <h3>@lang('public.Stolik'):</h3> <br>
-        <p>{{$zamowienie->stolik->nazwa}} <br>Piętro: {{$zamowienie->stolik->umiejscowienie}}</p>
+        <p>{{ trans('public.' .$zamowienie->stolik->nazwa)}} <br>
 
 
         <h3>@lang('public.Zawartość zamówienia'):</h3>

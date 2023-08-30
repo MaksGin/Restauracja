@@ -82,7 +82,7 @@
                         <i class="fas fa-envelope me-3"></i>
                         maksgintner0@gmail.com
                     </p>
-                    <p><i class="fas fa-phone me-3"></i>795 668 743</p>
+
 
                 </div>
                 <!-- Grid column -->

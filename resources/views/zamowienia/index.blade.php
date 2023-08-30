@@ -2,7 +2,7 @@
 @extends('layouts.prac_nav')
 @section('content')
 
-<h1><center>@lang('public.Zamówienia w dniu') {{$data_slownie}}</center></h1>
+<h1><center>@lang('public.Zamówienia w dniu') {{$Data}}</center></h1>
 
 <center>
     <a href="{{ route('Panelzamowienia')}}">
