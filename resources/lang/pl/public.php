@@ -170,6 +170,41 @@ return [
 
     //Bar Panel
     'Brak napojów do zamówienia' => 'Brak napojów do zamówienia',
+
+    //dalsze tlumaczenia potraw
+    'Sajgonki warzywne 8 szt.' => 'Sajgonki warzywne 8 szt.',
+    'Sajgonki drobiowo-wieprzowe 200g' => 'Sajgonki drobiowo-wieprzowe 200g',
+    'Surówka z kapusty 200g' => 'Surówka z kapusty 200g',
+    'Surówka marchew z chrzanem 200g' => 'Surówka marchew z chrzanem 200g',
+    'Surówka grecka 200g' => 'Surówka grecka 200g',
+    'Mizeria 200g' => 'Mizeria 200g',
+    'Zestaw surówek 200g' => 'Zestaw surówek 200g',
+    'Surówka z kiełków sojowych 200g' => 'Surówka z kiełków sojowych 200g',
+    'Frytki 200g' => 'Frytki 200g',
+    'Kulki z ziemniaczane 200g' => 'Kulki z ziemniaczane 200g',
+    'Talarki z ziemniaczane 200g' => 'Talarki z ziemniaczane 200g',
+    'Ćwiartki z ziemniaka 200g' => 'Ćwiartki z ziemniaka 200g',
+    'Szyszki z ziemniaków  200g' => 'Szyszki z ziemniaków 200g',
+    'Frytki literki 200g' => 'Frytki literki 200g',
+
+    'Brzoskwinie w cieście kokosowym' => 'Brzoskwinie w cieście kokosowym',
+    'Szarlotka z bitą śmietaną' => 'Szarlotka z bitą śmietaną',
+    'Sernik' => 'Sernik',
+    'Tiramisu' => 'Tiramisu',
+    'Wuzetka' => 'Wuzetka',
+
+    'Rosół z makaronem ryżowym i kurczakiem 300ml' => 'Rosół z makaronem ryżowym i kurczakiem 300ml',
+    'Rosół z makaronem z manioku, bambusem i mięsem 300ml' => 'Rosół z makaronem z manioku, bambusem i mięsem 300ml',
+    'Rosół z makaronem z manioku 300ml' => 'Rosół z makaronem z manioku 300ml',
+
+    'Herbata' => 'Herbata',
+    'Kulki ziemniaczane 200g' => 'Kulki ziemniaczane 200g',
+    'Talarki ziemniaczane 200g' => 'Talarki ziemniaczane 200g',
+    'Ćwiartki ziemniaka 200g' => 'Ćwiartki ziemniaka 200g',
+    'Szyszki ziemniaków 200g' => 'Szyszki ziemniaków 200g',
+
+    'Dania z drobiu' => 'Poultry dishes',
+    'Zupy' => "Soups",
 ];
 
 ?>

@@ -173,7 +173,34 @@ return [
     //Bar Panel
     'Brak napojów do zamówienia' => 'No drinks',
 
+    //dalsze tłumaczenia nazw potraw
+    'Sajgonki warzywne 8 szt.' => 'Vegetable Spring Rolls 8 pcs.',
+    'Sajgonki drobiowo-wieprzowe 200g' => 'Chicken-Pork Spring Rolls 200g',
+    'Surówka z kapusty 200g' => 'Cabbage Salad 200g',
+    'Surówka marchew z chrzanem 200g' => 'Carrot Salad with Horseradish 200g',
+    'Surówka grecka 200g' => 'Greek Salad 200g',
+    'Mizeria 200g' => 'Cucumber Salad 200g',
+    'Zestaw surówek 200g' => 'Mixed Salad 200g',
+    'Surówka z kiełków sojowych 200g' => 'Bean Sprout Salad 200g',
+    'Frytki 200g' => 'French Fries 200g',
+    'Kulki ziemniaczane 200g' => 'Potato Balls 200g',
+    'Talarki ziemniaczane 200g' => 'Potato Chips 200g',
+    'Ćwiartki ziemniaka 200g' => 'Potato Wedges 200g',
+    'Szyszki z ziemniaków 200g' => 'Potato Spirals 200g',
+    'Frytki literki 200g' => 'Alphabet Fries 200g',
 
+    'Brzoskwinie w cieście kokosowym' => 'Peaches in Coconut Dough',
+    'Szarlotka z bitą śmietaną' => 'Apple Pie with Whipped Cream',
+    'Sernik' => 'Cheesecake',
+    'Tiramisu' => 'Tiramisu',
+    'Wuzetka' => 'Wuzetka',
+
+    'Rosół z makaronem ryżowym i kurczakiem 300ml' => 'Chicken Broth with Rice Noodles and Chicken 300ml',
+    'Rosół z makaronem z manioku, bambusem i mięsem 300ml' => 'Chicken Broth with Cassava Noodles, Bamboo Shoots, and Meat 300ml',
+    'Rosół z makaronem z manioku 300ml' => 'Chicken Broth with Cassava Noodles 300ml',
+
+
+    'Herbata' => 'Tea',
 ];
 
 ?>
