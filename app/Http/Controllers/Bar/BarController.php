@@ -8,15 +8,29 @@ use App\Models\Zamowienia;
 use App\Models\ZamowieniaPotrawy;
 use App\Models\Kuchnia;
 use App\Models\Bar;
+use App\Models\Stolik;
+use App\Models\Potrawa;
 
 class BarController extends Controller
 {
     public function index(){
 
-        return view('bar.index');
+        //dane potrzebne do tłumaczen stolikow i potraw w sektorach oczekujace i w trakcie
+        $potrawy = Potrawa::all();
+        $stoliki = Stolik::all();
+        $translatedStoliki = [];
+
+        foreach ($stoliki as $stolik) {
+            $translatedStoliki[$stolik->nazwa] = __('public.' . $stolik->nazwa);
+            $translatedStoliki[$stolik->umiejscowienie] = __('public.' . $stolik->umiejscowienie);
+        }
+        foreach ($potrawy as $potrawa) {
+            $translatedPotrawy[$potrawa->nazwa] = __('public.' . $potrawa->nazwa);
+        }
+        return view('bar.index',compact('translatedStoliki','translatedPotrawy'));
     }
 
-    public function getWaitingPotrawy(): \Illuminate\Http\JsonResponse
+    public function getWaitingNapoje(): \Illuminate\Http\JsonResponse
     {
 
         /*
@@ -24,9 +38,9 @@ class BarController extends Controller
             $query->where('id_statusu_kuchnia', '5');
         }])->get();
         */
-        $waiting_zamowienia = Zamowienia::where('id_statusu_kuchnia', 3)
-        ->orWhere('id_statusu_kuchnia', 5)
-        ->orWhere('id_statusu_kuchnia',1)
+        $waiting_zamowienia = Zamowienia::where('id_statusu_bar', 3)
+        ->orWhere('id_statusu_bar', 5)
+        ->orWhere('id_statusu_bar',1)
         ->get();
 
         $waiting_zamowienia_ID = $waiting_zamowienia->pluck('id');
@@ -51,6 +65,7 @@ class BarController extends Controller
                 'nazwa' => $item->stolik->nazwa,
                 'umiejscowienie' => $item->stolik->umiejscowienie,
                 'id_statusu_kuchnia' => $item->id_statusu_kuchnia,
+                'id_statusu_bar' => $item->id_statusu_bar,
                 'cena' => $item->cena,
                 'potrawy' => $filteredPotrawy->pluck('nazwa')->toArray()
             ];
@@ -63,6 +78,21 @@ class BarController extends Controller
         return response()->json($jsonData);
     }
 
+    public function updateOrderBar(Request $request)
+    {
+        $orderId = $request->input('orderId');
+
+        $order = Zamowienia::find($orderId);
+        if ($order) {
+
+            $order->id_statusu_bar = 6; // Nowa wartość
+            $order->save();
+
+            return view('bar.index');
+        } else {
+
+        }
+    }
 
 
 }

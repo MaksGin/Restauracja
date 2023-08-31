@@ -128,15 +128,19 @@
 
     }
     .stolik.zaznaczony {
-        background-color: #3498db; /* Przykładowy kolor tła */
+        background-color: skyblue; /* Przykładowy kolor tła */
         color: black; /* Przykładowy kolor tekstu */
         border: 2px solid black; /* Przykładowe obramowanie */
     }
 
     .potrawa.zaznaczony {
-        background-color: #3498db; /* Przykładowy kolor tła */
+        background-color: skyblue; /* Przykładowy kolor tła */
         color: black; /* Przykładowy kolor tekstu */
         border: 2px solid black; /* Przykładowe obramowanie */
+    }
+    .stolik{
+        text-align: center;
+        vertical-align: text-top;
     }
 
 </style>
@@ -159,10 +163,10 @@
       </div>
       <div class="col align-items-center">
         <center><a class="m-3 btn btn-dark m-3 text-white" id="pobierz-potrawy">@lang('public.pobierz wszystkie potrawy')</a><br>
-        <button class="category-button m-3 btn btn-dark m-3 text-white" data-category-id="14">@lang('public.Napoje')</button></center>
+        <button class="category-button m-3 btn btn-dark m-3 text-white" data-category-id="4">@lang('public.Napoje')</button></center>
       </div>
       <div class="col">
-        <center><button class="category-button m-3 btn btn-dark m-3 text-white" data-category-id="12">@lang('public.Desery')</button>
+        <center><button class="category-button m-3 btn btn-dark m-3 text-white" data-category-id="6">@lang('public.Desery')</button>
         <button class="category-button m-3 btn btn-dark m-3 text-white" data-category-id="7">@lang('public.Dodatki')</button></center>
       </div>
     </div>
@@ -199,6 +203,7 @@
         <input type="hidden" name="cena_potrawy" id="cena_potrawy_input">
         <input type="hidden" name="id_stolika" id="id_stolika_input">
         <input type="hidden" name="id_statusu_kuchnia" id="id_statusu_kuchnia">
+        <input type="hidden" name="id_statusu_bar" id="id_statusu_bar">
         <input type="hidden" name="zaznaczone_potrawy" id="zaznaczone_potrawy_input">
         <div class="col-box">
             <div>
@@ -226,6 +231,7 @@
     var stolikId;
     let sumaCenPotraw = 0.0;
     const translatedTableNames = @json($translatedStoliki);
+    const translatedPotrawy = @json($translatedPotrawy);
     const selectedPotrawy = [];
     document.addEventListener('DOMContentLoaded', function () {
 
@@ -243,11 +249,13 @@
 
                     let textContent = stolik.nazwa + '<br><hr>' + stolik.umiejscowienie;
 
+                    //jesli locale ustawione na angielski to pobierz przetłumaczone nazwy stolików z translatedTableNames
                     if (currentLocale === 'en') {
-                        textContent = translatedTableNames[stolik.nazwa] || stolik.nazwa;
-                        textContent += '<br><hr>' + stolik.umiejscowienie;
+                        textContent = translatedTableNames[stolik.nazwa]+'<hr>'+translatedTableNames[stolik.umiejscowienie]|| stolik.nazwa;
+
                     }
 
+                    //innerHTML aby uwzglednic elementy html w textContent
                     div.innerHTML = textContent;
 
                     stoliki.appendChild(div);
@@ -301,9 +309,15 @@
                         div.classList.add("potrawa");
 
                         const text = document.createTextNode(potrawa.nazwa+' '+potrawa.cena+'zł');
-                        div.appendChild(text);
 
+                        let textContent = potrawa.nazwa
 
+                        //jesli locale ustawione na angielski to pobierz przetłumaczone nazwy potraw z translatedPotrawy
+                        if (currentLocale === 'en') {
+                            textContent = translatedPotrawy[potrawa.nazwa]+' '+potrawa.cena+'zł' || potrawa.nazwa;
+
+                        }
+                        div.innerHTML = textContent;
                         potrawy.appendChild(div);
 
                         div.addEventListener('click', function () {
@@ -340,8 +354,11 @@
                                 document.getElementById('cena_potrawy_input').value = sumaCenPotraw;
                                 document.getElementById('zaznaczone_potrawy_input').value = selectedPotrawy;
                                 var status = 5;
+                                var statusBar = 5;
                                 document.getElementById('id_statusu_kuchnia').value = status;
-                                zapiszDoBazy(IdKelner,stolikId,potrawaCena,status);
+                                document.getElementById('id_statusu_bar').value=statusBar;
+                                zapiszDoBazy(IdKelner, stolikId, potrawaCena,status,statusBar);
+
 
                                 document.getElementById('price').textContent = sumaCenPotraw.toFixed(2) + ' pln';
                             }
@@ -378,9 +395,15 @@
                             div.classList.add("potrawa");
 
                             const text = document.createTextNode(potrawa.nazwa+' '+potrawa.cena+'zł');
-                            div.appendChild(text);
 
+                            let textContent = potrawa.nazwa
 
+                            //jesli locale ustawione na angielski to pobierz przetłumaczone nazwy potraw z translatedPotrawy
+                            if (currentLocale === 'en') {
+                                textContent = translatedPotrawy[potrawa.nazwa]+' '+potrawa.cena+'zł' || potrawa.nazwa;
+
+                            }
+                            div.innerHTML = textContent;
                             potrawy.appendChild(div);
 
                             div.addEventListener('click', function () {
@@ -414,8 +437,10 @@
                                     document.getElementById('cena_potrawy_input').value = sumaCenPotraw;
                                     document.getElementById('zaznaczone_potrawy_input').value = selectedPotrawy;
                                     var status = 5;
+                                    var statusBar = 5;
                                     document.getElementById('id_statusu_kuchnia').value = status;
-                                    zapiszDoBazy(IdKelner, stolikId, potrawaCena,status);
+                                    document.getElementById('id_statusu_bar').value=statusBar;
+                                    zapiszDoBazy(IdKelner, stolikId, potrawaCena,status,statusBar);
                                     // Tutaj możesz aktualizować wyświetlaną sumę itp.
                                     document.getElementById('price').textContent = sumaCenPotraw.toFixed(2) + ' pln';
                                 }
@@ -429,7 +454,7 @@
             });
         });
 
-        function zapiszDoBazy(id_kelnera, id_stolika, cena_potrawy,status) {
+        function zapiszDoBazy(id_kelnera, id_stolika, cena_potrawy,status,statusBar) {
 
             const zatwierdzBtn = document.getElementById('zatwierdzBtn');
 
@@ -443,6 +468,7 @@
                             cena_potrawy: cena_potrawy,
                             id_stolika: id_stolika,
                             id_statusu_kuchnia: status,
+                            id_statusu_bar: statusBar,
                             zaznaczone_potrawy: selectedPotrawy
                     };
 

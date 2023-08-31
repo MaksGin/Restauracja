@@ -1,22 +1,37 @@
 @extends('layouts.app')
 
 @section('content')
+<style>
+    .container{
+        position: relative;
+    }
+    .centered{
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%,-50%);
+        color: white;
+        font-size: 40px;
+    }
+    img{
+        border-radius: 30px;
+    }
+    @media (max-width: 700px) {
+    .centered {
+        display: none;
+    }
+}
+
+</style>
 <body class="antialiased">
 
-    <img  src="MainPagePhoto.jpg" alt="Opis obrazka" style="width: 90%; height: auto; margin: 0 auto;" class="rounded mx-auto d-block img-fluid">
-    <div class="container">
-        <div class="row align-items-start">
-          <div class="col-sm">
 
-          </div>
-          <div class="col-sm">
-            <!--<p class="carousel-caption text-over-img text-center" style="font-size: 50px;">Restaurant App</p>-->
-          </div>
-          <div class="col-sm">
 
-          </div>
-        </div>
-    </div>
+        <img  src="MainPagePhoto.jpg" alt="Opis obrazka" style="width: 100%; height: auto; margin: 0 auto;" class=" mx-auto d-block img-fluid">
+        <div class="centered">Restaurant APP</div>
+
+
+
 
     <hr>
 

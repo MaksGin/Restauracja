@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Zamowienia;
 use App\Models\ZamowieniaPotrawy;
+use App\Models\Potrawa;
+use App\Models\Stolik;
 
 class KuchniaController extends Controller
 {
@@ -23,9 +25,23 @@ class KuchniaController extends Controller
         $oczekujace = $zamowienia->where("id_statusu_kuchnia", '=', 5);
         $wTrakcie = $zamowienia->where("id_statusu_kuchnia", '=', 1);
 
+
+        //dane potrzebne do tłumaczen stolikow i potraw w sektorach oczekujace i w trakcie
+        $potrawy = Potrawa::all();
+        $stoliki = Stolik::all();
+        $translatedStoliki = [];
+
+        foreach ($stoliki as $stolik) {
+            $translatedStoliki[$stolik->nazwa] = __('public.' . $stolik->nazwa);
+            $translatedStoliki[$stolik->umiejscowienie] = __('public.' . $stolik->umiejscowienie);
+        }
+        foreach ($potrawy as $potrawa) {
+            $translatedPotrawy[$potrawa->nazwa] = __('public.' . $potrawa->nazwa);
+        }
+
         $jsonData = $zamowienia->toJson();
 
-        return view('kuchnia.index',compact('kuchnie','zamowienia','jsonData','oczekujace','wTrakcie'));
+        return view('kuchnia.index',compact('kuchnie','zamowienia','jsonData','oczekujace','wTrakcie','translatedStoliki','translatedPotrawy'));
     }
 
     public function ChangeStatus(Request $request)
@@ -182,6 +198,14 @@ class KuchniaController extends Controller
 
 
         $transformedData = $zamowienia_wTrakcie->map(function ($item) {
+
+            $excludedIds = [4, 6];
+
+            $filteredPotrawy = $item->potrawy->filter(function ($potrawa) use ($excludedIds) {
+                return !in_array($potrawa->kategoria->id, $excludedIds);
+            });
+
+
             return [
                 'id' => $item->id,
                 'id_kelnera' => $item->id_kelnera,
@@ -190,7 +214,7 @@ class KuchniaController extends Controller
                 'nazwa' => $item->stolik->nazwa,
                 'umiejscowienie' => $item->stolik->umiejscowienie,
                 'cena' => $item->cena,
-                'potrawy' => $item->potrawy->pluck('nazwa')->toArray()
+                'potrawy' => $filteredPotrawy->pluck('nazwa')->toArray()
             ];
         });
         $jsonData = $transformedData->toJson();

@@ -37,8 +37,12 @@ class ZamowieniaController extends Controller
 
         foreach ($stoliki as $stolik) {
             $translatedStoliki[$stolik->nazwa] = __('public.' . $stolik->nazwa);
+            $translatedStoliki[$stolik->umiejscowienie] = __('public.' . $stolik->umiejscowienie);
         }
-        return view('zamowienia.add',compact('id_stolikow','kategorie','potrawy','stoliki','translatedStoliki'));
+        foreach ($potrawy as $potrawa) {
+            $translatedPotrawy[$potrawa->nazwa] = __('public.' . $potrawa->nazwa);
+        }
+        return view('zamowienia.add',compact('id_stolikow','kategorie','potrawy','stoliki','translatedStoliki','translatedPotrawy'));
     }
 
     public function PotrawyAll(){
@@ -90,6 +94,7 @@ class ZamowieniaController extends Controller
         $cenaPotrawy = $request->input('cena_potrawy');
         $idStolika = $request->input('id_stolika');
         $id_statusu_kuchnia = $request->input('id_statusu_kuchnia');
+        $id_statusu_bar = $request->input('id_statusu_bar');
         $zaznaczonePotrawy = explode(',', $request->input('zaznaczone_potrawy'));
 
         //data zamowienia
@@ -102,6 +107,7 @@ class ZamowieniaController extends Controller
         $zamowienie->id_kelnera = $idKelnera;
         $zamowienie->id_stoliku = $idStolika;
         $zamowienie->id_statusu_kuchnia = $id_statusu_kuchnia;
+        $zamowienie->id_statusu_bar = $id_statusu_bar;
         $zamowienie->cena = $cenaPotrawy;
         $zamowienie->save();
 

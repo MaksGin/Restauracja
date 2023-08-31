@@ -31,6 +31,9 @@
 
 <script>
     function doRefresh() {
+        const translatedTableNames = @json($translatedStoliki);
+        const translatedPotrawy = @json($translatedPotrawy);
+
         fetch('/get-ready-potrawy')
         .then(response => response.json())
         .then(data => {
@@ -51,7 +54,7 @@
 
                 oczekujace.potrawy.forEach(potrawa => {
                     const li = document.createElement("li");
-                    li.textContent = potrawa;
+                    li.textContent = translatedPotrawy[potrawa];
                     potrawyList.appendChild(li);
                 });
 
@@ -59,7 +62,7 @@
                 tr.appendChild(tdPotrawy);
 
                 const tdStolik = document.createElement("td");
-                tdStolik.textContent = 'numer stolika: '+oczekujace.id_stoliku+' '+oczekujace.nazwa+' '+oczekujace.umiejscowienie;
+                tdStolik.textContent = '@lang('public.Stolik'): ' +translatedTableNames[oczekujace.nazwa]+' '+translatedTableNames[oczekujace.umiejscowienie];
                 tr.appendChild(tdStolik);
 
                 const tdCena = document.createElement("td");
@@ -69,6 +72,9 @@
                 const tdPrzycisk = document.createElement("td");
                 const button = document.createElement("button");
                 button.textContent = "@lang('public.Zrealizowane i opłacone')";
+
+                button.classList.add('Btn');
+                button.classList.add('btn-dark');
 
 
                 //nasłuch przycisku w tabeli
@@ -105,7 +111,7 @@
         })
         .catch(error => console.error('Error loading content:', error))
             .finally(() => {
-                setTimeout(doRefresh, 2000);
+                setTimeout(doRefresh, 2000); //refresh panelu kelnera co 2 sek
             });
     }
 

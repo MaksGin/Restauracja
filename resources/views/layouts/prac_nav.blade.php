@@ -1,10 +1,16 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <!-- Include other meta tags and stylesheets here -->
 
-@php
-    $user = auth()->user();
-    $stanowisko = $user->id_stanowiska;
-@endphp
 
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark" style="margin-top: 50px">
+</head>
+<body>
+    @php
+        $user = auth()->user();
+        $stanowisko = $user->id_stanowiska;
+    @endphp
+<nav class="navbar navbar-expand-sm navbar-dark bg-dark prac" style="margin-top: 50px">
     <div class="container-fluid">
         <a class="navbar-brand" href="/home">@lang('public.Strona Główna')</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDarkDropdown" aria-controls="navbarNavDarkDropdown" aria-expanded="false" aria-label="Toggle navigation">
@@ -74,3 +80,5 @@
     </div>
 </nav>
 
+</body>
+</html>

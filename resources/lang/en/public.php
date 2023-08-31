@@ -113,27 +113,15 @@ return [
     'nazwa' => 'Name',
     'pojemnosc' => 'Capacity',
     'miejsce' => 'Place',
-    '4-osobowy' => '4-person 1st floor',
-    '2-osobowy' => '2-person 1st floor',
-    '2-osobowy' => '2-person 1st floor',
-    '3-osobow' => '3-person 1st floor',
-    '4-osobowy' => '4-person 1st floor',
-    '3-osobowy' => '3-person ground floor',
-    '5-osobowy' => '5-person ground floor',
-    '4-osobowy' => '4-person ground floor',
-    '2-osobowy' => '2-person ground floor',
-    '2-osobowy' => '2-person ground floor',
-    '2-osobowy' => '2-person ground floor',
-    '4-osobowy' => '4-person 2nd floor',
-    '4-osobowy' => '4-person 2nd floor',
-    '2-osobowy' => '2-person 2nd floor',
-    '4-osobowy' => '4-person 2nd floor',
-    '2-osobowy' => '2-person 2nd floor',
-    '3-osobowy' => '3-person courtyard',
-    '2-osobowy' => '2-person courtyard',
-    '5-osobowy' => '5-person courtyard',
-    '5-osobowy' => '5-person courtyard',
-    '4-osobowy' => '4-person courtyard',
+    '4-osobowy' => '4-person',
+    '2-osobowy' => '2-person',
+    '3-osobow' => '3-person',
+    '5-osobowy' => '5-person',
+    'parter' => 'ground floor',
+    '1 pietro' => 'first floor',
+    '2 pietro' => '2nd floor',
+    'podworze' => 'courtyard',
+
 
 
     //Lista rezerwacji
@@ -182,7 +170,8 @@ return [
     'Raport z dnia' => 'Report',
     'Podsumowanie' => 'Summary',
 
-
+    //Bar Panel
+    'Brak napojów do zamówienia' => 'No drinks',
 
 
 ];

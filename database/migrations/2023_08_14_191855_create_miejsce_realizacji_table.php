@@ -16,6 +16,8 @@ return new class extends Migration
             $table->string("nazwa");
             $table->timestamps();
         });
+        DB::insert("INSERT INTO miejsce_realizacji (nazwa) VALUES ('Kuchnia')");
+        DB::insert("INSERT INTO miejsce_realizacji (nazwa) VALUES ('Bar')");
     }
 
     /**

@@ -20,11 +20,16 @@
         .navbar{
             background-color: #e1be00;
         }
+
+
+
+
+
     </style>
 </head>
 <body>
     <div id="app">
-        <nav class="navbar fixed-top navbar-expand-md navbar-light shadow-sm">
+        <nav class="navbar fixed-top navbar-expand-xl navbar-light shadow-sm">
             <div class="container">
                 <img src="{{ URL::to('/logo.png') }}" alt="Logo" width="25" height="24" class="d-inline-block align-text-top" style="margin-right: 10px">
                 <a class="navbar-brand" href="{{ url('/') }}">

@@ -93,7 +93,7 @@ Route::post('/kuchnia/zamowienia/modify', [KuchniaController::class,'modifyKuchn
 Route::post('/kuchnia/zamowienia/ready', [KuchniaController::class,'readyKuchnia'])->name('kuchnia.zamowienia.ready');
 Route::get('/get-ready-potrawy', [KelnerController::class,'getReadyPotrawy'])->name('getReadyPotrawy');
 
-
+Route::put('/update-order-bar',[BarController::class,'updateOrderBar'])->name('updateOrderBar');
 Route::put('/update-order-status/',[KelnerController::class,'updateOrderStatus'])->name('updateOrderStatus');
 
 //potrawy oczekujące/w trakcie dla kuchni
@@ -110,8 +110,11 @@ Route::put('/kuchnia/zamowienia/cancel', [KuchniaController::class,'CancelKuchni
 //panel dla baru
 Route::get('/panel/bar',[BarController::class,'index'])->name('panelBar');
 
-Route::get('/get-waiting-potrawy-bar', [BarController::class,'getWaitingPotrawy'])->name('getWaitingPotrawy');
+Route::get('/get-waiting-napoje-bar', [BarController::class,'getWaitingNapoje'])->name('getWaitingNapoje');
 Route::get('/get-potrawy-wtrakcie-bar', [BarController::class,'getPotrawyWtrakcie'])->name('getPotrawyWtrakcie');
+
+
+
 
 //panel dla kelnera
 Route::get('/panel/kelner',[KelnerController::class,'index'])->name('panelKelner');

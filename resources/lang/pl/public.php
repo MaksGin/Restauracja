@@ -113,25 +113,12 @@ return [
     //Stoliki
     '4-osobowy' => '4-osobowy',
     '2-osobowy' => '2-osobowy',
-    '2-osobowy' => '2-osobowy',
-    '3-osobowy' => '3-osobowy',
-    '4-osobowy' => '4-osobowy',
     '3-osobowy' => '3-osobowy',
     '5-osobowy' => '5-osobowy',
-    '4-osobowy' => '4-osobowy',
-    '2-osobowy' => '2-osobowy',
-    '2-osobowy' => '2-osobowy',
-    '2-osobowy' => '2-osobowy',
-    '4-osobowy' => '4-osobowy',
-    '4-osobowy' => '4-osobowy',
-    '2-osobowy' => '2-osobowy',
-    '4-osobowy' => '4-osobowy',
-    '2-osobowy' => '2-osobowy',
-    '3-osobowy' => '3-osobowy',
-    '2-osobowy' => '2-osobowy',
-    '5-osobowy' => '5-osobowy',
-    '5-osobowy' => '5-osobowy',
-    '4-osobowy' => '4-osobowy',
+    'parter' => 'parter',
+    '1 pietro' => '1 pietro',
+    '2 pietro' => '2 pietro',
+    'podworze' => 'podworze',
 
     //Lista rezerwacji
     'Data i Godzina rozpoczęcia' => 'Data i Godzina rozpoczęcia',
@@ -180,6 +167,9 @@ return [
     'Pobierz PDF' => 'Pobierz PDF',
     'Raport z dnia' => 'Raport z dnia',
     'Podsumowanie' => 'Podsumowanie',
+
+    //Bar Panel
+    'Brak napojów do zamówienia' => 'Brak napojów do zamówienia',
 ];
 
 ?>

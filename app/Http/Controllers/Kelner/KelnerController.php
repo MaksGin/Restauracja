@@ -10,14 +10,27 @@ use App\Models\Zamowienia;
 use App\Models\ZamowieniaPotrawy;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
-
+use App\Models\Stolik;
+use App\Models\Potrawa;
 
 class KelnerController extends Controller
 {
     public function index(){
 
+        $stoliki = Stolik::all();
+        $potrawy = Potrawa::all();
 
-        return view('kelner.index');
+        $translatedStoliki = [];
+        $translatedPotrawy = [];
+
+        foreach ($stoliki as $stolik) {
+            $translatedStoliki[$stolik->nazwa] = __('public.' . $stolik->nazwa);
+            $translatedStoliki[$stolik->umiejscowienie] = __('public.' . $stolik->umiejscowienie);
+        }
+        foreach ($potrawy as $potrawa) {
+            $translatedPotrawy[$potrawa->nazwa] = __('public.' . $potrawa->nazwa);
+        }
+        return view('kelner.index',compact('translatedStoliki','translatedPotrawy'));
     }
 
 
@@ -126,7 +139,7 @@ class KelnerController extends Controller
             $order->id_statusu_kuchnia = 6; // Nowa wartość
             $order->save();
 
-            return view('kelner.index');
+            return view('bar.index');
         } else {
 
         }
