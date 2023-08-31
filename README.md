@@ -45,7 +45,7 @@ Application created in Polish with the ability to translate the application into
 ##### For non-login users
 The main page offers a full list of restaurant dishes and the ability to book a table.
 
-/post a gif here/
+![MainPage](https://github.com/MaksGin/Restauracja/assets/26302413/8baa6165-3da5-40e2-8f8d-5f17bdee41e3)
 
 
 ##### For logged users
@@ -63,7 +63,17 @@ Manager has access to all application functions available to other users, additi
 img
 
 Waiter has a view of current orders, can create new orders, and has access to his own panel where orders come from the kitchen and are ready to serve, then he can click the button "completed and paid"
-/add new order image/ raports img/ and waiter panel img
+
+
+
+Process of adding an order by the waiter:
+
+
+![AddOrder](https://github.com/MaksGin/Restauracja/assets/26302413/acd1bf69-60ba-45fd-b34a-ef49fd362d5a)
+
+
+/ raports img/ and waiter panel img
+
 
 Cook has access to the list of dishes, categories and kitchen panel where orders come in and has the option of accepting the order for execution and transferring the order to be served by the waiter (then the order will appear in the waiter's panel and notify him that he need to pick up the dish from kitchen) or canceling the order.
 /kitchen panel img/
