@@ -14,7 +14,7 @@
     </li>
     <li><a href="#Setup">Setup</a></li>
     <li><a href="#Instructions">Instructions</a></li>
-    <li><a href="#conslusions">Conclusions</a></li> <!-- I corrected the spelling here -->
+    <li><a href="#Conclusions">Conclusions</a></li> <!-- I corrected the spelling here -->
   </ol>
 </details>
 
