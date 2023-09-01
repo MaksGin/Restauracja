@@ -21,7 +21,7 @@
         <label for="id_stolu">@lang('public.Wybierz stolik'):</label><br>
         <select id="id_stolu" name="id_stolu">
             @foreach($stoliki as $stolik)
-                <option value='{{$stolik->id}}'>Stolik {{$stolik->id}} - {{$stolik->nazwa}} - {{$stolik->umiejscowienie}}</option>
+                <option value='{{$stolik->id}}'>@lang('public.Stolik') {{$stolik->id}} - {{ trans('public.'.$stolik->nazwa)}} - {{ trans('public.'.$stolik->umiejscowienie)}}</option>
             @endforeach
         </select><br>
         <label for="nazwisko">@lang('public.Na nazwisko'):</label><br>
@@ -37,12 +37,12 @@
 </form>
 @if(isset($wiadomosc))
     <div class="alert alert-success">
-        {{ $wiadomosc }}
+        {{ trans('public.'.$wiadomosc) }}
     </div>
 @endif
 @if(isset($wiadomosc1))
     <div class="alert alert-danger">
-        {{ $wiadomosc1 }}
+        {{ trans('public.'.$wiadomosc1) }}
     </div>
 @endif
 </div>

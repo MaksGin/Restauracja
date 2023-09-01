@@ -205,6 +205,17 @@ return [
 
     'Dania z drobiu' => 'Poultry dishes',
     'Zupy' => "Soups",
+
+
+    'Nie można zarezerwować tego stolika w tym czasie.' => 'Nie można zarezerwować tego stolika w tym czasie.',
+    'Poprawnie dodano rezerwację!' => 'Poprawnie dodano rezerwację!',
+    'Dodaj Pracownika' => 'Dodaj Pracownika',
+
+    'Telefon' => 'Telefon',
+    'Potwierdź Hasło' => 'Potwierdź Hasło',
+    'Rejestruj' => 'Rejestruj',
+
+    'Zarejestruj pracownika' => 'Zarejestruj pracownika',
 ];
 
 ?>

@@ -22,8 +22,16 @@ class PracownicyController extends Controller
         return view('pracownicy.edit',compact('pracownik'));
     }
 
-    public function update(Request $request, User $user): \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View|\Illuminate\Foundation\Application
+    public function create(){
+
+        return view('auth.register');
+
+    }
+
+    public function update(Request $request, $id): \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View|\Illuminate\Foundation\Application
     {
+        $user = User::find($id);
+
         $validatedData = $request->validate([
             'imie' => 'required',
             'email' => 'required',
@@ -31,7 +39,10 @@ class PracownicyController extends Controller
 
         ]);
 
-        $user->update($validatedData);
+        $user->name = $validatedData['imie'];
+        $user->email = $validatedData['email'];
+        $user->telefon = $validatedData['telefon'];
+        $user->save();
         $pracownicy = User::all();
         return view('pracownicy.index',compact('pracownicy'));
     }

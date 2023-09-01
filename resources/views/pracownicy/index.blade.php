@@ -24,7 +24,7 @@
                         <td>{{$pracownik -> name }}</td>
                         <td>{{ trans('public.' .$pracownik->stanowisko->stanowisko)}}</td>
                         <td>
-                            <a href="{{ route('pracownik.edit',[$pracownik->id])}}" class="btn btn-secondary">
+                            <a href="{{ route('pracownik.edit', ['id' => $pracownik->id]) }}" class="btn btn-secondary">
                                 @lang('public.Edytuj')
                             </a>
                         </td>

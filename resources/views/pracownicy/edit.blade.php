@@ -20,7 +20,7 @@
                     </div>
                     <div class="mb-3">
                         <label for="telefon" class="form-label">Telefon</label>
-                        <input type="text" name="telefon" class="form-control" id="numer_indeksu" value="{{ $pracownik->telefon }}" required>
+                        <input type="text" name="telefon" class="form-control" id="telefon" value="{{ $pracownik->telefon }}" required>
                     </div>
 
                     <button type="submit" class="btn btn-primary">Submit</button>

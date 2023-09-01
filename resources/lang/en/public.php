@@ -74,7 +74,7 @@ return [
     'W trakcie realizacji' => 'In progress',
     //Lista Pracowników
     'Imie' => 'Name',
-    'Stanowisko' => 'Positon',
+    'Stanowisko' => 'Position',
     'Działania' => 'Actions',
 
     'kierownik' => 'manager',
@@ -115,7 +115,7 @@ return [
     'miejsce' => 'Place',
     '4-osobowy' => '4-person',
     '2-osobowy' => '2-person',
-    '3-osobow' => '3-person',
+    '3-osobowy' => '3-person',
     '5-osobowy' => '5-person',
     'parter' => 'ground floor',
     '1 pietro' => 'first floor',
@@ -201,6 +201,15 @@ return [
 
 
     'Herbata' => 'Tea',
+    'Nie można zarezerwować tego stolika w tym czasie.' => 'Table unavailable at the selected time',
+    'Poprawnie dodano rezerwację!' => 'Reservation successfully added!',
+    'Dodaj Pracownika' => 'Add Employee',
+
+    'Telefon' => 'Phone',
+    'Potwierdź Hasło' => 'Confirm Password',
+    'Rejestruj' => 'Register',
+    'Zarejestruj pracownika' => 'Register Employee',
+
 ];
 
 ?>

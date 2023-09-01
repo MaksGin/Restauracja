@@ -29,7 +29,7 @@
 
                         <li><a class="dropdown-item" href="{{ route('pracownicy.index') }}">@lang('public.Lista Pracowników')</a></li>
                         <li><a class="dropdown-item" href="{{ route('stanowiska.index') }}">@lang('public.Lista Stanowisk')</a></li>
-
+                        <li><a class="dropdown-item" href="{{ url('/register') }}">@lang('public.Dodaj Pracownika')</a></li>
                         @if($stanowisko === 2 || $stanowisko === 1)
                         <li><a class="dropdown-item" href="{{ route('raportyKelner') }}">@lang('public.Raporty Kelnerów')</a></li>
                         @endif

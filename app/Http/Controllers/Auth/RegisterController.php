@@ -5,6 +5,9 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use App\Models\User;
+use App\Models\MiejsceRealizacji;
+use App\Models\KategoriePotraw;
+use App\Models\Stanowisko;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
@@ -24,6 +27,14 @@ class RegisterController extends Controller
 
     use RegistersUsers;
 
+    public function showRegistrationForm()
+    {
+        // Tutaj możesz przygotować dane potrzebne do formularza, np. dostępne stanowiska
+        $stanowiska = Stanowisko::all();
+        // Załóżmy, że masz model Stanowisko
+
+        return view('auth.register', ['stanowiska' => $stanowiska]);
+    }
     /**
      * Where to redirect users after registration.
      *
@@ -38,7 +49,8 @@ class RegisterController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('guest');
+        $this->middleware('auth');
+
     }
 
     /**
@@ -53,6 +65,8 @@ class RegisterController extends Controller
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
+            'telefon' => ['required'],
+            'id_stanowiska' => ['required'],
         ]);
     }
 
@@ -68,6 +82,9 @@ class RegisterController extends Controller
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
+            'telefon' => $data['telefon'],
+            'id_stanowiska' => $data['id_stanowiska']
+
         ]);
     }
 }

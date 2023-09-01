@@ -38,7 +38,7 @@
                         <td scope="row">{{ trans('public.' .$kategorie->nazwa )}}</td>
                         <td scope="row">{{ trans('public.' .$kategorie->miejsceRealizacji->nazwa)}}</td>
                         <td>
-                            <a href="{{ route('kategorie.edit',[$kategorie->id])}}" class="btn btn-secondary">
+                            <a href="{{ route('kategorie.edit', $kategorie->id) }}" class="btn btn-secondary">
                                 @lang('public.Edytuj')
                             </a>
                         </td>
