@@ -163,10 +163,10 @@
       </div>
       <div class="col align-items-center">
         <center><a class="m-3 btn btn-dark m-3 text-white" id="pobierz-potrawy">@lang('public.pobierz wszystkie potrawy')</a><br>
-        <button class="category-button m-3 btn btn-dark m-3 text-white" data-category-id="4">@lang('public.Napoje')</button></center>
+        <button class="category-button m-3 btn btn-dark m-3 text-white" data-category-id="14">@lang('public.Napoje')</button></center>
       </div>
       <div class="col">
-        <center><button class="category-button m-3 btn btn-dark m-3 text-white" data-category-id="6">@lang('public.Desery')</button>
+        <center><button class="category-button m-3 btn btn-dark m-3 text-white" data-category-id="12">@lang('public.Desery')</button>
         <button class="category-button m-3 btn btn-dark m-3 text-white" data-category-id="7">@lang('public.Dodatki')</button></center>
       </div>
     </div>

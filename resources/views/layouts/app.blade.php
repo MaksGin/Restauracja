@@ -20,14 +20,30 @@
         .navbar{
             background-color: #e1be00;
         }
+        html, body {
+            height: 100%;
+            margin: 0;
+            padding: 0;
+        }
+        body {
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
 
+        main {
+            flex-grow: 1;
+        }
 
+        footer{
+            bottom: 0;
+        }
 
 
 
     </style>
 </head>
-<body>
+<body class="min-vh-100">
     <div id="app">
         <nav class="navbar fixed-top navbar-expand-xl navbar-light shadow-sm">
             <div class="container">
@@ -115,8 +131,8 @@
         <main class="py-4">
             @yield('content')
         </main>
-
+        @extends('layouts.footer')
     </div>
-   @extends('layouts.footer')
+
 </body>
 </html>

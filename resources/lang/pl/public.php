@@ -203,7 +203,7 @@ return [
     'Ćwiartki ziemniaka 200g' => 'Ćwiartki ziemniaka 200g',
     'Szyszki ziemniaków 200g' => 'Szyszki ziemniaków 200g',
 
-    'Dania z drobiu' => 'Poultry dishes',
+    'Dania z drobiu' => 'Dania z drobiu',
     'Zupy' => "Soups",
 
 

@@ -162,7 +162,7 @@ class KuchniaController extends Controller
 
 
         $transformedData = $waiting_zamowienia->map(function ($item) {
-            $excludedIds = [4, 6];
+            $excludedIds = [12, 14];
 
             $filteredPotrawy = $item->potrawy->filter(function ($potrawa) use ($excludedIds) {
                 return !in_array($potrawa->kategoria->id, $excludedIds);
@@ -199,7 +199,7 @@ class KuchniaController extends Controller
 
         $transformedData = $zamowienia_wTrakcie->map(function ($item) {
 
-            $excludedIds = [4, 6];
+            $excludedIds = [12, 14];
 
             $filteredPotrawy = $item->potrawy->filter(function ($potrawa) use ($excludedIds) {
                 return !in_array($potrawa->kategoria->id, $excludedIds);
