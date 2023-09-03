@@ -12,27 +12,16 @@
         <li><a href="#built-with">Built With</a></li>
       </ul>
     </li>
-    <li>
-      <a href="#getting-started">Getting Started</a>
-      <ul>
-        <li><a href="#prerequisites">Prerequisites</a></li>
-        <li><a href="#installation">Installation</a></li>
-      </ul>
-    </li>
-    <li><a href="#usage">Usage</a></li>
-    <li><a href="#roadmap">Roadmap</a></li>
-    <li><a href="#contributing">Contributing</a></li>
-    <li><a href="#license">License</a></li>
-    <li><a href="#contact">Contact</a></li>
-    <li><a href="#conslusions">Conslusions</a></li>
+    <li><a href="#Setup">Setup</a></li>
+    <li><a href="#Instructions">Instructions</a></li>
+    <li><a href="#Conclusions">Conclusions</a></li> <!-- I corrected the spelling here -->
   </ol>
 </details>
 
 
 ## About The Project
 
-The "Restaurant App" is an application that can serve as a representation of restaurant in polish city. Its minimalist design and responsiveness allow for easy and enjoyable user interactions.
-The primary goal of this project was to elevate my programming skills while simultaneously crafting a practical application that showcases my abilities. Developed during my spare time, the project embodies my dedication to continuous learning and improvement within the realm of software development.
+"Restaurant App" is a bilingual application that can represent the website of a local restaurant as well as a foreign one. Minimalist design and responsiveness allow for easy and pleasant interaction with the user. The primary goal of this project was to improve my programming skills while creating a practical application that would showcase my skills. The project developed in my spare time embodies my commitment to continuous learning and improvement in the field of software development.
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -40,7 +29,7 @@ The primary goal of this project was to elevate my programming skills while simu
 
 #### Restaurant App offers
 
-Application created in Polish with the ability to translate the application into English for foreign users. The main page for the client can be translated fully. I have introduced a partial translation for the employee.
+Application created in Polish with the ability to translate the application into English for foreign users.
 
 ##### For non-login users
 The main page offers a full list of restaurant dishes and the ability to book a table.
@@ -52,6 +41,7 @@ The main page offers a full list of restaurant dishes and the ability to book a 
 The login panel is used to log in to individual restaurant employees, offers different views and access to functionalities for the WAITER, COOK, BARTENER and MANAGER.
 
 After Login you get access to Orders Page where you can see list of todays orders, with details like Table Number, Order Status and price.
+
 ![OrdersPage](https://github.com/MaksGin/Restauracja/assets/26302413/8c6444ae-404f-41bc-8a02-37de2a379a76)
 
 You can click on specific order and display content of the order.
@@ -60,7 +50,7 @@ You can click on specific order and display content of the order.
 
 
 Manager has access to all application functions available to other users, additionally he can display and manage the list of employees and manage the list of job positions.
-img
+
 
 Waiter has a view of current orders, can create new orders, and has access to his own panel where orders come from the kitchen and are ready to serve, then he can click the button "completed and paid"
 
@@ -72,26 +62,36 @@ Process of adding an order by the waiter:
 ![AddOrder](https://github.com/MaksGin/Restauracja/assets/26302413/acd1bf69-60ba-45fd-b34a-ef49fd362d5a)
 
 
-/ raports img/ and waiter panel img
 
 
 Cook has access to the list of dishes, categories and kitchen panel where orders come in and has the option of accepting the order for execution and transferring the order to be served by the waiter (then the order will appear in the waiter's panel and notify him that he need to pick up the dish from kitchen) or canceling the order.
-/kitchen panel img/
-
-Bartender / person working at the bar after logging in has access to the bar panel where drinks and desserts from individual orders come.
-/bar panel img/
+![KitchenPanel](https://github.com/MaksGin/Restauracja/assets/26302413/10f61715-a620-4aa5-96e4-646a20cf9633)
 
 
+Bartender / person working at the bar after logging in has access to the bar panel where drinks and desserts from individual orders come also he can check list of tables and list of drinks/meals.
 
-### Build With
+![BarPanel](https://github.com/MaksGin/Restauracja/assets/26302413/b11e7f53-4fcc-460e-bff1-5ef434f21128)
+
+The process of creating an order, accepting the order by the kitchen, dividing the order into parts for the bar and kitchen, the waiter confirms that the order has been completed and the payment has been made and then the completed order goes to the waiter's report where there is a summary of the day, it is possible to download the report in pdf format.
+
+![OgolnaPrezentacja](https://github.com/MaksGin/Restauracja/assets/26302413/088e9635-f24a-4b61-bc64-bddde16f8647)
+
+
+
+
+
+### Built-with
 
 Project is created with:
-* Bootstrap
+* Bootstrap 5.0
 * PHP 8.2.4
 * Laravel 10.19.0
 * JavaScript and Ajax for enhanced interactivity
 
 By using JavaScript and Ajax in the application, I wanted to make the user experience better by adding things like buttons and other elements that react when users click on them. This makes the app more interesting and easy to use. Also, Ajax helped me get data from the server without needing to refresh the whole page. This makes it feel smoother when you're looking through the app.
+
+##### Laravel Eloquent
+In my project, I utilized the Eloquent ORM model in Laravel, which offers numerous advantages. Eloquent ORM not only enhances the readability of code but also simplifies the management of database relationships and provides automatic object-relational mapping (ORM). This allowed me to create efficient and maintainable database interactions.
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -104,7 +104,7 @@ By using JavaScript and Ajax in the application, I wanted to make the user exper
 1. Clone the repository on your local environment
    Start by cloning this repository to your local machine using the following command:
 ```
-$ git clone [<repository-url>]([https://github.com/MaksGin/StudentManagmentCrud.git](https://github.com/MaksGin/Restauracja.git))
+$ git clone https://github.com/MaksGin/Restauracja.git
 $ cd folder-name
 ```
 2. Install dependencies (use composer to install php dependecies and npm to install js dependencies)
