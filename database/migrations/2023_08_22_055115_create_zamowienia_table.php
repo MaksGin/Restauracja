@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::create('zamowienia', function (Blueprint $table) {
             $table->id();
+            $table->DateTime('Data');
             $table->unsignedBigInteger('id_kelnera');
             $table->foreign('id_kelnera')->references('id')->on('users');
             $table->unsignedBigInteger('id_stoliku');

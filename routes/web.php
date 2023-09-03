@@ -127,13 +127,13 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/zamowienia/pdf', [KelnerController::class, 'exportPDF'])->name('zamowienia.export.pdf');
 
 
-    //lokalizacja
-    Route::get('locale/{lange}',[\App\Http\Controllers\Location\LocationController::class,'setLang']);
-});
 
- //Rezerwacje
- Route::get('/rezerwacja',[RezerwacjaController::class,'index'])->name('rezerwacje.index');
- Route::post('rezerwacje/wybor', [RezerwacjaController::class, 'wybor'])->name('rezerwacje.wybor.daty');
+});
+//lokalizacja
+    Route::get('locale/{lange}',[\App\Http\Controllers\Location\LocationController::class,'setLang']);
+//Rezerwacje
+    Route::get('/rezerwacja',[RezerwacjaController::class,'index'])->name('rezerwacje.index');
+    Route::post('rezerwacje/wybor', [RezerwacjaController::class, 'wybor'])->name('rezerwacje.wybor.daty');
 
 
 
