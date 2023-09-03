@@ -112,17 +112,26 @@ $ cd folder-name
 composer install
 npm install
 ```
-3. Run Migrations and Seed Data: Execute database migrations and seed sample data.
+3. Create an .env file and copy the entire contents of the env.example file to it
+
+Update the file with the appropriate settings, such as data for the database, API keys, etc. Link to the documentation: https://laravel.com/docs/10.x/configuration#introduction
+
+Generate app key:
+```
+php artisan key:generate
+```
+
+4. Run Migrations and Seed Data: Execute database migrations and seed sample data.
 ```
 php artisan migrate
 php artisan db:seed
 ```
-4. Start the server
+5. Start the server
 ```
 php artisan serve
 npm run dev
 ```
-5. Open the browser and navigate to
+6. Open the browser and navigate to
    http://localhost:8000 to see application in action.
 
   By following these steps, you'll have the Restaurant App set up on your local machine, and you can start exploring its features and functionalities. 
@@ -131,3 +140,6 @@ npm run dev
 
 When it comes to project translation, it is an important aspect and thanks to it you can reach more customers from all over the world, for larger projects than mine I would use translation in a database than in language files because it allows for greater dynamism and scalability.
 
+Overall, I'm happy with the project I've done, but I'm also aware that there's still a lot of work to do.
+
+Thank you for taking the time to explore this project!
