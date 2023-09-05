@@ -34,7 +34,9 @@ Application created in Polish with the ability to translate the application into
 ##### For non-login users
 The main page offers a full list of restaurant dishes and the ability to book a table.
 
-![MainPage](https://github.com/MaksGin/Restauracja/assets/26302413/8baa6165-3da5-40e2-8f8d-5f17bdee41e3)
+![MainPage](https://github.com/MaksGin/Restauracja/assets/26302413/c925d8f4-fdf9-406b-ac78-54ef6b361996)
+
+
 
 
 ##### For logged users
@@ -42,11 +44,12 @@ The login panel is used to log in to individual restaurant employees, offers dif
 
 After Login you get access to Orders Page where you can see list of todays orders, with details like Table Number, Order Status and price.
 
-![OrdersPage](https://github.com/MaksGin/Restauracja/assets/26302413/8c6444ae-404f-41bc-8a02-37de2a379a76)
+![image](https://github.com/MaksGin/Restauracja/assets/26302413/76c51d56-f2f0-4d5e-af83-306ef187d08a)
 
 You can click on specific order and display content of the order.
 
-![OrderDetails](https://github.com/MaksGin/Restauracja/assets/26302413/a6487bdf-9ba0-459a-bb5c-c7a459d69154)
+![image](https://github.com/MaksGin/Restauracja/assets/26302413/97adde8c-4b3b-44df-9e08-3e57aa9e6bf1)
+
 
 
 Manager has access to all application functions available to other users, additionally he can display and manage the list of employees and manage the list of job positions.
@@ -58,23 +61,22 @@ Waiter has a view of current orders, can create new orders, and has access to hi
 
 Process of adding an order by the waiter:
 
-
-![AddOrder](https://github.com/MaksGin/Restauracja/assets/26302413/acd1bf69-60ba-45fd-b34a-ef49fd362d5a)
-
-
+![AddOrder](https://github.com/MaksGin/Restauracja/assets/26302413/588493d4-6325-41ff-a93a-2c685a13304d)
 
 
 Cook has access to the list of dishes, categories and kitchen panel where orders come in and has the option of accepting the order for execution and transferring the order to be served by the waiter (then the order will appear in the waiter's panel and notify him that he need to pick up the dish from kitchen) or canceling the order.
-![KitchenPanel](https://github.com/MaksGin/Restauracja/assets/26302413/10f61715-a620-4aa5-96e4-646a20cf9633)
+
+![KitchenPanel](https://github.com/MaksGin/Restauracja/assets/26302413/df48c84a-ff4f-4400-ac6d-ac21c00e03eb)
 
 
 Bartender / person working at the bar after logging in has access to the bar panel where drinks and desserts from individual orders come also he can check list of tables and list of drinks/meals.
 
-![BarPanel](https://github.com/MaksGin/Restauracja/assets/26302413/b11e7f53-4fcc-460e-bff1-5ef434f21128)
+![BarPanel](https://github.com/MaksGin/Restauracja/assets/26302413/fc9f24f4-9751-451a-b035-e4fb2e3193c9)
+
 
 The process of creating an order, accepting the order by the kitchen, dividing the order into parts for the bar and kitchen, the waiter confirms that the order has been completed and the payment has been made and then the completed order goes to the waiter's report where there is a summary of the day, it is possible to download the report in pdf format.
 
-![OgolnaPrezentacja](https://github.com/MaksGin/Restauracja/assets/26302413/088e9635-f24a-4b61-bc64-bddde16f8647)
+![OgolnaPrezentacja](https://github.com/MaksGin/Restauracja/assets/26302413/b10b941d-3f72-48a1-85d4-9e6aee51f9aa)
 
 
 
